@@ -1,8 +1,10 @@
 package model.entity;
 
-import Entity.Enum.Tipo_Enum;
+
+import model.entity.Enum.Tipo_Enum;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Libro extends Publicacion {
@@ -10,8 +12,8 @@ public class Libro extends Publicacion {
     private Publicacion publicacion;
     private Autor autor;
 
-    public Libro(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, String ISBN, Publicacion publicacion, Autor autor) {
-        super(id, titulo, fecha_publicacion, tipo, categoria, editorial);
+    public Libro(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISBN, Publicacion publicacion, Autor autor) {
+        super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISBN = ISBN;
         this.publicacion = publicacion;
         this.autor = autor;
@@ -47,12 +49,12 @@ public class Libro extends Publicacion {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Libro libro = (Libro) object;
-        return Objects.equals(ISBN, libro.ISBN) && Objects.equals(publicacion, libro.publicacion);
+        return Objects.equals(ISBN, libro.ISBN) && Objects.equals(autor, libro.autor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ISBN, publicacion);
+        return Objects.hash(super.hashCode(), ISBN, autor);
     }
 
     @Override
@@ -64,5 +66,3 @@ public class Libro extends Publicacion {
                 '}';
     }
 }
-
-

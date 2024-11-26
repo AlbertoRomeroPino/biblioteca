@@ -1,9 +1,10 @@
 package model.entity;
 
-import Entity.Enum.Periodicidad_Enum;
-import Entity.Enum.Tipo_Enum;
 
-import java.util.ArrayList;
+
+import model.entity.Enum.Periodicidad_Enum;
+import model.entity.Enum.Tipo_Enum;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -13,8 +14,8 @@ public class Revista extends Publicacion {
     private Periodicidad_Enum periodicidad;
     private Publicacion publicacion;
 
-    public Revista(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
-        super(id, titulo, fecha_publicacion, tipo, categoria, editorial);
+    public Revista(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
+        super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISSN = ISSN;
         this.periodicidad = periodicidad;
         this.publicacion = publicacion;
