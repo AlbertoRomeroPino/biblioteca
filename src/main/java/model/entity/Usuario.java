@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Usuario {
     private int id;
     private String nombre;
-    private String hashedClave;
+    private String Clave;
     private String salt;
     private String EMAIL;
     private List<Prestamo> prestamos;
@@ -22,7 +22,7 @@ public class Usuario {
         this.id = id;
         this.nombre = nombre;
         this.salt = generateSalt();
-        this.hashedClave = hashClave(clave, this.salt);
+        this.Clave = hashClave(clave, this.salt);
         this.EMAIL = EMAIL;
         this.prestamos = prestamos;
     }
@@ -30,7 +30,7 @@ public class Usuario {
     public Usuario(String nombre, String clave, String EMAIL, List<Prestamo> prestamos) {
         this.nombre = nombre;
         this.salt = generateSalt();
-        this.hashedClave = hashClave(clave, this.salt);
+        this.Clave = hashClave(clave, this.salt);
         this.EMAIL = EMAIL;
         this.prestamos = prestamos;
     }
@@ -72,12 +72,12 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getHashedClave() {
-        return hashedClave;
+    public String getClave() {
+        return Clave;
     }
 
-    public void setHashedClave(String hashedClave) {
-        this.hashedClave = hashedClave;
+    public void setClave(String clave) {
+        this.Clave = clave;
     }
 
     public String getSalt() {
@@ -122,7 +122,7 @@ public class Usuario {
         return "Usuario{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", hashedClave='" + hashedClave + '\'' +
+                ", hashedClave='" + Clave + '\'' +
                 ", salt='" + salt + '\'' +
                 ", EMAIL='" + EMAIL + '\'' +
                 ", prestamos=" + prestamos +
