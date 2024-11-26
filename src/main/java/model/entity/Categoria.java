@@ -18,6 +18,11 @@ public class Categoria {
         this.publicacions = new ArrayList<>();
     }
 
+    public Categoria(String nombre, List<Publicacion> publicacions) {
+        this.nombre = nombre;
+        this.publicacions = publicacions;
+    }
+
     public int getId() {
         return id;
     }

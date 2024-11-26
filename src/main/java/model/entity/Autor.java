@@ -1,7 +1,7 @@
 package model.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,14 +9,21 @@ public class Autor {
     private int id;
     private String nombre;
     private String Nacionalidad;
-    private Date FechaNacimiento;
+    private LocalDate FechaNacimiento;
     private List<Libro> libros;
 
     public Autor() {
     }
 
-    public Autor(int id, String nombre, String nacionalidad, Date fechaNacimiento, List<Libro> libros) {
+    public Autor(int id, String nombre, String nacionalidad, LocalDate fechaNacimiento, List<Libro> libros) {
         this.id = id;
+        this.nombre = nombre;
+        Nacionalidad = nacionalidad;
+        FechaNacimiento = fechaNacimiento;
+        this.libros = libros;
+    }
+
+    public Autor(String nombre, String nacionalidad, LocalDate fechaNacimiento, List<Libro> libros) {
         this.nombre = nombre;
         Nacionalidad = nacionalidad;
         FechaNacimiento = fechaNacimiento;
@@ -47,11 +54,11 @@ public class Autor {
         Nacionalidad = nacionalidad;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return FechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         FechaNacimiento = fechaNacimiento;
     }
 

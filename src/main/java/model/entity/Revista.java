@@ -5,6 +5,7 @@ package model.entity;
 import model.entity.Enum.Periodicidad_Enum;
 import model.entity.Enum.Tipo_Enum;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class Revista extends Publicacion {
     public Revista() {
     }
 
-    public Revista(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
+    public Revista(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
         super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISSN = ISSN;
         this.periodicidad = periodicidad;

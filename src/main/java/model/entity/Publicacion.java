@@ -3,15 +3,14 @@ package model.entity;
 
 import model.entity.Enum.Tipo_Enum;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 public class Publicacion {
     private int id;
     private String titulo;
-    private Date fecha_publicacion;
+    private LocalDate fecha_publicacion;
     private Tipo_Enum tipo;
     private Categoria categoria;
     private Editorial editorial;
@@ -20,8 +19,17 @@ public class Publicacion {
     public Publicacion() {
     }
 
-    public Publicacion(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos) {
+    public Publicacion(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos) {
         this.id = id;
+        this.titulo = titulo;
+        this.fecha_publicacion = fecha_publicacion;
+        this.tipo = tipo;
+        this.categoria = categoria;
+        this.editorial = editorial;
+        this.prestamos = prestamos;
+    }
+
+    public Publicacion(String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos) {
         this.titulo = titulo;
         this.fecha_publicacion = fecha_publicacion;
         this.tipo = tipo;
@@ -46,11 +54,11 @@ public class Publicacion {
         this.titulo = titulo;
     }
 
-    public Date getFecha_publicacion() {
+    public LocalDate getFecha_publicacion() {
         return fecha_publicacion;
     }
 
-    public void setFecha_publicacion(Date fecha_publicacion) {
+    public void setFecha_publicacion(LocalDate fecha_publicacion) {
         this.fecha_publicacion = fecha_publicacion;
     }
 
