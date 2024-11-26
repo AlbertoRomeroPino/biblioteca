@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.interfaces.IDAO;
+import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
 import model.entity.Usuario;
 
