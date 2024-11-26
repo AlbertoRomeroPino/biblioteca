@@ -1,6 +1,7 @@
 package model.entity;
 
-import Entity.Enum.Tipo_Enum;
+
+import model.entity.Enum.Tipo_Enum;
 
 import java.util.ArrayList;
 import java.util.Date;
