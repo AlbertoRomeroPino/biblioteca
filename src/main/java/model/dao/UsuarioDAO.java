@@ -18,32 +18,27 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         connection = ConnectionMariaDB.getConnection();
     }
 
-    // Esto es porsi necesitamos insertar con id
-    //private static final String INSERT = "INSERT INTO Usuario(Id, Nombre, Clave, Email) VALUES (?,?,?,?)";
-
     private static final String INSERT = "INSERT INTO Usuario(Nombre, Clave, Email) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Usuario WHERE Id = ?";
     private static final String UPDATE = "UPDATE Usuario SET Nombre = ?, Clave = ?, Email = ? WHERE Id = ?";
-
-    //Select
-    private static final String FINDID = "SELECT ID, Nombre, Clave, Email FROM usuario WHERE Id = ?";
+    private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
 
     /**
-     * Tiene dos cosas que puede hacer actualizar un usuario o insertarlo en la base de datos
-     * @param entity el usuario que quiere almacenar
-     * @return el usuario que a insertado en la base de datos
+     * Almacena un usuario en la base de datos.
+     * Si el usuario ya existe (por su ID), lo actualiza; si no, lo inserta como nuevo.
+     *
+     * @param entity El usuario que se desea almacenar.
+     * @return El usuario almacenado en la base de datos.
      */
     @Override
     public Usuario store(Usuario entity) {
         if (entity != null) {
-            int idUsuariotmp = entity.getId();
-            if (idUsuariotmp > 0) {
-                Usuario usuarioTmp = findId(idUsuariotmp);
+            int idUsuarioTmp = entity.getId();
+            if (idUsuarioTmp > 0) {
+                Usuario usuarioTmp = findId(idUsuarioTmp);
                 if (usuarioTmp == null) {
+                    // Inserta un nuevo usuario
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
-                        // id se crea porque esta en autoincrement
-                        // preparedStatement.setInt(1, entity.getId());
-
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getClave());
                         preparedStatement.setString(3, entity.getEMAIL());
@@ -53,13 +48,12 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                         e.printStackTrace();
                     }
                 } else {
+                    // Actualiza un usuario existente
                     try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-                        // Con lo que se va a comparar
-                        preparedStatement.setInt(4, entity.getId());
-                        //Lo que se va a editar
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getClave());
                         preparedStatement.setString(3, entity.getEMAIL());
+                        preparedStatement.setInt(4, entity.getId());
 
                         preparedStatement.executeUpdate();
                     } catch (SQLException e) {
@@ -72,39 +66,37 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     }
 
     /**
-     * Busca un usuario por su identificador
-     * @param entityId El identificador de usuario
-     * @return El usuario rellenado
+     * Busca un usuario en la base de datos utilizando su identificador (ID).
+     *
+     * @param entityId El ID del usuario que se desea buscar.
+     * @return El usuario encontrado con todos sus datos; devuelve null si no existe.
      */
     @Override
     public Usuario findId(Integer entityId) {
-
         Usuario usuario = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDID)) {
             preparedStatement.setInt(1, entityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    Usuario usuarioTmp = new Usuario();
-                    usuarioTmp.setId(resultSet.getInt("Id"));
-                    usuarioTmp.setNombre(resultSet.getString("Nombre"));
-                    usuarioTmp.setClave(resultSet.getString("Clave"));
-                    usuarioTmp.setEMAIL(resultSet.getString("Email"));
-                    usuario = usuarioTmp;
+                    usuario = new Usuario();
+                    usuario.setId(resultSet.getInt("Id"));
+                    usuario.setNombre(resultSet.getString("Nombre"));
+                    usuario.setClave(resultSet.getString("Clave"));
+                    usuario.setEMAIL(resultSet.getString("Email"));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-
         return usuario;
     }
 
     /**
-     * Se le pasa un usuario y borra ese usuario de la base de datos
+     * Elimina un usuario específico de la base de datos.
      *
-     * @param entityDelete el usuario que se desea borrar
-     * @return el usuario que as enviado que deseabas borrar
+     * @param entityDelete El usuario que se desea eliminar.
+     * @return El usuario que se intentó eliminar.
      */
     @Override
     public Usuario deleteEntity(Usuario entityDelete) {
@@ -119,8 +111,13 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         return entityDelete;
     }
 
+
     @Override
     public void close() throws IOException {
 
+    }
+
+    public static UsuarioDAO build() {
+        return new UsuarioDAO();
     }
 }
