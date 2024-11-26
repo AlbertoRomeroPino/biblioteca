@@ -22,6 +22,13 @@ public class Editorial {
         this.publicacions = publicacions;
     }
 
+    public Editorial(String nombre, String pais, Date fecha_fundacion, List<Publicacion> publicacions) {
+        this.nombre = nombre;
+        this.pais = pais;
+        this.fecha_fundacion = fecha_fundacion;
+        this.publicacions = publicacions;
+    }
+
     public int getId() {
         return id;
     }
