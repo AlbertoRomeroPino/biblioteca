@@ -10,6 +10,9 @@ public class Usuario {
     private String EMAIL;
     private List<Prestamo> prestamos;
 
+    public Usuario() {
+    }
+
     public Usuario(int id, String nombre, String clave, String EMAIL, List<Prestamo> prestamos) {
         this.id = id;
         this.nombre = nombre;

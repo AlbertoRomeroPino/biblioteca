@@ -13,6 +13,9 @@ public class Prestamo {
     private LocalDate fechaDevolucion;
     private Estado estado;
 
+    public Prestamo() {
+    }
+
     public Prestamo(Usuario usuario, Publicacion publicacion, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Estado estado) {
         this.usuario = usuario;
         this.publicacion = publicacion;

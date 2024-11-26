@@ -9,6 +9,9 @@ public class Categoria {
     private String nombre;
     private List<Publicacion> publicacions;
 
+    public Categoria() {
+    }
+
     public Categoria(int id, String nombre, List<Publicacion> publicacions) {
         this.id = id;
         this.nombre = nombre;
