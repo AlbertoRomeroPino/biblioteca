@@ -11,6 +11,9 @@ public class Editorial {
     private Date fecha_fundacion;
     private List<Publicacion>publicacions;
 
+    public Editorial() {
+    }
+
     public Editorial(int id, String nombre, String pais, Date fecha_fundacion, List<Publicacion> publicacions) {
         this.id = id;
         this.nombre = nombre;

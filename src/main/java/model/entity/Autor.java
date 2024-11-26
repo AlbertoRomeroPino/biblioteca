@@ -12,6 +12,9 @@ public class Autor {
     private Date FechaNacimiento;
     private List<Libro> libros;
 
+    public Autor() {
+    }
+
     public Autor(int id, String nombre, String nacionalidad, Date fechaNacimiento, List<Libro> libros) {
         this.id = id;
         this.nombre = nombre;

@@ -12,6 +12,9 @@ public class Libro extends Publicacion {
     private Publicacion publicacion;
     private Autor autor;
 
+    public Libro() {
+    }
+
     public Libro(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISBN, Publicacion publicacion, Autor autor) {
         super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISBN = ISBN;

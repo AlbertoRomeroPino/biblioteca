@@ -17,6 +17,9 @@ public class Publicacion {
     private Editorial editorial;
     private List<Prestamo> prestamos;
 
+    public Publicacion() {
+    }
+
     public Publicacion(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos) {
         this.id = id;
         this.titulo = titulo;

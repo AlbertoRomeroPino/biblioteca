@@ -14,6 +14,9 @@ public class Revista extends Publicacion {
     private Periodicidad_Enum periodicidad;
     private Publicacion publicacion;
 
+    public Revista() {
+    }
+
     public Revista(int id, String titulo, Date fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
         super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISSN = ISSN;
