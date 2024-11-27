@@ -9,5 +9,5 @@ public interface IDAO <T, K> extends Closeable {
 
     T findId(K entityId);
 
-    Usuario deleteEntity(Usuario entityDelete);
+    T deleteEntity(T entityDelete);
 }
