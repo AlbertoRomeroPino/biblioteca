@@ -1,25 +1,26 @@
 
 import model.entity.Usuario;
-import utils.Validacion;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class TestValidacion {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+class TestValidacion {
+
     public static void main(String[] args) {
-        // Creación de un nuevo usuario
-        Usuario user = new Usuario("nombreUsuario", "miContraseñaSegura", "email@example.com", new ArrayList<>());
 
-        // Mostrar detalles del usuario creado
-        System.out.println("Usuario creado: " + user);
-
-        // Verificar la contraseña utilizando la clase Autenticador
-        boolean isMatch = Validacion.verifyClave(user, "miContraseñaSegura");
-        System.out.println("¿La contraseña coincide? " + isMatch);
-
-        // Probar con una contraseña incorrecta
-        boolean isMatchIncorrect = Validacion.verifyClave(user, "contraseñaIncorrecta");
-        System.out.println("¿La contraseña coincide? " + isMatchIncorrect);
     }
+
+
 }
 
 

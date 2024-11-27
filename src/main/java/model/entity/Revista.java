@@ -30,6 +30,22 @@ public class Revista extends Publicacion {
         this.periodicidad = periodicidad;
     }
 
+    public String getISSN() {
+        return ISSN;
+    }
+
+    public void setISSN(String ISSN) {
+        this.ISSN = ISSN;
+    }
+
+    public Periodicidad_Enum getPeriodicidad() {
+        return periodicidad;
+    }
+
+    public void setPeriodicidad(Periodicidad_Enum periodicidad) {
+        this.periodicidad = periodicidad;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
