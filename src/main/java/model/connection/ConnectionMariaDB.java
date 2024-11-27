@@ -11,29 +11,30 @@ public class ConnectionMariaDB {
     private static ConnectionMariaDB _instance;
     private static Connection connection;
 
-    private ConnectionMariaDB(){
+    private ConnectionMariaDB() {
         ConnectionProperties properties = (ConnectionProperties) ManagerXML.readXML(new ConnectionProperties(), FILE);
 
         try {
             connection = DriverManager.getConnection(properties.getURL(), properties.getUser(), properties.getPassword());
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             connection = null;
         }
+
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         if (_instance == null) {
             _instance = new ConnectionMariaDB();
         }
         return connection;
     }
 
-    public static void closeConnection(){
-        if (connection != null){
+    public static void closeConnection() {
+        if (connection != null) {
             try {
                 connection.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
