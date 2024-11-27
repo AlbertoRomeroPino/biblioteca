@@ -2,15 +2,12 @@ package model.dao;
 
 import model.connection.ConnectionMariaDB;
 import model.entity.Autor;
-import model.entity.Usuario;
 import interfaces.IDAO;
 
 import java.io.IOException;
 import java.sql.*;
 
-/**
- * Clase DAO para manejar las operaciones de la tabla "Autor" en la base de datos.
- */
+
 public class AutorDAO implements IDAO<Autor, Integer> {
     private Connection connection;
 
@@ -25,7 +22,8 @@ public class AutorDAO implements IDAO<Autor, Integer> {
 
     /**
      * Almacena un autor en la base de datos.
-     * Si el autor ya existe (por su ID), lo actualiza; si no, lo inserta como nuevo.
+     * Si el autor no existe (por su ID), lo inserta como un nuevo registro.
+     * Si ya existe, se actualizan sus datos.
      *
      * @param entity El autor que se desea almacenar.
      * @return El autor almacenado en la base de datos.
