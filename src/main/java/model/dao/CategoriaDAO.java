@@ -3,7 +3,6 @@ package model.dao;
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
 import model.entity.Categoria;
-import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,9 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Clase DAO para manejar las operaciones de la tabla "Categoria" en la base de datos.
- */
+
 public class CategoriaDAO implements IDAO<Categoria, Integer> {
 
     private Connection connection;
@@ -29,10 +26,11 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
 
     /**
      * Almacena una categoría en la base de datos.
-     * Si la categoría ya existe (por su ID), la actualiza; si no, la inserta como nueva.
+     * Si la categoría no existe (por su ID), la inserta como un nuevo registro.
+     * Si ya existe, se actualizan sus datos.
      *
      * @param entity La categoría que se desea almacenar.
-     * @return La categoría almacenada en la base de datos.
+     * @return La categoría almacenada o actualizada en la base de datos.
      */
     @Override
     public Categoria store(Categoria entity) {
@@ -67,7 +65,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
      * Busca una categoría en la base de datos por su identificador (ID).
      *
      * @param entityId El ID de la categoría que se desea buscar.
-     * @return La categoría encontrada con todos sus datos; devuelve una categoría vacía si no se encuentra.
+     * @return La categoría encontrada con todos sus datos, o una categoría vacía si no se encuentra.
      */
     @Override
     public Categoria findId(Integer entityId) {
@@ -106,6 +104,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
         }
         return entityDelete;
     }
+
 
     @Override
     public void close() throws IOException {

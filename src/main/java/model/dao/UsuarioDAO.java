@@ -24,11 +24,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
 
     /**
-     * Almacena un usuario en la base de datos.
-     * Si el usuario ya existe (por su ID), lo actualiza; si no, lo inserta como nuevo.
-     *
-     * @param entity El usuario que se desea almacenar.
-     * @return El usuario almacenado en la base de datos.
+     * Clase DAO para gestionar las operaciones CRUD de la entidad Usuario en la base de datos.
      */
     @Override
     public Usuario store(Usuario entity) {
@@ -45,7 +41,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
 
                         preparedStatement.executeUpdate();
                     } catch (SQLException e) {
-                        e.printStackTrace();
+                        System.err.println("Error al insertar un nuevo usuario: " + e.getMessage());
                     }
                 } else {
                     // Actualiza un usuario existente
@@ -57,7 +53,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
 
                         preparedStatement.executeUpdate();
                     } catch (SQLException e) {
-                        e.printStackTrace();
+                        System.err.println("Error al actualizar el usuario: " + e.getMessage());
                     }
                 }
             }
@@ -86,7 +82,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al buscar el usuario con ID " + entityId + ": " + e.getMessage());
         }
 
         return usuario;
@@ -105,12 +101,11 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 preparedStatement.setInt(1, entityDelete.getId());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Error al eliminar el usuario con ID " + entityDelete.getId() + ": " + e.getMessage());
             }
         }
         return entityDelete;
     }
-
 
     @Override
     public void close() throws IOException {
