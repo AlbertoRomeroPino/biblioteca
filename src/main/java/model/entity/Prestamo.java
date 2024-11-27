@@ -1,7 +1,7 @@
 package model.entity;
 
 
-import model.entity.Enum.Estado;
+import model.entity.Enum.Estado_Enum;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,12 +11,12 @@ public class Prestamo {
     private Publicacion publicacion;
     private LocalDate fechaPrestamo;
     private LocalDate fechaDevolucion;
-    private Estado estado;
+    private Estado_Enum estado;
 
     public Prestamo() {
     }
 
-    public Prestamo(Usuario usuario, Publicacion publicacion, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Estado estado) {
+    public Prestamo(Usuario usuario, Publicacion publicacion, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Estado_Enum estado) {
         this.usuario = usuario;
         this.publicacion = publicacion;
         this.fechaPrestamo = fechaPrestamo;
@@ -58,11 +58,11 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public Estado getEstado() {
+    public Estado_Enum getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(Estado_Enum estado) {
         this.estado = estado;
     }
 
