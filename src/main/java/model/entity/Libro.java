@@ -10,17 +10,20 @@ import java.util.Objects;
 
 public class Libro extends Publicacion {
     private String ISBN;
-    private Publicacion publicacion;
     private Autor autor;
 
     public Libro() {
     }
 
-
-    public Libro(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISBN, Publicacion publicacion, Autor autor) {
+    public Libro(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISBN, Autor autor) {
         super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISBN = ISBN;
-        this.publicacion = publicacion;
+        this.autor = autor;
+    }
+
+    public Libro(String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISBN, Autor autor) {
+        super(titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
+        this.ISBN = ISBN;
         this.autor = autor;
     }
 
@@ -30,14 +33,6 @@ public class Libro extends Publicacion {
 
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
-    }
-
-    public Publicacion getPublicacion() {
-        return publicacion;
-    }
-
-    public void setPublicacion(Publicacion publicacion) {
-        this.publicacion = publicacion;
     }
 
     public Autor getAutor() {
@@ -54,19 +49,18 @@ public class Libro extends Publicacion {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Libro libro = (Libro) object;
-        return Objects.equals(ISBN, libro.ISBN) && Objects.equals(autor, libro.autor);
+        return Objects.equals(ISBN, libro.ISBN);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ISBN, autor);
+        return Objects.hash(super.hashCode(), ISBN);
     }
 
     @Override
     public String toString() {
         return "Libro{" +
                 "ISBN='" + ISBN + '\'' +
-                ", publicacion=" + publicacion +
                 ", autor=" + autor +
                 '}';
     }
