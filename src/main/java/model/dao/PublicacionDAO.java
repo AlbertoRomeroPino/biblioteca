@@ -5,6 +5,7 @@ import model.connection.ConnectionMariaDB;
 import model.entity.Editorial;
 import model.entity.Enum.Tipo_Enum;
 import model.entity.Publicacion;
+import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
@@ -23,7 +24,40 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
 
     @Override
     public Publicacion store(Publicacion entity) {
-        return null;
+        if (entity != null) {
+            int idPublicacionTmp = entity.getId();
+            if (idPublicacionTmp > 0) {
+                Publicacion publicacionTmp = findId(idPublicacionTmp);
+                if (publicacionTmp == null) {
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
+                        preparedStatement.setString(1, entity.getTitulo());
+                        preparedStatement.setDate(2, Date.valueOf(entity.getFecha_publicacion()));
+                        preparedStatement.setString(3, entity.getTipo().toString());
+                        preparedStatement.setInt(4, entity.getCategoria().getId());
+                        preparedStatement.setInt(5, entity.getEditorial().getId());
+
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
+                        preparedStatement.setString(1, entity.getTitulo());
+                        preparedStatement.setDate(2, Date.valueOf(entity.getFecha_publicacion()));
+                        preparedStatement.setString(3, entity.getTipo().toString());
+                        preparedStatement.setInt(4, entity.getCategoria().getId());
+                        preparedStatement.setInt(5, entity.getEditorial().getId());
+
+                        preparedStatement.setInt(6, entity.getId());
+
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return entity;
     }
 
     @Override
@@ -50,7 +84,15 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
 
     @Override
     public Publicacion deleteEntity(Publicacion entityDelete) {
-        return null;
+        if (entityDelete != null){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)){
+                preparedStatement.setInt(1,entityDelete.getId());
+                preparedStatement.executeUpdate();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return entityDelete;
     }
 
     @Override
