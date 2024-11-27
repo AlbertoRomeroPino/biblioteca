@@ -13,40 +13,21 @@ import java.util.Objects;
 public class Revista extends Publicacion {
     private String ISSN;
     private Periodicidad_Enum periodicidad;
-    private Publicacion publicacion;
+
 
     public Revista() {
     }
 
-    public Revista(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad, Publicacion publicacion) {
+    public Revista(int id, String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad) {
         super(id, titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISSN = ISSN;
         this.periodicidad = periodicidad;
-        this.publicacion = publicacion;
     }
 
-    public String getISSN() {
-        return ISSN;
-    }
-
-    public void setISSN(String ISSN) {
+    public Revista(String titulo, LocalDate fecha_publicacion, Tipo_Enum tipo, Categoria categoria, Editorial editorial, List<Prestamo> prestamos, String ISSN, Periodicidad_Enum periodicidad) {
+        super(titulo, fecha_publicacion, tipo, categoria, editorial, prestamos);
         this.ISSN = ISSN;
-    }
-
-    public Periodicidad_Enum getPeriodicidad() {
-        return periodicidad;
-    }
-
-    public void setPeriodicidad(Periodicidad_Enum periodicidad) {
         this.periodicidad = periodicidad;
-    }
-
-    public Publicacion getPublicacion() {
-        return publicacion;
-    }
-
-    public void setPublicacion(Publicacion publicacion) {
-        this.publicacion = publicacion;
     }
 
     @Override
@@ -55,12 +36,12 @@ public class Revista extends Publicacion {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Revista revista = (Revista) object;
-        return Objects.equals(ISSN, revista.ISSN) && Objects.equals(publicacion, revista.publicacion);
+        return Objects.equals(ISSN, revista.ISSN);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ISSN, publicacion);
+        return Objects.hash(super.hashCode(), ISSN);
     }
 
     @Override
@@ -68,7 +49,6 @@ public class Revista extends Publicacion {
         return "Revista{" +
                 "ISSN='" + ISSN + '\'' +
                 ", periodicidad=" + periodicidad +
-                ", publicacion=" + publicacion +
                 '}';
     }
 }
