@@ -40,7 +40,7 @@ public class Validacion implements IValidacion {
         return email.matches(emailRegex);
     }
 
-    private String generateSalt() {
+    public String generateSalt() {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
