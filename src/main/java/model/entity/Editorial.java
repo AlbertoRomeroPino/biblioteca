@@ -1,6 +1,6 @@
 package model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,13 +8,13 @@ public class Editorial {
     private int id;
     private String nombre;
     private String pais;
-    private Date fecha_fundacion;
+    private LocalDate fecha_fundacion;
     private List<Publicacion>publicacions;
 
     public Editorial() {
     }
 
-    public Editorial(int id, String nombre, String pais, Date fecha_fundacion, List<Publicacion> publicacions) {
+    public Editorial(int id, String nombre, String pais, LocalDate fecha_fundacion, List<Publicacion> publicacions) {
         this.id = id;
         this.nombre = nombre;
         this.pais = pais;
@@ -22,7 +22,7 @@ public class Editorial {
         this.publicacions = publicacions;
     }
 
-    public Editorial(String nombre, String pais, Date fecha_fundacion, List<Publicacion> publicacions) {
+    public Editorial(String nombre, String pais, LocalDate fecha_fundacion, List<Publicacion> publicacions) {
         this.nombre = nombre;
         this.pais = pais;
         this.fecha_fundacion = fecha_fundacion;
@@ -53,11 +53,11 @@ public class Editorial {
         this.pais = pais;
     }
 
-    public Date getFecha_fundacion() {
+    public LocalDate getFecha_fundacion() {
         return fecha_fundacion;
     }
 
-    public void setFecha_fundacion(Date fecha_fundacion) {
+    public void setFecha_fundacion(LocalDate fecha_fundacion) {
         this.fecha_fundacion = fecha_fundacion;
     }
 
