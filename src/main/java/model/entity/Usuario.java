@@ -35,7 +35,6 @@ public class Usuario {
         this.prestamos = prestamos;
     }
 
-    // Generar una sal aleatoria
     private String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -43,7 +42,6 @@ public class Usuario {
         return Base64.getEncoder().encodeToString(salt);
     }
 
-    // Hashear la clave con la sal usando SHA-256
     private String hashClave(String clave, String salt) {
         String saltedClave = clave + salt;
         try {
