@@ -1,138 +1,140 @@
+import model.dao.CategoriaDAO;
 import model.dao.PublicacionDAO;
 import model.dao.RevistaDAO;
 import model.dao.UsuarioDAO;
 import model.entity.*;
+import model.entity.Enum.Estado_Enum;
 import model.entity.Enum.Periodicidad_Enum;
 import model.entity.Enum.Tipo_Enum;
+import utils.Validacion;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TestDAO {
-        public static void main(String[] args) {
-            // Inicia la conexión a la base de datos
-            System.out.println("Iniciando el programa...");
+    public static void main(String[] args) {
+        // Crear Usuarios
+        String clave1 = Validacion.encryptClave("clave123");
+        String clave2 = Validacion.encryptClave("clave456");
+        String clave3 = Validacion.encryptClave("delete");
 
-            // Crear un nuevo usuario
-            System.out.println("\n-- Creando un nuevo Usuario --");
-            Usuario usuario = new Usuario();
-            usuario.setNombre("Juan Pérez");
-            usuario.setClave("1234");
-            usuario.setEMAIL("juanperez@gmail.com");
+        Usuario usuario1 = new Usuario(1, "Juan Pérez", clave1, "juan.perez@example.com", new ArrayList<>());
+        Usuario usuario2 = new Usuario(2, "María López", clave2, "maria.lopez@example.com", new ArrayList<>());
+        Usuario usuarioDelete = new Usuario("Alberto", clave3, "alberto@gamil.com", new ArrayList<>());
 
-            UsuarioDAO usuarioDAO = UsuarioDAO.build();
-            usuarioDAO.store(usuario);  // Insertamos el usuario
-            System.out.println("Usuario creado: " + usuario.getNombre());
-
-            // Buscar usuario por ID
-            System.out.println("\n-- Buscando el Usuario con ID 1 --");
-            Usuario usuarioEncontrado = usuarioDAO.findId(1);
-            if (usuarioEncontrado != null) {
-                System.out.println("Usuario encontrado: " + usuarioEncontrado.getNombre());
-            } else {
-                System.out.println("Usuario no encontrado.");
-            }
-
-            // Actualizar usuario
-            System.out.println("\n-- Actualizando el Usuario con ID 1 --");
-            if (usuarioEncontrado != null) {
-                usuarioEncontrado.setNombre("Juan Pérez Actualizado");
-                usuarioDAO.store(usuarioEncontrado);  // Actualizamos el usuario
-                System.out.println("Usuario actualizado: " + usuarioEncontrado.getNombre());
-            }
-
-            // Eliminar usuario
-            System.out.println("\n-- Eliminando el Usuario con ID 1 --");
-            if (usuarioEncontrado != null) {
-                usuarioDAO.deleteEntity(usuarioEncontrado);  // Eliminamos el usuario
-                System.out.println("Usuario eliminado.");
-            }
-
-            // Crear una nueva publicación
-            System.out.println("\n-- Creando una nueva Publicación --");
-            Publicacion publicacion = new Publicacion();
-            publicacion.setTitulo("Revista de Tecnología");
-            publicacion.setFecha_publicacion(LocalDate.of(2023, 12, 1));
-            publicacion.setTipo(Tipo_Enum.Libro);
-
-            // Establecer la categoría y la editorial
-            publicacion.setCategoria(new Categoria(1, "Tecnología", new ArrayList<Publicacion>()));
-            publicacion.setEditorial(new Editorial(1, "Editorial XYZ", "España", LocalDate.of(2000, 1, 1), new ArrayList<Publicacion>()));
-
-            PublicacionDAO publicacionDAO = PublicacionDAO.build();
-            publicacionDAO.store(publicacion);  // Insertamos la publicación
-            System.out.println("Publicación creada: " + publicacion.getTitulo());
+        // Crear Categorías
+        Categoria categoria1 = new Categoria(1, "Literatura", new ArrayList<>());
+        Categoria categoria2 = new Categoria(2, "Ciencia Ficción", new ArrayList<>());
 
 
-            // Buscar publicación por ID
-            System.out.println("\n-- Buscando la Publicación con ID 1 --");
-            Publicacion publicacionEncontrada = publicacionDAO.findId(1);
-            if (publicacionEncontrada != null) {
-                System.out.println("Publicación encontrada: " + publicacionEncontrada.getTitulo());
-            } else {
-                System.out.println("Publicación no encontrada.");
-            }
+        // Crear Editoriales
+        Editorial editorial1 = new Editorial(1, "Penguin Random House", "Reino Unido", LocalDate.of(1935, 7, 1), new ArrayList<>());
+        Editorial editorial2 = new Editorial(2, "Planeta", "España", LocalDate.of(1949, 12, 23), new ArrayList<>());
 
-            // Actualizar publicación
-            System.out.println("\n-- Actualizando la Publicación con ID 1 --");
-            if (publicacionEncontrada != null) {
-                publicacionEncontrada.setTitulo("Revista de Innovación");
-                publicacionDAO.store(publicacionEncontrada);  // Actualizamos la publicación
-                System.out.println("Publicación actualizada: " + publicacionEncontrada.getTitulo());
-            }
+        // Crear Autores
+        Autor autor1 = new Autor(1, "Gabriel García Márquez", "Colombiana", LocalDate.of(1927, 3, 6), new ArrayList<>());
+        Autor autor2 = new Autor(2, "Isaac Asimov", "Rusa-Estadounidense", LocalDate.of(1920, 1, 2), new ArrayList<>());
 
-            // Eliminar publicación
-            System.out.println("\n-- Eliminando la Publicación con ID 1 --");
-            if (publicacionEncontrada != null) {
-                publicacionDAO.deleteEntity(publicacionEncontrada);  // Eliminamos la publicación
-                System.out.println("Publicación eliminada.");
-            }
+        // Crear Libros
+        Libro libro1 = new Libro(1, "Cien Años de Soledad", LocalDate.of(1967, 5, 30), Tipo_Enum.Libro, categoria1, editorial1, new ArrayList<>(), "123-456-789", autor1);
+        Libro libro2 = new Libro(2, "Fundación", LocalDate.of(1951, 6, 1), Tipo_Enum.Libro, categoria2, editorial2, new ArrayList<>(), "987-654-321", autor2);
 
-            // Crear una nueva revista
-            System.out.println("\n-- Creando una nueva Revista --");
-            Revista revista = new Revista();
-            revista.setId(1);  // Usamos el ID de la publicación recién creada
-            revista.setISSN("1234-5678");
-            revista.setPeriodicidad(Periodicidad_Enum.Anual);
+        // Crear Revistas
+        Revista revista1 = new Revista(1, "National Geographic", LocalDate.of(2023, 1, 1), Tipo_Enum.revista, categoria2, editorial1, new ArrayList<>(), "1234-5678", Periodicidad_Enum.Anual);
+        Revista revista2 = new Revista(2, "Scientific American", LocalDate.of(2023, 2, 1), Tipo_Enum.revista, categoria2, editorial2, new ArrayList<>(), "8765-4321", Periodicidad_Enum.Diaria);
 
-            RevistaDAO revistaDAO = RevistaDAO.build();
-            revistaDAO.store(revista);  // Insertamos la revista
-            System.out.println("Revista creada: " + revista.getISSN());
+        // Crear Préstamos
+        Prestamo prestamo1 = new Prestamo(usuario1, libro1, LocalDate.of(2023, 10, 1), LocalDate.of(2023, 10, 15), Estado_Enum.prestado);
+        Prestamo prestamo2 = new Prestamo(usuario2, revista1, LocalDate.of(2023, 11, 1), LocalDate.of(2023, 11, 20), Estado_Enum.devuelto);
 
-            // Buscar revista por ID
-            System.out.println("\n-- Buscando la Revista con ID 1 --");
-            Revista revistaEncontrada = revistaDAO.findId(1);
-            if (revistaEncontrada != null) {
-                System.out.println("Revista encontrada: " + revistaEncontrada.getISSN());
-            } else {
-                System.out.println("Revista no encontrada.");
-            }
+        // Mostrar las entidades creadas
+        System.out.println("Categorías:");
+        System.out.println(categoria1);
+        System.out.println(categoria2);
 
-            // Actualizar revista
-            System.out.println("\n-- Actualizando la Revista con ID 1 --");
-            if (revistaEncontrada != null) {
-                revistaEncontrada.setISSN("9876-5432");
-                revistaDAO.store(revistaEncontrada);  // Actualizamos la revista
-                System.out.println("Revista actualizada: " + revistaEncontrada.getISSN());
-            }
+        System.out.println("\nEditoriales:");
+        System.out.println(editorial1);
+        System.out.println(editorial2);
 
-            // Eliminar revista
-            System.out.println("\n-- Eliminando la Revista con ID 1 --");
-            if (revistaEncontrada != null) {
-                revistaDAO.deleteEntity(revistaEncontrada);  // Eliminamos la revista
-                System.out.println("Revista eliminada.");
-            }
+        System.out.println("\nAutores:");
+        System.out.println(autor1);
+        System.out.println(autor2);
 
-            // Cerrar conexión (si fuera necesario)
-            try {
-                usuarioDAO.close();
-                publicacionDAO.close();
-                revistaDAO.close();
-            } catch (IOException e) {
-                System.err.println("Error al cerrar la conexión: " + e.getMessage());
-            }
+        System.out.println("\nUsuarios:");
+        System.out.println(usuario1);
+        System.out.println(usuario2);
 
-            System.out.println("\nPrograma terminado.");
-        }
+        System.out.println("\nLibros:");
+        System.out.println(libro1);
+        System.out.println(libro2);
+
+        System.out.println("\nRevistas:");
+        System.out.println(revista1);
+        System.out.println(revista2);
+
+        System.out.println("\nPréstamos:");
+        System.out.println(prestamo1);
+        System.out.println(prestamo2);
+
+        System.out.println("-----------------");
+        System.out.println("-----------------");
+        System.out.println("-----------------");
+        System.out.println("-----------------");
+        System.out.println("-----------------");
+
+        System.out.println("Comienzan las pruebas de los Usuariodao");
+//        Funcionan
+
+//        Almacenar
+        UsuarioDAO.build().store(usuario1);
+        UsuarioDAO.build().store(usuario2);
+        // No tiene ID
+        UsuarioDAO.build().store(usuarioDelete);
+
+//        Buscar
+        System.out.println(UsuarioDAO.build().findId(1));
+        System.out.println(UsuarioDAO.build().findId(2));
+        // Este es el que no tiene ID
+        System.out.println(UsuarioDAO.build().findId(3));
+
+//        Actualizar
+        usuario1.setEMAIL("algo@gmail.com");
+        UsuarioDAO.build().store(usuario1);
+
+//        Delete
+        String nombre = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
+        System.out.println(nombre + ". Se a borrado");
+
+        System.out.println("-----------------");
+
+        System.out.println("Comienzan las pruebas de los Categoria");
+//        Funcionan
+
+//        Almacenar
+        CategoriaDAO.build().store(categoria1);
+        CategoriaDAO.build().store(categoria2);
+        // No tiene ID
+        UsuarioDAO.build().store(usuarioDelete);
+
+//        Buscar
+        System.out.println(UsuarioDAO.build().findId(1));
+        System.out.println(UsuarioDAO.build().findId(2));
+        // Este es el que no tiene ID
+        System.out.println(UsuarioDAO.build().findId(3));
+
+//        Actualizar
+        usuario1.setEMAIL("algo@gmail.com");
+        UsuarioDAO.build().store(usuario1);
+
+//        Delete
+        String nombre = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
+        System.out.println(nombre + ". Se a borrado");
+
+        System.out.println("-----------------");
+
+    }
 }
+
+
+
