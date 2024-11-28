@@ -42,5 +42,14 @@
         </dependency>
         <!-- Terminar Conexion a la base de datos-->
 
+        <!--Test-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Test-->
+
     </dependencies>
 </project>
