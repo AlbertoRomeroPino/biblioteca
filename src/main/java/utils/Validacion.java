@@ -10,28 +10,30 @@ import java.security.SecureRandom;
 
 public class Validacion implements IValidacion {
 
-    // Verificar si la clave ingresada coincide con el hash almacenado en Usuario
-    public static boolean verifyClave(Usuario usuario, String clave) {
-        String hashedClaveInput = hashClave(clave, usuario.getSalt());
-        return hashedClaveInput.equals(usuario.getClave());
-    }
-
-    // Hashear la clave con la sal usando SHA-256
-    private static String hashClave(String clave, String salt) {
-        String saltedClave = clave + salt;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(saltedClave.getBytes());
-            return Base64.getEncoder().encodeToString(hashedBytes);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public String encryptClave(String clave) {
-        String salt = generateSalt();
-        return hashClave(clave, salt);
+        String hexString = null;
+
+        try {
+
+            MessageDigest digest = MessageDigest.getInstance("SHA3-256");
+
+            byte[] hash = digest.digest(clave.getBytes());
+
+            StringBuilder hexStringBuilder = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexStringBuilder.append('0');
+                }
+                hexStringBuilder.append(hex);
+            }
+
+            hexString = hexStringBuilder.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return hexString;
     }
 
     @Override
@@ -40,11 +42,6 @@ public class Validacion implements IValidacion {
         return email.matches(emailRegex);
     }
 
-    public String generateSalt() {
-        byte[] salt = new byte[16];
-        new SecureRandom().nextBytes(salt);
-        return Base64.getEncoder().encodeToString(salt);
-    }
 }
 
 
