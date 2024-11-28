@@ -21,6 +21,10 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private static final String DELETE = "DELETE FROM Publicacion WHERE Id = ?";
     private static final String UPDATE = "UPDATE Publicacion SET Titulo = ?, FechaPublicacion = ?, Tipo = ?, Categoria_ID = ?, Editorial_ID = ? WHERE Id = ?";
     private static final String FINDID = "SELECT Id, Titulo, FechaPublicacion, Tipo FROM publicacion WHERE Id = ?";
+    private static final String FINDBYLIBRO = "SELECT  P.ID AS Publicacion_ID, P.Titulo, P.FechaPublicacion, P.Tipo, P.Categoria_ID, P.Editorial_ID, L.ISBN, L.Autor_ID" +
+            " FROM Publicacion P" +
+            " JOIN Libro L ON P.ID = L.Publicacion_ID" +
+            " WHERE P.ID = ?";
 
     /**
      * Almacena un objeto Publicacion en la base de datos.
@@ -85,7 +89,7 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
                 if (resultSet.next()) {
                     publicacion = new Publicacion();
                     publicacion.setId(resultSet.getInt("Id"));
-                    publicacion.setTitulo(resultSet.getString("Nombre"));
+                    publicacion.setTitulo(resultSet.getString("Titulo"));
                     publicacion.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
                     publicacion.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
                     publicacion.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
@@ -97,6 +101,8 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         }
         return publicacion;
     }
+
+
 
     /**
      * Elimina un objeto Publicacion de la base de datos.
