@@ -36,7 +36,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
     public Categoria store(Categoria entity) {
         if (entity != null) {
             int idCategoriatmp = entity.getId();
-            if (idCategoriatmp > 0) {
+            if (idCategoriatmp >= 0) {
                 Categoria categoriaTmp = findId(idCategoriatmp);
                 if (categoriaTmp == null) {
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
@@ -69,7 +69,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
      */
     @Override
     public Categoria findId(Integer entityId) {
-        Categoria categoria = new Categoria();
+        Categoria categoria = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDID)) {
             preparedStatement.setInt(1, entityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

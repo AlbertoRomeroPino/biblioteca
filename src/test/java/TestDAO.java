@@ -21,12 +21,12 @@ public class TestDAO {
 
         Usuario usuario1 = new Usuario(1, "Juan Pérez", clave1, "juan.perez@example.com", new ArrayList<>());
         Usuario usuario2 = new Usuario(2, "María López", clave2, "maria.lopez@example.com", new ArrayList<>());
-        Usuario usuarioDelete = new Usuario("Alberto", clave3, "alberto@gamil.com", new ArrayList<>());
+        Usuario usuarioDelete = new Usuario(3, "Alberto", clave3, "alberto@gamil.com", new ArrayList<>());
 
         // Crear Categorías
         Categoria categoria1 = new Categoria(1, "Literatura", new ArrayList<>());
         Categoria categoria2 = new Categoria(2, "Ciencia Ficción", new ArrayList<>());
-
+        Categoria categoriaDelete = new Categoria(3, "Tecnologia", new ArrayList<>());
 
         // Crear Editoriales
         Editorial editorial1 = new Editorial(1, "Penguin Random House", "Reino Unido", LocalDate.of(1935, 7, 1), new ArrayList<>());
@@ -83,55 +83,60 @@ public class TestDAO {
         System.out.println("-----------------");
         System.out.println("-----------------");
 
-        System.out.println("Comienzan las pruebas de los Usuariodao");
-//        Funcionan
-
+//        System.out.println("Comienzan las pruebas de los usuarioDAO");
+//
 //        Almacenar
-        UsuarioDAO.build().store(usuario1);
-        UsuarioDAO.build().store(usuario2);
-        // No tiene ID
-        UsuarioDAO.build().store(usuarioDelete);
-
-//        Buscar
-        System.out.println(UsuarioDAO.build().findId(1));
-        System.out.println(UsuarioDAO.build().findId(2));
-        // Este es el que no tiene ID
-        System.out.println(UsuarioDAO.build().findId(3));
-
-//        Actualizar
-        usuario1.setEMAIL("algo@gmail.com");
-        UsuarioDAO.build().store(usuario1);
-
-//        Delete
-        String nombre = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
-        System.out.println(nombre + ". Se a borrado");
-
-        System.out.println("-----------------");
-
-        System.out.println("Comienzan las pruebas de los Categoria");
+//        UsuarioDAO.build().store(usuario1);
+//        UsuarioDAO.build().store(usuario2);
+//        UsuarioDAO.build().store(usuarioDelete);
+//
+//       Buscar
+//        usuario1 = (UsuarioDAO.build().findId(1));
+//        usuario2 = (UsuarioDAO.build().findId(2));
+//        usuarioDelete = (UsuarioDAO.build().findId(3));
+//
+//        System.out.println(usuario1);
+//        System.out.println(usuario2);
+//        System.out.println(usuarioDelete);
+//
+//       Actualizar
+//        usuario1.setEMAIL("algo@gmail.com");
+//        UsuarioDAO.build().store(usuario1);
+//
+//       Delete
+//        String nombreUsuario = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
+//        System.out.println(nombreUsuario + ". Se a borrado");
+//
+//
+//        System.out.println("-----------------");
+//
+//        System.out.println("Comienzan las pruebas de los CategoriaDAO");
 //        Funcionan
-
+//
 //        Almacenar
-        CategoriaDAO.build().store(categoria1);
-        CategoriaDAO.build().store(categoria2);
-        // No tiene ID
-        UsuarioDAO.build().store(usuarioDelete);
-
+//        CategoriaDAO.build().store(categoria1);
+//        CategoriaDAO.build().store(categoria2);
+//        CategoriaDAO.build().store(categoriaDelete);
+//
 //        Buscar
-        System.out.println(UsuarioDAO.build().findId(1));
-        System.out.println(UsuarioDAO.build().findId(2));
-        // Este es el que no tiene ID
-        System.out.println(UsuarioDAO.build().findId(3));
-
-//        Actualizar
-        usuario1.setEMAIL("algo@gmail.com");
-        UsuarioDAO.build().store(usuario1);
-
+//        categoria1 = (CategoriaDAO.build().findId(1));
+//        categoria2 = (CategoriaDAO.build().findId(2));
+//        // Este es el que no tiene ID
+//        categoriaDelete = (CategoriaDAO.build().findId(3));
+//
+//        System.out.println(categoria1);
+//        System.out.println(categoria2);
+//        System.out.println(categoriaDelete);
+//
+//       Actualizar
+//        categoria1.setNombre("Artes Marciales");
+//        CategoriaDAO.build().store(categoria1);
+//
 //        Delete
-        String nombre = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
-        System.out.println(nombre + ". Se a borrado");
+//        String nombreCateogira = CategoriaDAO.build().deleteEntity(categoriaDelete).getNombre();
+//        System.out.println(nombreCateogira + ". Se a borrado");
 
-        System.out.println("-----------------");
+
 
     }
 }
