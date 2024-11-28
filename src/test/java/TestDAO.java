@@ -5,7 +5,6 @@ import model.entity.Enum.Periodicidad_Enum;
 import model.entity.Enum.Tipo_Enum;
 import utils.Validacion;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -41,9 +40,9 @@ public class TestDAO {
         Libro libroDelete = new Libro(3,"Harry potter", LocalDate.of(200, 4,5), Tipo_Enum.Libro, categoria1,editorial2, new ArrayList<>(), "123-333-222",autor1);
 
         // Crear Revistas
-        Revista revista1 = new Revista(1, "National Geographic", LocalDate.of(2023, 1, 1), Tipo_Enum.revista, categoria2, editorial1, new ArrayList<>(), "1234-5678", Periodicidad_Enum.Anual);
-        Revista revista2 = new Revista(2, "Scientific American", LocalDate.of(2023, 2, 1), Tipo_Enum.revista, categoria2, editorial2, new ArrayList<>(), "8765-4321", Periodicidad_Enum.Diaria);
-        Revista revistaDelete = new Revista(3,"Vandal",LocalDate.of(2022, 3, 4),Tipo_Enum.revista, categoria2,editorial2, new ArrayList<>(),"787-998-755",Periodicidad_Enum.Anual);
+        Revista revista1 = new Revista(1, "National Geographic", LocalDate.of(2023, 1, 1), Tipo_Enum.Revista, categoria2, editorial1, new ArrayList<>(), "1234-5678", Periodicidad_Enum.Anual);
+        Revista revista2 = new Revista(2, "Scientific American", LocalDate.of(2023, 2, 1), Tipo_Enum.Revista, categoria2, editorial2, new ArrayList<>(), "8765-4321", Periodicidad_Enum.Diaria);
+        Revista revistaDelete = new Revista(3,"Vandal",LocalDate.of(2022, 3, 4),Tipo_Enum.Revista, categoria2,editorial2, new ArrayList<>(),"787-998-755",Periodicidad_Enum.Anual);
 
         // Crear Préstamos
         Prestamo prestamo1 = new Prestamo(usuario1, libro1, LocalDate.of(2023, 10, 1), LocalDate.of(2023, 10, 15), Estado_Enum.prestado);
@@ -197,7 +196,7 @@ public class TestDAO {
         LibroDAO.build().store(libro1);
         LibroDAO.build().store(libro2);
         LibroDAO.build().store(libroDelete);
-
+//
 //        // Buscar
 //        libro1 = LibroDAO.build().findId(libro1.getId());
 //        libro2 = LibroDAO.build().findId(libro2.getId());
