@@ -30,7 +30,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     public Usuario store(Usuario entity) {
         if (entity != null) {
             int idUsuarioTmp = entity.getId();
-            if (idUsuarioTmp > 0) {
+            if (idUsuarioTmp >= 0) {
                 Usuario usuarioTmp = findId(idUsuarioTmp);
                 if (usuarioTmp == null) {
                     // Inserta un nuevo usuario
