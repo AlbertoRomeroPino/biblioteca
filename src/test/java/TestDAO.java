@@ -1,7 +1,4 @@
-import model.dao.CategoriaDAO;
-import model.dao.PublicacionDAO;
-import model.dao.RevistaDAO;
-import model.dao.UsuarioDAO;
+import model.dao.*;
 import model.entity.*;
 import model.entity.Enum.Estado_Enum;
 import model.entity.Enum.Periodicidad_Enum;
@@ -31,6 +28,7 @@ public class TestDAO {
         // Crear Editoriales
         Editorial editorial1 = new Editorial(1, "Penguin Random House", "Reino Unido", LocalDate.of(1935, 7, 1), new ArrayList<>());
         Editorial editorial2 = new Editorial(2, "Planeta", "España", LocalDate.of(1949, 12, 23), new ArrayList<>());
+        Editorial editorialDelete = new Editorial(3, "Editorial", "Africa", LocalDate.of(1949,12,23), new ArrayList<>());
 
         // Crear Autores
         Autor autor1 = new Autor(1, "Gabriel García Márquez", "Colombiana", LocalDate.of(1927, 3, 6), new ArrayList<>());
@@ -40,15 +38,17 @@ public class TestDAO {
         // Crear Libros
         Libro libro1 = new Libro(1, "Cien Años de Soledad", LocalDate.of(1967, 5, 30), Tipo_Enum.Libro, categoria1, editorial1, new ArrayList<>(), "123-456-789", autor1);
         Libro libro2 = new Libro(2, "Fundación", LocalDate.of(1951, 6, 1), Tipo_Enum.Libro, categoria2, editorial2, new ArrayList<>(), "987-654-321", autor2);
-
+        Libro libroDelete = new Libro(3,"Harry potter", LocalDate.of(200, 4,5), Tipo_Enum.Libro, categoria1,editorial2, new ArrayList<>(), "123-333-222",autor1);
 
         // Crear Revistas
         Revista revista1 = new Revista(1, "National Geographic", LocalDate.of(2023, 1, 1), Tipo_Enum.revista, categoria2, editorial1, new ArrayList<>(), "1234-5678", Periodicidad_Enum.Anual);
         Revista revista2 = new Revista(2, "Scientific American", LocalDate.of(2023, 2, 1), Tipo_Enum.revista, categoria2, editorial2, new ArrayList<>(), "8765-4321", Periodicidad_Enum.Diaria);
+        Revista revistaDelete = new Revista(3,"Vandal",LocalDate.of(2022, 3, 4),Tipo_Enum.revista, categoria2,editorial2, new ArrayList<>(),"787-998-755",Periodicidad_Enum.Anual);
 
         // Crear Préstamos
         Prestamo prestamo1 = new Prestamo(usuario1, libro1, LocalDate.of(2023, 10, 1), LocalDate.of(2023, 10, 15), Estado_Enum.prestado);
         Prestamo prestamo2 = new Prestamo(usuario2, revista1, LocalDate.of(2023, 11, 1), LocalDate.of(2023, 11, 20), Estado_Enum.devuelto);
+        Prestamo prestamoDelete = new Prestamo(usuario2, revista1, LocalDate.of(2050, 11, 1), LocalDate.of(2033, 11, 20), Estado_Enum.devuelto);
 
         // Mostrar las entidades creadas
         System.out.println("Categorías:");
@@ -86,60 +86,134 @@ public class TestDAO {
         System.out.println("-----------------");
 
         System.out.println("Comienzan las pruebas de los usuarioDAO");
-//
-//        Almacenar
-//        UsuarioDAO.build().store(usuario1);
-//        UsuarioDAO.build().store(usuario2);
-//        UsuarioDAO.build().store(usuarioDelete);
-//
-//       Buscar
-//        usuario1 = (UsuarioDAO.build().findId(1));
-//        usuario2 = (UsuarioDAO.build().findId(2));
-//        usuarioDelete = (UsuarioDAO.build().findId(3));
-//
-//        System.out.println(usuario1);
-//        System.out.println(usuario2);
-//        System.out.println(usuarioDelete);
-//
-//       Actualizar
-//        usuario1.setEMAIL("algo@gmail.com");
-//        UsuarioDAO.build().store(usuario1);
-//
-//       Delete
-//        String nombreUsuario = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
-//        System.out.println(nombreUsuario + ". Se a borrado");
-//
-//
-//        System.out.println("-----------------");
-//
-//        System.out.println("Comienzan las pruebas de los CategoriaDAO");
-//        Funcionan
-//
-//        Almacenar
-//        CategoriaDAO.build().store(categoria1);
-//        CategoriaDAO.build().store(categoria2);
-//        CategoriaDAO.build().store(categoriaDelete);
-//
-//        Buscar
-//        categoria1 = (CategoriaDAO.build().findId(1));
-//        categoria2 = (CategoriaDAO.build().findId(2));
-//        // Este es el que no tiene ID
-//        categoriaDelete = (CategoriaDAO.build().findId(3));
-//
-//        System.out.println(categoria1);
-//        System.out.println(categoria2);
-//        System.out.println(categoriaDelete);
-//
-//       Actualizar
-//        categoria1.setNombre("Artes Marciales");
-//        CategoriaDAO.build().store(categoria1);
-//
-//        Delete
-//        String nombreCateogira = CategoriaDAO.build().deleteEntity(categoriaDelete).getNombre();
-//        System.out.println(nombreCateogira + ". Se a borrado");
+
+        //Almacenar
+        UsuarioDAO.build().store(usuario1);
+        UsuarioDAO.build().store(usuario2);
+        UsuarioDAO.build().store(usuarioDelete);
+
+        //Buscar
+        usuario1 = (UsuarioDAO.build().findId(1));
+        usuario2 = (UsuarioDAO.build().findId(2));
+        usuarioDelete = (UsuarioDAO.build().findId(3));
+
+        System.out.println(usuario1);
+        System.out.println(usuario2);
+        System.out.println(usuarioDelete);
+
+        //Actualizar
+        usuario1.setEMAIL("algo@gmail.com");
+        UsuarioDAO.build().store(usuario1);
+
+        //Delete
+        String nombreUsuario = UsuarioDAO.build().deleteEntity(usuarioDelete).getNombre();
+        System.out.println(nombreUsuario + ". Se a borrado");
 
 
+        System.out.println("-----------------");
 
+        System.out.println("Comienzan las pruebas de los CategoriaDAO");
+
+
+        //Almacenar
+        CategoriaDAO.build().store(categoria1);
+        CategoriaDAO.build().store(categoria2);
+        CategoriaDAO.build().store(categoriaDelete);
+
+        //Buscar
+        categoria1 = (CategoriaDAO.build().findId(1));
+        categoria2 = (CategoriaDAO.build().findId(2));
+        // Este es el que no tiene ID
+        categoriaDelete = (CategoriaDAO.build().findId(3));
+
+        System.out.println(categoria1);
+        System.out.println(categoria2);
+        System.out.println(categoriaDelete);
+
+        //Actualizar
+        categoria1.setNombre("Artes Marciales");
+        CategoriaDAO.build().store(categoria1);
+
+        //Delete
+        String nombreCateogira = CategoriaDAO.build().deleteEntity(categoriaDelete).getNombre();
+        System.out.println(nombreCateogira + ". Se a borrado");
+
+        System.out.println("-----------------");
+
+        System.out.println("Comienzan las pruebas de los EditorialDAO");
+
+        // Almacenar
+        EditorialDAO.build().store(editorial1);
+        EditorialDAO.build().store(editorial2);
+        EditorialDAO.build().store(editorialDelete);
+
+        // Buscar
+        editorial1 = EditorialDAO.build().findId(1);
+        editorial2 = EditorialDAO.build().findId(2);
+        editorialDelete = EditorialDAO.build().findId(3);
+
+        System.out.println(editorial1);
+        System.out.println(editorial2);
+        System.out.println(editorialDelete);
+
+        // Actualizar
+        editorial1.setPais("Alemania");
+        EditorialDAO.build().store(editorial1);
+
+        // Borrar
+        EditorialDAO.build().deleteEntity(editorialDelete);
+
+        System.out.println("-----------------");
+
+        System.out.println("Comienzan las pruebas de los AutorDAO");
+
+        // Almacenar
+        AutorDAO.build().store(autor1);
+        AutorDAO.build().store(autor2);
+        AutorDAO.build().store(autorDelete);
+
+        // Buscar
+        autor1 = AutorDAO.build().findId(autor1.getId());
+        autor2 = AutorDAO.build().findId(autor2.getId());
+        autorDelete = AutorDAO.build().findId(autorDelete.getId());
+
+        System.out.println(autor1);
+        System.out.println(autor2);
+        System.out.println(autorDelete);
+
+        // Actualizar
+        autor1.setNacionalidad("Portugal");
+        AutorDAO.build().store(autor1);
+
+        // Delete
+        AutorDAO.build().deleteEntity(autorDelete);
+
+
+        System.out.println("-----------------");
+
+        System.out.println("Comienzan las pruebas de los LibroDAO");
+
+        // Almacenar
+        LibroDAO.build().store(libro1);
+        LibroDAO.build().store(libro2);
+        LibroDAO.build().store(libroDelete);
+
+//        // Buscar
+//        libro1 = LibroDAO.build().findId(libro1.getId());
+//        libro2 = LibroDAO.build().findId(libro2.getId());
+//        libroDelete = LibroDAO.build().findId(libroDelete.getId());
+//
+//        System.out.println(libro1);
+//        System.out.println(libro2);
+//        System.out.println(libroDelete);
+//
+//        //Actualizar
+//
+//        libro1.setTitulo("One piece");
+//        LibroDAO.build().store(libro1);
+//
+//        // Delete
+//        LibroDAO.build().deleteEntity(libroDelete);
     }
 }
 

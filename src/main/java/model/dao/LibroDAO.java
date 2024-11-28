@@ -40,6 +40,17 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                 // Buscar el libro por ID
                 Libro libroTmp = findId(idLibroTmp);
                 if (libroTmp == null) {
+                    Publicacion publicacionTmp = new Publicacion(
+                            entity.getId(),
+                            entity.getTitulo(),
+                            entity.getFecha_publicacion(),
+                            entity.getTipo(),
+                            entity.getCategoria(),
+                            entity.getEditorial(),
+                            entity.getPrestamos()
+                    );
+                    PublicacionDAO.build().store(publicacionTmp);
+
                     // Si no existe, insertar un nuevo libro
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
                         preparedStatement.setInt(1, entity.getId());
