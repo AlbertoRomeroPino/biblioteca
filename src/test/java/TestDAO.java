@@ -193,11 +193,11 @@ public class TestDAO {
 
         System.out.println("Comienzan las pruebas de los LibroDAO");
 
-        // Almacenar
-        LibroDAO.build().store(libro1);
-        LibroDAO.build().store(libro2);
-        LibroDAO.build().store(libroDelete);
-
+//        // Almacenar
+//        LibroDAO.build().store(libro1);
+//        LibroDAO.build().store(libro2);
+//        LibroDAO.build().store(libroDelete);
+//
 //        // Buscar
 //        libro1 = LibroDAO.build().findId(libro1.getId());
 //        libro2 = LibroDAO.build().findId(libro2.getId());

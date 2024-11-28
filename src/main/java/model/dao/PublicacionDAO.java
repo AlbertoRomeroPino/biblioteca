@@ -102,7 +102,13 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacion;
     }
 
+    public Publicacion findByLibro(Integer entityId){
+        Publicacion publicacion = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYLIBRO)){
+            preparedStatement
 
+        }
+    }
 
     /**
      * Elimina un objeto Publicacion de la base de datos.
