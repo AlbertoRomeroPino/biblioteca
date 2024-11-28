@@ -36,17 +36,29 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     public Revista store(Revista entity) {
         if (entity != null) {
             int idRevistaTmp = entity.getId();
-            if (idRevistaTmp > 0) {
+            if (idRevistaTmp >= 0) {
                 Revista revistaTmp = findId(idRevistaTmp);
                 if (revistaTmp == null) {
                     // Insertar una nueva revista
+                    // Insertar la publicación asociada
+                    Publicacion publicacionTmp = new Publicacion(
+                            entity.getId(),
+                            entity.getTitulo(),
+                            entity.getFecha_publicacion(),
+                            entity.getTipo(),
+                            entity.getCategoria(),
+                            entity.getEditorial(),
+                            entity.getPrestamos()
+                    );
+                    PublicacionDAO.build().store(publicacionTmp);
+
+                    // Insertar la revista
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
                         preparedStatement.setInt(1, entity.getId());
                         preparedStatement.setString(2, entity.getISSN());
                         preparedStatement.setString(3, entity.getPeriodicidad().toString());
-
                         preparedStatement.executeUpdate();
-                    } catch (SQLException e) {
+                    }catch (SQLException e){
                         e.printStackTrace();
                     }
                 } else {
