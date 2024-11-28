@@ -35,10 +35,12 @@ public class TestDAO {
         // Crear Autores
         Autor autor1 = new Autor(1, "Gabriel García Márquez", "Colombiana", LocalDate.of(1927, 3, 6), new ArrayList<>());
         Autor autor2 = new Autor(2, "Isaac Asimov", "Rusa-Estadounidense", LocalDate.of(1920, 1, 2), new ArrayList<>());
+        Autor autorDelete = new Autor(3, "Pepe","Español",LocalDate.of(1999, 1,3), new ArrayList<>());
 
         // Crear Libros
         Libro libro1 = new Libro(1, "Cien Años de Soledad", LocalDate.of(1967, 5, 30), Tipo_Enum.Libro, categoria1, editorial1, new ArrayList<>(), "123-456-789", autor1);
         Libro libro2 = new Libro(2, "Fundación", LocalDate.of(1951, 6, 1), Tipo_Enum.Libro, categoria2, editorial2, new ArrayList<>(), "987-654-321", autor2);
+
 
         // Crear Revistas
         Revista revista1 = new Revista(1, "National Geographic", LocalDate.of(2023, 1, 1), Tipo_Enum.revista, categoria2, editorial1, new ArrayList<>(), "1234-5678", Periodicidad_Enum.Anual);
@@ -83,7 +85,7 @@ public class TestDAO {
         System.out.println("-----------------");
         System.out.println("-----------------");
 
-//        System.out.println("Comienzan las pruebas de los usuarioDAO");
+        System.out.println("Comienzan las pruebas de los usuarioDAO");
 //
 //        Almacenar
 //        UsuarioDAO.build().store(usuario1);
