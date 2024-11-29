@@ -14,7 +14,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
 
     private Connection connection;
 
-    public RevistaDAO(){
+    public RevistaDAO() {
         connection = ConnectionMariaDB.getConnection();
     }
 
@@ -58,7 +58,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
                         preparedStatement.setString(2, entity.getISSN());
                         preparedStatement.setString(3, entity.getPeriodicidad().toString());
                         preparedStatement.executeUpdate();
-                    }catch (SQLException e){
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -126,7 +126,24 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     @Override
     public Revista deleteEntity(Revista entityDelete) {
         if (entityDelete != null) {
-            PublicacionDAO.build().deleteEntity(findId(entityDelete.getId()));
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+                preparedStatement.setInt(1, entityDelete.getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Publicacion publicacionTmp = new Publicacion(
+                    entityDelete.getId(),
+                    entityDelete.getTitulo(),
+                    entityDelete.getFecha_publicacion(),
+                    entityDelete.getTipo(),
+                    entityDelete.getCategoria(),
+                    entityDelete.getEditorial(),
+                    entityDelete.getPrestamos()
+            );
+
+            PublicacionDAO.build().deleteEntity(publicacionTmp);
         }
         return entityDelete;
     }

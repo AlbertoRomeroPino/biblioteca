@@ -22,10 +22,6 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private static final String DELETE = "DELETE FROM Publicacion WHERE Id = ?";
     private static final String UPDATE = "UPDATE Publicacion SET Titulo = ?, FechaPublicacion = ?, Tipo = ?, Categoria_ID = ?, Editorial_ID = ? WHERE Id = ?";
     private static final String FINDID = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion WHERE Id = ?";
-    private static final String FINDBYLIBRO = "SELECT  P.ID, P.Titulo, P.FechaPublicacion, P.Tipo, P.Categoria_ID, P.Editorial_ID, L.ISBN, L.Autor_ID" +
-            " FROM Publicacion P" +
-            " JOIN Libro L ON P.ID = L.Publicacion_ID" +
-            " WHERE P.ID = ?";
 
     /**
      * Almacena un objeto Publicacion en la base de datos.
@@ -103,30 +99,6 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacion;
     }
 
-    public Libro findByLibro(Integer entityId){
-        Libro libro = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYLIBRO)){
-            preparedStatement.setInt(1,entityId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
-                if (resultSet.next()){
-                    libro = new Libro();
-                    libro.setId(resultSet.getInt("Id"));
-                    libro.setTitulo(resultSet.getString("Titulo"));
-                    libro.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
-                    libro.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
-                    libro.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
-                    libro.setEditorial(EditorialDAO.build().findId(resultSet.getInt("Editorial_ID")));
-                    libro.setISBN(resultSet.getString("ISBN"));
-                    libro.setAutor(AutorDAO.build().findId(resultSet.getInt("Autor_ID")));
-
-                }
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return libro;
-    }
 
     /**
      * Elimina un objeto Publicacion de la base de datos.
