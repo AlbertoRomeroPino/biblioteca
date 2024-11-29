@@ -106,6 +106,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         }catch (SQLException e){
             System.out.println();
         }
+        return usuario;
     }
 
     /**
