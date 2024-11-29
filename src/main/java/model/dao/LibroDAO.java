@@ -19,7 +19,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         connection = ConnectionMariaDB.getConnection();
     }
 
-    private static final String INSERT = "INSERT INTO Libro(Publicacion_ID, ISBN, Autor_DAO) VALUES (?,?,?)";
+    private static final String INSERT = "INSERT INTO Libro(Publicacion_ID, ISBN, Autor_ID) VALUES (?,?,?)";
     private static final String UPDATE = "UPDATE Libro SET ISBN = ?, Autor_ID = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
 
