@@ -126,10 +126,10 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     @Override
     public Libro deleteEntity(Libro entityDelete) {
         if (entityDelete != null) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)){
-                preparedStatement.setInt(1,entityDelete.getId());
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+                preparedStatement.setInt(1, entityDelete.getId());
                 preparedStatement.executeUpdate();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 

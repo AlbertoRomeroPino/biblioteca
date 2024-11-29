@@ -2,6 +2,7 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
+import model.entity.Sesion;
 import model.entity.Usuario;
 
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         return usuario;
     }
 
-    public Usuario FindByEmail(String email){
+    public Usuario findByEmail(String email){
         Usuario usuario = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)){
             preparedStatement.setString(1, email);
