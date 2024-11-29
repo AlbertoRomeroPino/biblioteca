@@ -1,5 +1,8 @@
 package DAO;
 
+import model.dao.AutorDAO;
+import model.dao.CategoriaDAO;
+import model.dao.EditorialDAO;
 import model.dao.LibroDAO;
 import model.entity.Autor;
 import model.entity.Categoria;
@@ -30,9 +33,9 @@ public class TestLibro {
         // Crear Libros
         Libro libro1 = new Libro(1, "Cien Años de Soledad", LocalDate.of(1967, 5, 30), Tipo_Enum.Libro, categoria1, editorial1, new ArrayList<>(), "123-456-789", autor1);
         Libro libro2 = new Libro(2, "Fundación", LocalDate.of(1951, 6, 1), Tipo_Enum.Libro, categoria2, editorial2, new ArrayList<>(), "987-654-321", autor2);
-        Libro libroDelete = new Libro(3, "Harry potter", LocalDate.of(200, 4, 5), Tipo_Enum.Libro, categoria1, editorial2, new ArrayList<>(), "123-333-222", autor1);
+        Libro libroDelete = new Libro(3, "Harry potter", LocalDate.of(200, 4, 5), Tipo_Enum.Libro, categoriaDelete, editorialDelete, new ArrayList<>(), "123-333-222", autorDelete);
 
-        System.out.println("Comienzan las pruebas de los AutorDAO");
+        System.out.println("Comienzan las pruebas de los LibroDAO");
 
         LibroDAO.build().store(libro1);
         LibroDAO.build().store(libro2);
@@ -42,12 +45,16 @@ public class TestLibro {
         libro2 = LibroDAO.build().findId(2);
         libroDelete = LibroDAO.build().findId(3);
 
+        System.out.println("Publicacion{Publicacion_Id="+libro1.getId()+", Titulo=" + libro1.getTitulo() + ", FechaPublicacion= " + libro1.getFecha_publicacion() + ", Tipo=" + libro1.getTipo() + ", Categoria_ID=" + libro1.getCategoria().getId() + ", Editorial_ID=" + libro1.getEditorial().getId());
         System.out.println(libro1);
+        System.out.println("Publicacion{Publicacion_Id="+libro2.getId()+", Titulo=" + libro2.getTitulo() + ", FechaPublicacion= " + libro2.getFecha_publicacion() + ", Tipo=" + libro2.getTipo() + ", Categoria_ID=" + libro2.getCategoria().getId() + ", Editorial_ID=" + libro2.getEditorial().getId());
         System.out.println(libro2);
+        System.out.println("Publicacion{Publicacion_Id="+libroDelete.getId()+", Titulo=" + libroDelete.getTitulo() + ", FechaPublicacion= " + libroDelete.getFecha_publicacion() + ", Tipo=" + libroDelete.getTipo() + ", Categoria_ID=" + libroDelete.getCategoria().getId() + ", Editorial_ID=" + libroDelete.getEditorial().getId());
         System.out.println(libroDelete);
 
         libro1.setISBN("1234 4321");
         LibroDAO.build().store(libro1);
+        System.out.println(libro1);
 
         LibroDAO.build().deleteEntity(libroDelete);
 
