@@ -9,6 +9,8 @@ import model.entity.Revista;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RevistaDAO implements IDAO<Revista, Integer> {
 
@@ -22,6 +24,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     private static final String DELETE = "DELETE FROM Revista WHERE Publicacion_ID = ?";
     private static final String UPDATE = "UPDATE Revista SET ISSN = ?, Periodicidad = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista WHERE Publicacion_Id = ?";
+    private static final String FINDALL = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista";
 
 
     /**
@@ -112,6 +115,36 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
             e.printStackTrace();
         }
         return revista;
+    }
+
+    public List<Revista> findAll() {
+        List<Revista> revistas = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Revista revista = new Revista();
+
+                    // Atributos heredados de Publicación
+                    Publicacion publicacion = PublicacionDAO.build().findId(resultSet.getInt("Publicacion_Id"));
+                    revista.setId(publicacion.getId());
+                    revista.setTitulo(publicacion.getTitulo());
+                    revista.setFecha_publicacion(publicacion.getFecha_publicacion());
+                    revista.setTipo(publicacion.getTipo());
+                    revista.setCategoria(publicacion.getCategoria());
+                    revista.setEditorial(publicacion.getEditorial());
+
+                    // Atributos específicos de Revista
+                    revista.setISSN(resultSet.getString("ISSN"));
+                    revista.setPeriodicidad(Periodicidad_Enum.valueOf(resultSet.getString("Periodicidad")));
+
+                    revistas.add(revista);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return revistas;
     }
 
     /**

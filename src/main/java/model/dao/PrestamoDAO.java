@@ -102,6 +102,10 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
         return prestamo;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Prestamo> findAll(){
         List<Prestamo> prestamos = new ArrayList<>();
 

@@ -91,12 +91,12 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         return usuario;
     }
 
-    public Usuario findByEmail(String email){
+    public Usuario findByEmail(String email) {
         Usuario usuario = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)) {
             preparedStatement.setString(1, email);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
-                if (resultSet.next()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
                     usuario = new Usuario();
                     usuario.setId(resultSet.getInt("Id"));
                     usuario.setNombre(resultSet.getString("Nombre"));
@@ -104,7 +104,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                     usuario.setEMAIL(resultSet.getString("Email"));
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println();
         }
         return usuario;
