@@ -8,6 +8,8 @@ import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditorialDAO implements IDAO<Editorial, Integer> {
     private Connection connection;
@@ -19,7 +21,9 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
     private static final String INSERT = "INSERT INTO Editorial (Nombre, Pais, Fecha_Fundacion) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Editorial WHERE Id = ?";
     private static final String UPDATE = "UPDATE Editorial SET Nombre = ?, Pais = ?, Fecha_Fundacion = ? WHERE Id = ?";
-    private static final String FINDID =  "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial WHERE Id = ?";
+    //Select
+    private static final String FINDID = "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial WHERE Id = ?";
+    private static final String FINDALL = "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial";
 
     /**
      * Almacena una editorial en la base de datos.
@@ -88,6 +92,27 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
             e.printStackTrace();
         }
         return editorial;
+    }
+
+    public List<Editorial> findAll() {
+        List<Editorial> editoriales = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Editorial editorial = new Editorial();
+                    editorial.setId(resultSet.getInt("Id"));
+                    editorial.setNombre(resultSet.getString("Nombre"));
+                    editorial.setPais(resultSet.getString("Pais"));
+                    editorial.setFecha_fundacion(resultSet.getDate("Fecha_Fundacion").toLocalDate());
+
+                    editoriales.add(editorial);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return editoriales;
     }
 
     /**

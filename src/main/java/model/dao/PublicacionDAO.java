@@ -10,6 +10,8 @@ import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private Connection connection;
@@ -21,7 +23,9 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private static final String INSERT = "INSERT INTO Publicacion(Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID) VALUES (?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM Publicacion WHERE Id = ?";
     private static final String UPDATE = "UPDATE Publicacion SET Titulo = ?, FechaPublicacion = ?, Tipo = ?, Categoria_ID = ?, Editorial_ID = ? WHERE Id = ?";
+    //Select
     private static final String FINDID = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion WHERE Id = ?";
+    private static final String FINDALL = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion";
 
     /**
      * Almacena un objeto Publicacion en la base de datos.
@@ -99,6 +103,28 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacion;
     }
 
+    public List<Publicacion> findAll() {
+        List<Publicacion> publicacions = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Publicacion publicacion = new Publicacion();
+                    publicacion.setId(resultSet.getInt("Id"));
+                    publicacion.setTitulo(resultSet.getString("Titulo"));
+                    publicacion.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
+                    publicacion.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
+                    publicacion.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
+                    publicacion.setEditorial(EditorialDAO.build().findId(resultSet.getInt("Editorial_ID")));
+
+                    publicacions.add(publicacion);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicacions;
+    }
 
     /**
      * Elimina un objeto Publicacion de la base de datos.
