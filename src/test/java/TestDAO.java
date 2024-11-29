@@ -83,7 +83,7 @@ public class TestDAO {
         System.out.println("-----------------");
         System.out.println("-----------------");
         System.out.println("-----------------");
-
+/*
         System.out.println("Comienzan las pruebas de los usuarioDAO");
 
         //Almacenar
@@ -189,10 +189,10 @@ public class TestDAO {
 
 
         System.out.println("-----------------");
-
+*/
         System.out.println("Comienzan las pruebas de los LibroDAO");
 
-        // Almacenar
+       // Almacenar
         LibroDAO.build().store(libro1);
         LibroDAO.build().store(libro2);
         LibroDAO.build().store(libroDelete);
