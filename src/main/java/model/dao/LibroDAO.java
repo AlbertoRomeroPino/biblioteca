@@ -20,6 +20,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     }
 
     private static final String INSERT = "INSERT INTO Libro(Publicacion_ID, ISBN, Autor_ID) VALUES (?,?,?)";
+    private static final String DELETE = "DELETE FROM Libro WHERE Publicacion_ID = ?";
     private static final String UPDATE = "UPDATE Libro SET ISBN = ?, Autor_ID = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
 
@@ -104,7 +105,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                     libro.setEditorial(publicacion.getEditorial());
 
                     // Atributos específicos de Libro
-                    libro.setTitulo(resultSet.getString("ISBN"));
+                    libro.setISBN(resultSet.getString("ISBN"));
                     libro.setAutor(AutorDAO.build().findId(resultSet.getInt("Autor_Id")));
                 }
             }
@@ -125,7 +126,24 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     @Override
     public Libro deleteEntity(Libro entityDelete) {
         if (entityDelete != null) {
-            PublicacionDAO.build().deleteEntity(findId(entityDelete.getId()));
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)){
+                preparedStatement.setInt(1,entityDelete.getId());
+                preparedStatement.executeUpdate();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            Publicacion publicacionTmp = new Publicacion(
+                    entityDelete.getId(),
+                    entityDelete.getTitulo(),
+                    entityDelete.getFecha_publicacion(),
+                    entityDelete.getTipo(),
+                    entityDelete.getCategoria(),
+                    entityDelete.getEditorial(),
+                    entityDelete.getPrestamos()
+            );
+
+            PublicacionDAO.build().deleteEntity(publicacionTmp);
         }
         return entityDelete;
     }

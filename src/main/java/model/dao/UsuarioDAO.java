@@ -21,7 +21,9 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     private static final String INSERT = "INSERT INTO Usuario(Nombre, Clave, Email) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Usuario WHERE Id = ?";
     private static final String UPDATE = "UPDATE Usuario SET Nombre = ?, Clave = ?, Email = ? WHERE Id = ?";
+    //Select
     private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
+    private static final String FINDBYEMAIL = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Email = ?";
 
     /**
      * Clase DAO para gestionar las operaciones CRUD de la entidad Usuario en la base de datos.
@@ -86,6 +88,24 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         }
 
         return usuario;
+    }
+
+    public Usuario FindByEmail(String email){
+        Usuario usuario = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)){
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                if (resultSet.next()){
+                    usuario = new Usuario();
+                    usuario.setId(resultSet.getInt("Id"));
+                    usuario.setNombre(resultSet.getString("Nombre"));
+                    usuario.setClave(resultSet.getString("Clave"));
+                    usuario.setEMAIL(resultSet.getString("Email"));
+                }
+            }
+        }catch (SQLException e){
+            System.out.println();
+        }
     }
 
     /**
