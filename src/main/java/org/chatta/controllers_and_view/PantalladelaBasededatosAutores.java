@@ -5,7 +5,7 @@ import org.chatta.App;
 
 import java.io.IOException;
 
-public class PantalladelaBasededatos {
+public class PantalladelaBasededatosAutores {
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {

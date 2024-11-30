@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatos">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosPublicaciones">
    <children>
       <MenuBar layoutY="2.0">
         <menus>
           <Menu mnemonicParsing="false" text="tables">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladePrestamos" text="prestamo" />
-                  <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladePublicaciones" text="publicación" />
-                  <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeLibros" text="libro" />
-                  <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeRevistas" text="revista" />
-                  <MenuItem mnemonicParsing="false" text="autores" onAction="#SwitchToPantalladeAutores" />
-                  <MenuItem mnemonicParsing="false" text="editorial" onAction="#SwitchToPantalladeEditorial" />
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladePrestamos" text="prestamo" />
+
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeLibros" text="libro" />
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeRevistas" text="revista" />
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeAutores" text="autores" />
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeEditorial" text="editorial" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -69,13 +66,22 @@
           </Menu>
           <Menu mnemonicParsing="false" text="ohters">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
+                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <TableView layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0" />
-      <Text layoutX="219.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="bienvenido a la base de datos " />
-      <Text layoutX="221.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="elija una tabla para comenzar" />
+      <TableView layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
+        <columns>
+          <TableColumn prefWidth="90.0" text="C1" />
+          <TableColumn prefWidth="73.0" text="C2" />
+            <TableColumn prefWidth="83.0" text="C3" />
+            <TableColumn prefWidth="82.0" text="C4" />
+            <TableColumn text="C5" />
+            <TableColumn text="C6" />
+            <TableColumn prefWidth="76.0" text="C7" />
+        </columns>
+      </TableView>
+      <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publicacion" />
    </children>
 </AnchorPane>
