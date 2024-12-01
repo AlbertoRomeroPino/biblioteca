@@ -32,7 +32,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="prestamo">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="create prestamo" />
+                        <MenuItem mnemonicParsing="false" text="create prestamo" onAction="#CreateNewPrestamo" />
                         <MenuItem mnemonicParsing="false" text="update prestamo" />
                         <MenuItem mnemonicParsing="false" text="delete prestamo" />
                      </items>
