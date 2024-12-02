@@ -58,7 +58,7 @@ public class viewController {
         String clave = scanner.nextLine();
 
         if (Validacion.validacionEmail(email)) {
-            Usuario usuario = UsuarioDAO.build().FindByEmail(email);
+            Usuario usuario = UsuarioDAO.build().findByEmail(email);
             if (usuario != null && Validacion.encryptClave(clave).equals(usuario.getClave())) {
                 Sesion.getInstance().setUsuario(usuario);
                 System.out.println("Inicio de sesión exitoso.");
