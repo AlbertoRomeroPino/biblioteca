@@ -1,5 +1,7 @@
 package org.chatta.controllers_and_view;
 
+import model.dao.UsuarioDAO;
+import model.entity.Usuario;
 import org.chatta.App;
 import org.chatta.controllers_and_view.scenes;
 import utils.Validacion;
@@ -33,23 +35,15 @@ public class PantalladeIdentificacion {
 
 
     @FXML
-    private void handleIdentificacion() {
+    private void handleIdentificacion() throws IOException {
         // Obtener los datos introducidos por el usuario
         String email = emailField.getText();
         String password = passwordField.getText();
         String passwordCifrado = Validacion.encryptClave(password);
 
         if (Validacion.validacionEmail(email)) {
-            try (Connection connection = ConnectionMariaDB.getConnection()) {
-                if (connection != null && !connection.isClosed()) {
-                    String query = "SELECT * FROM usuario WHERE email = ? AND clave = ?";
-                    PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setString(1, email);
-                    statement.setString(2, passwordCifrado);
-
-                    ResultSet resultSet = statement.executeQuery();
-
-                    if (resultSet.next()) {
+            Usuario usuario = UsuarioDAO.build().findByIdentificator(email, passwordCifrado);
+                    if (usuario != null) {
                         // Usuario encontrado y autenticado, cambiar a la pantalla de base de datos
                         App.setRoot(scenes.PANTALLADEBASADEDATOS);
                         // Cerrar la ventana actual
@@ -59,13 +53,8 @@ public class PantalladeIdentificacion {
                         // Usuario no encontrado o credenciales incorrectas
                         mostrarAlerta("Error de autenticación", "El correo electrónico o la contraseña son incorrectos.", AlertType.ERROR);
                     }
-                } else {
-                    mostrarAlerta("Error", "No se pudo conectar a la base de datos.", AlertType.ERROR);
-                }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo conectar a la base de datos.", AlertType.ERROR);
-            }
+
+
         } else {
             mostrarAlerta("Error de formato", "El correo electrónico no tiene un formato válido.", AlertType.ERROR);
         }

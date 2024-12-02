@@ -1,7 +1,5 @@
 package interfaces;
 
-import model.entity.Usuario;
-
 import java.io.Closeable;
 
 public interface IDAO <T, K> extends Closeable {

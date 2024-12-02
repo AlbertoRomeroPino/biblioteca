@@ -46,6 +46,12 @@ public class Test2DAO {
         System.out.println("-------------------");
 
         FindAllRevista();
+
+        System.out.println("-------------------");
+        System.out.println("|All Identificador |");
+        System.out.println("-------------------");
+
+        FindIdentificador();
     }
 
     public static void FindALLPrestamo() {
@@ -88,5 +94,13 @@ public class Test2DAO {
         for (Revista revista : revistas){
             System.out.println(revista);
         }
+    }
+
+    public static void FindIdentificador(){
+        String email = "algo@gmail.com";
+        String clave = "1a02c611aeb8a65c9bf6fe741a1f4e0119334737abaa97f20e42f2e68c4d851c";
+        Usuario usuario = UsuarioDAO.build().findByIdentificator(email, clave);
+
+        System.out.println(usuario);
     }
 }
