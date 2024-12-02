@@ -1,47 +1,101 @@
 package org.chatta.controllers_and_view;
 
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dao.AutorDAO;
+import model.entity.Autor;
 import org.chatta.App;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+
 
 public class PantalladelaBasededatosAutores {
+
+
+    @FXML
+    private TableView<Autor> tablaAutores;
+    @FXML
+    private TableColumn<Autor, Integer> colId;
+    @FXML
+    private TableColumn<Autor, String> colNombre;
+    @FXML
+    private TableColumn<Autor, String> colNacionalidad;
+    @FXML
+    private TableColumn<Autor, LocalDate> colNacimiento;
+
+    public void initialize() {
+        // Configurar las columnas de la tabla
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colNacionalidad.setCellValueFactory(new PropertyValueFactory<>("nacionalidad"));
+        colNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
+
+        // Cargar los autores
+        cargarAutores();
+    }
+
+    private void cargarAutores() {
+        // Obtén la lista de autores desde la base de datos o el DAO
+        ObservableList<Autor> autores = FXCollections.observableArrayList(AutorDAO.build().findAll());
+
+        // Asignar la lista de autores a la tabla
+        tablaAutores.setItems(autores);
+    }
+
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEINICIO);
     }
+
     @FXML
     private void SwitchToPantalladePrestamos() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEBASADEDATOSPRESTAMOS);
     }
+
     @FXML
     private void SwitchToPantalladePublicaciones() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
     }
+
     @FXML
     private void SwitchToPantalladeLibros() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEBASADEDATOSLIBRO);
     }
+
     @FXML
     private void SwitchToPantalladeRevistas() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEBASADEDATOSREVISTA);
     }
+
     @FXML
     private void SwitchToPantalladeAutores() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
     }
+
     @FXML
     private void SwitchToPantalladeEditorial() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
@@ -78,6 +132,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void CreateNewPrestamo() throws IOException {
         try {
@@ -108,6 +163,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void CreateNewLibro() throws IOException {
         try {
@@ -138,6 +194,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void CreateNewRevista() throws IOException {
         try {
@@ -168,6 +225,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void CreateNewAutor() throws IOException {
         try {
@@ -198,6 +256,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void CreateNewEditorial() throws IOException {
         try {
@@ -259,6 +318,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void ModifyPrestamo() throws IOException {
         try {
@@ -289,6 +349,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void ModifyLibro() throws IOException {
         try {
@@ -319,6 +380,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void ModifyRevista() throws IOException {
         try {
@@ -349,6 +411,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void ModifyAutor() throws IOException {
         try {
@@ -379,6 +442,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void ModifyEditorial() throws IOException {
         try {
@@ -440,6 +504,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DeletePrestamo() throws IOException {
         try {
@@ -470,6 +535,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DeleteLibro() throws IOException {
         try {
@@ -500,6 +566,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DeleteRevista() throws IOException {
         try {
@@ -530,6 +597,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DeleteAutor() throws IOException {
         try {
@@ -560,6 +628,7 @@ public class PantalladelaBasededatosAutores {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DeleteEditorial() throws IOException {
         try {

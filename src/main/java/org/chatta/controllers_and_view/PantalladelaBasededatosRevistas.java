@@ -1,16 +1,65 @@
 package org.chatta.controllers_and_view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dao.RevistaDAO;
+import model.entity.Revista;
 import org.chatta.App;
 
 import java.io.IOException;
+import java.util.List;
 
 public class PantalladelaBasededatosRevistas {
+
+    @FXML
+    private TableView<Revista> tableView;
+
+    @FXML
+    private TableColumn<Revista, Integer> idColumn;
+
+    @FXML
+    private TableColumn<Revista, String> tituloColumn;
+
+    @FXML
+    private TableColumn<Revista, String> fechaPublicacionColumn;
+
+    @FXML
+    private TableColumn<Revista, String> categoriaColumn;
+
+    @FXML
+    private TableColumn<Revista, String> editorialColumn;
+
+    @FXML
+    private TableColumn<Revista, String> issnColumn;
+
+    @FXML
+    private TableColumn<Revista, String> periodicidadColumn;
+
+    @FXML
+    public void initialize() {
+        // Configuración de columnas
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        fechaPublicacionColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPublicacion"));
+        categoriaColumn.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        editorialColumn.setCellValueFactory(new PropertyValueFactory<>("editorial"));
+        issnColumn.setCellValueFactory(new PropertyValueFactory<>("issn"));
+        periodicidadColumn.setCellValueFactory(new PropertyValueFactory<>("periodicidad"));
+
+        // Cargar datos desde RevistaDAO
+        List<Revista> revistas = RevistaDAO.build().findAll();
+        ObservableList<Revista> data = FXCollections.observableArrayList(revistas);
+        tableView.setItems(data);
+    }
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {
