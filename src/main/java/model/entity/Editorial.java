@@ -9,7 +9,7 @@ public class Editorial {
     private String nombre;
     private String pais;
     private LocalDate fecha_fundacion;
-    private List<Publicacion>publicacions;
+    private List<Publicacion> publicacions;
 
     public Editorial() {
     }

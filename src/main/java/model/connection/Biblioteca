@@ -1,0 +1,88 @@
+DROP DATABASE IF EXISTS biblioteca;
+CREATE DATABASE biblioteca;
+USE biblioteca;
+
+
+-- Crear tabla Categoría
+-- Llave es entero
+CREATE TABLE Categoria (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(50) NOT NULL
+);
+
+-- Crear tabla Autor
+-- Llave es entero
+CREATE TABLE Autor (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100) NOT NULL,
+    Nacionalidad VARCHAR(50),
+    Fecha_Nacimiento DATE
+);
+
+-- Crear tabla Editorial
+-- Llave es entero
+CREATE TABLE Editorial (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100) NOT NULL,
+    Pais VARCHAR(50),
+    Fecha_Fundacion DATE
+);
+
+-- Crear tabla Usuario
+-- Llave es entero
+CREATE TABLE Usuario (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100) NOT NULL,
+    Clave VARCHAR(255) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- Crear tabla Publicacion
+-- Llave es entero
+CREATE TABLE Publicacion (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Titulo VARCHAR(150) NOT NULL,
+    FechaPublicacion DATE NOT NULL,
+    Tipo ENUM('Libro', 'Revista') NOT NULL,
+    Categoria_ID INT NOT NULL,
+    Editorial_ID INT NOT NULL,  -- Subido desde Libros
+    FOREIGN KEY (Categoria_ID) REFERENCES Categoria(ID),
+    FOREIGN KEY (Editorial_ID) REFERENCES Editorial(ID)  -- Relación con Editoriales
+);
+
+-- Crear tabla Libro (relacionada con Publicaciones)
+-- Llave es entero
+-- Si buscas por ISBN buscas por entero
+CREATE TABLE Libro (
+    Publicacion_ID INT PRIMARY KEY,
+     -- Publicacion_ID es la clave primaria heredada
+    ISBN VARCHAR(15) UNIQUE,
+    -- ISBN se define como una clave única
+    Autor_ID INT NOT NULL,
+    FOREIGN KEY (Publicacion_ID) REFERENCES Publicacion(ID),
+     -- Relación con la tabla Publicacion
+    FOREIGN KEY (Autor_ID) REFERENCES Autor(ID)
+     -- Relación con la tabla Autor
+);
+
+-- Crear tabla Revista (relacionada con Publicaciones)
+-- Llave es entero
+CREATE TABLE Revista (
+    Publicacion_ID INT PRIMARY KEY,            -- Publicacion_ID es la clave primaria heredada
+    ISSN VARCHAR(15) UNIQUE,                   -- ISSN se define como una clave única
+    Periodicidad ENUM('Diaria', 'Semanal', 'Mensual', 'Anual') NOT NULL, -- Frecuencia de publicación
+    FOREIGN KEY (Publicacion_ID) REFERENCES Publicacion(ID) -- Relación con la tabla Publicacion
+);
+
+-- Crear tabla Prestamo (relacion N:M entre Usuarios y Publicaciones)
+-- LLave 2 enteros y la FechaPrestamo
+CREATE TABLE Prestamo (
+    Usuario_ID INT NOT NULL,
+    Publicacion_ID INT NOT NULL,
+    FechaPrestamo DATE NOT NULL,
+    FechaDevolucion DATE,
+    Estado ENUM('Prestado', 'Devuelto') DEFAULT 'Prestado',
+    PRIMARY KEY (Usuario_ID, Publicacion_ID, FechaPrestamo), -- Clave primaria compuesta
+    FOREIGN KEY (Usuario_ID) REFERENCES Usuario(ID),
+    FOREIGN KEY (Publicacion_ID) REFERENCES Publicacion(ID)
+);

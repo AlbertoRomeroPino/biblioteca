@@ -10,6 +10,8 @@ import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private Connection connection;
@@ -21,11 +23,9 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     private static final String INSERT = "INSERT INTO Publicacion(Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID) VALUES (?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM Publicacion WHERE Id = ?";
     private static final String UPDATE = "UPDATE Publicacion SET Titulo = ?, FechaPublicacion = ?, Tipo = ?, Categoria_ID = ?, Editorial_ID = ? WHERE Id = ?";
+    //Select
     private static final String FINDID = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion WHERE Id = ?";
-    private static final String FINDBYLIBRO = "SELECT  P.ID, P.Titulo, P.FechaPublicacion, P.Tipo, P.Categoria_ID, P.Editorial_ID, L.ISBN, L.Autor_ID" +
-            " FROM Publicacion P" +
-            " JOIN Libro L ON P.ID = L.Publicacion_ID" +
-            " WHERE P.ID = ?";
+    private static final String FINDALL = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion";
 
     /**
      * Almacena un objeto Publicacion en la base de datos.
@@ -103,29 +103,27 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacion;
     }
 
-    public Libro findByLibro(Integer entityId){
-        Libro libro = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYLIBRO)){
-            preparedStatement.setInt(1,entityId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
-                if (resultSet.next()){
-                    libro = new Libro();
-                    libro.setId(resultSet.getInt("Id"));
-                    libro.setTitulo(resultSet.getString("Titulo"));
-                    libro.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
-                    libro.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
-                    libro.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
-                    libro.setEditorial(EditorialDAO.build().findId(resultSet.getInt("Editorial_ID")));
-                    libro.setISBN(resultSet.getString("ISBN"));
-                    libro.setAutor(AutorDAO.build().findId(resultSet.getInt("Autor_ID")));
+    public List<Publicacion> findAll() {
+        List<Publicacion> publicacions = new ArrayList<>();
 
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Publicacion publicacion = new Publicacion();
+                    publicacion.setId(resultSet.getInt("Id"));
+                    publicacion.setTitulo(resultSet.getString("Titulo"));
+                    publicacion.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
+                    publicacion.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
+                    publicacion.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
+                    publicacion.setEditorial(EditorialDAO.build().findId(resultSet.getInt("Editorial_ID")));
+
+                    publicacions.add(publicacion);
                 }
             }
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return libro;
+        return publicacions;
     }
 
     /**

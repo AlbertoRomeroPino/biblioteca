@@ -67,7 +67,8 @@ public class Autor {
     }
 
     public void setLibros(List<Libro> libros) {
-        this.libros = new ArrayList<>(){};
+        this.libros = new ArrayList<>() {
+        };
 
     }
 

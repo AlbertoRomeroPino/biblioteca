@@ -1,12 +1,10 @@
 package model.entity;
 
 
-
 import model.entity.Enum.Periodicidad_Enum;
 import model.entity.Enum.Tipo_Enum;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 

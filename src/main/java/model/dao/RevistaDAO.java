@@ -9,12 +9,14 @@ import model.entity.Revista;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RevistaDAO implements IDAO<Revista, Integer> {
 
     private Connection connection;
 
-    public RevistaDAO(){
+    public RevistaDAO() {
         connection = ConnectionMariaDB.getConnection();
     }
 
@@ -22,6 +24,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     private static final String DELETE = "DELETE FROM Revista WHERE Publicacion_ID = ?";
     private static final String UPDATE = "UPDATE Revista SET ISSN = ?, Periodicidad = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista WHERE Publicacion_Id = ?";
+    private static final String FINDALL = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista";
 
 
     /**
@@ -58,7 +61,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
                         preparedStatement.setString(2, entity.getISSN());
                         preparedStatement.setString(3, entity.getPeriodicidad().toString());
                         preparedStatement.executeUpdate();
-                    }catch (SQLException e){
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -114,6 +117,36 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
         return revista;
     }
 
+    public List<Revista> findAll() {
+        List<Revista> revistas = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Revista revista = new Revista();
+
+                    // Atributos heredados de Publicación
+                    Publicacion publicacion = PublicacionDAO.build().findId(resultSet.getInt("Publicacion_Id"));
+                    revista.setId(publicacion.getId());
+                    revista.setTitulo(publicacion.getTitulo());
+                    revista.setFecha_publicacion(publicacion.getFecha_publicacion());
+                    revista.setTipo(publicacion.getTipo());
+                    revista.setCategoria(publicacion.getCategoria());
+                    revista.setEditorial(publicacion.getEditorial());
+
+                    // Atributos específicos de Revista
+                    revista.setISSN(resultSet.getString("ISSN"));
+                    revista.setPeriodicidad(Periodicidad_Enum.valueOf(resultSet.getString("Periodicidad")));
+
+                    revistas.add(revista);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return revistas;
+    }
+
     /**
      * Elimina un objeto Revista de la base de datos.
      * Dado que Revista hereda de Publicacion, este método delega
@@ -126,7 +159,24 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     @Override
     public Revista deleteEntity(Revista entityDelete) {
         if (entityDelete != null) {
-            PublicacionDAO.build().deleteEntity(findId(entityDelete.getId()));
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+                preparedStatement.setInt(1, entityDelete.getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Publicacion publicacionTmp = new Publicacion(
+                    entityDelete.getId(),
+                    entityDelete.getTitulo(),
+                    entityDelete.getFecha_publicacion(),
+                    entityDelete.getTipo(),
+                    entityDelete.getCategoria(),
+                    entityDelete.getEditorial(),
+                    entityDelete.getPrestamos()
+            );
+
+            PublicacionDAO.build().deleteEntity(publicacionTmp);
         }
         return entityDelete;
     }

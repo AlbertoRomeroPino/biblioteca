@@ -7,8 +7,10 @@ import model.entity.Prestamo;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PrestamoDAO implements IDAO<Prestamo, Integer> {
+public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
     private Connection connection;
 
     private PrestamoDAO() {
@@ -18,8 +20,9 @@ public class PrestamoDAO implements IDAO<Prestamo, Integer> {
     private static final String INSERT = "INSERT INTO Prestamo(Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado) VALUES (?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM Prestamo WHERE Usuario_ID = ? and Publicacion_ID = ? and FechaPrestamo = ?";
     private static final String UPDATE = "UPDATE Prestamo SET FechaDevolucion = ?, Estado = ? WHERE Usuario_ID = ? AND Publicacion_ID = ? AND FechaPrestamo = ?";
-    private static final String FINDID = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo WHERE Usuario_ID = ?";
 
+    private static final String FINDID = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo WHERE Usuario_ID = ? and Publicacion_ID = ? and FechaPrestamo = ?";
+    private static final String FINDALL = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo";
 
     /**
      * Almacena un objeto Prestamo en la base de datos.
@@ -34,7 +37,7 @@ public class PrestamoDAO implements IDAO<Prestamo, Integer> {
         if (entity != null) {
             int idprestamoTmp = entity.getUsuario().getId();
             if (idprestamoTmp > 0) {
-                Prestamo prestamoTmp = findId(idprestamoTmp);
+                Prestamo prestamoTmp = findId(entity);
                 if (prestamoTmp == null) {
                     // Insertar un nuevo préstamo
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
@@ -77,10 +80,12 @@ public class PrestamoDAO implements IDAO<Prestamo, Integer> {
      * @return Un objeto Prestamo con los datos encontrados, o null si no existe.
      */
     @Override
-    public Prestamo findId(Integer entityId) {
+    public Prestamo findId(Prestamo entityId) {
         Prestamo prestamo = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDID)) {
-            preparedStatement.setInt(1, entityId);
+            preparedStatement.setInt(1, entityId.getUsuario().getId());
+            preparedStatement.setInt(2, entityId.getPublicacion().getId());
+            preparedStatement.setDate(3, Date.valueOf(entityId.getFechaPrestamo()));
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     prestamo = new Prestamo();
@@ -95,6 +100,32 @@ public class PrestamoDAO implements IDAO<Prestamo, Integer> {
             e.printStackTrace();
         }
         return prestamo;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Prestamo> findAll(){
+        List<Prestamo> prestamos = new ArrayList<>();
+
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Prestamo prestamo = new Prestamo();
+                    prestamo.setUsuario(UsuarioDAO.build().findId(resultSet.getInt("Usuario_ID")));
+                    prestamo.setPublicacion(PublicacionDAO.build().findId(resultSet.getInt("Publicacion_ID")));
+                    prestamo.setFechaPrestamo(resultSet.getDate("FechaPrestamo").toLocalDate());
+                    prestamo.setFechaDevolucion(resultSet.getDate("FechaDevolucion").toLocalDate());
+                    prestamo.setEstado(Estado_Enum.valueOf(resultSet.getString("Estado")));
+                    prestamos.add(prestamo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prestamos;
     }
 
     /**

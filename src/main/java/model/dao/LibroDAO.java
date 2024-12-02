@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LibroDAO implements IDAO<Libro, Integer> {
 
@@ -23,6 +25,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     private static final String DELETE = "DELETE FROM Libro WHERE Publicacion_ID = ?";
     private static final String UPDATE = "UPDATE Libro SET ISBN = ?, Autor_ID = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
+    private static final String FINDALL = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro";
 
 
     /**
@@ -115,6 +118,37 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         return libro;
     }
 
+    public List<Libro> findAll() {
+        List<Libro> libros = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Libro libro = new Libro();
+
+                    // Atributos heredados de Publicación
+                    Publicacion publicacion = PublicacionDAO.build().findId(resultSet.getInt("Publicacion_Id"));
+                    libro.setId(publicacion.getId());
+                    libro.setTitulo(publicacion.getTitulo());
+                    libro.setFecha_publicacion(publicacion.getFecha_publicacion());
+                    libro.setTipo(publicacion.getTipo());
+                    libro.setCategoria(publicacion.getCategoria());
+                    libro.setEditorial(publicacion.getEditorial());
+
+                    // Atributos específicos de Libro
+                    libro.setISBN(resultSet.getString("ISBN"));
+                    libro.setAutor(AutorDAO.build().findId(resultSet.getInt("Autor_Id")));
+
+                    libros.add(libro);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+
+    }
+
     /**
      * Elimina un objeto Libro de la base de datos.
      * Este método delega la eliminación al DAO de Publicación, dado que Libro hereda de Publicacion.
@@ -126,10 +160,10 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     @Override
     public Libro deleteEntity(Libro entityDelete) {
         if (entityDelete != null) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)){
-                preparedStatement.setInt(1,entityDelete.getId());
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+                preparedStatement.setInt(1, entityDelete.getId());
                 preparedStatement.executeUpdate();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 
@@ -147,7 +181,6 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         }
         return entityDelete;
     }
-
 
 
     @Override
