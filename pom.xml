@@ -81,6 +81,23 @@
         </dependency>
         <!--Termina el apartado de XML-->
 
+        <!-- Inicio Conexion a la base de datos-->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <!-- Terminar Conexion a la base de datos-->
+
+        <!--Test-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Test-->
+
     </dependencies>
 
     <repositories>

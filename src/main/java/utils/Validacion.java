@@ -1,50 +1,40 @@
 package utils;
 
-import interfaces.IValidacion;
-import model.entity.Usuario;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.security.SecureRandom;
 
-public class Validacion implements IValidacion {
+public class Validacion {
 
-    // Verificar si la clave ingresada coincide con el hash almacenado en Usuario
-    public static boolean verifyClave(Usuario usuario, String clave) {
-        String hashedClaveInput = hashClave(clave, usuario.getSalt());
-        return hashedClaveInput.equals(usuario.getClave());
-    }
+    public static String encryptClave(String clave) {
+        String hexString = null;
 
-    // Hashear la clave con la sal usando SHA-256
-    private static String hashClave(String clave, String salt) {
-        String saltedClave = clave + salt;
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(saltedClave.getBytes());
-            return Base64.getEncoder().encodeToString(hashedBytes);
+
+            MessageDigest digest = MessageDigest.getInstance("SHA3-256");
+
+            byte[] hash = digest.digest(clave.getBytes());
+
+            StringBuilder hexStringBuilder = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexStringBuilder.append('0');
+                }
+                hexStringBuilder.append(hex);
+            }
+
+            hexString = hexStringBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return hexString;
     }
 
-    @Override
-    public String encryptClave(String clave) {
-        String salt = generateSalt();
-        return hashClave(clave, salt);
-    }
-
-    @Override
-    public boolean validacionEmail(String email) {
+    public static boolean validacionEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         return email.matches(emailRegex);
     }
 
-    private String generateSalt() {
-        byte[] salt = new byte[16];
-        new SecureRandom().nextBytes(salt);
-        return Base64.getEncoder().encodeToString(salt);
-    }
 }
 
 

@@ -2,6 +2,7 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
+import model.entity.Sesion;
 import model.entity.Usuario;
 
 import java.io.IOException;
@@ -21,20 +22,18 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     private static final String INSERT = "INSERT INTO Usuario(Nombre, Clave, Email) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Usuario WHERE Id = ?";
     private static final String UPDATE = "UPDATE Usuario SET Nombre = ?, Clave = ?, Email = ? WHERE Id = ?";
+    //Select
     private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
+    private static final String FINDBYEMAIL = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Email = ?";
 
     /**
-     * Almacena un usuario en la base de datos.
-     * Si el usuario ya existe (por su ID), lo actualiza; si no, lo inserta como nuevo.
-     *
-     * @param entity El usuario que se desea almacenar.
-     * @return El usuario almacenado en la base de datos.
+     * Clase DAO para gestionar las operaciones CRUD de la entidad Usuario en la base de datos.
      */
     @Override
     public Usuario store(Usuario entity) {
         if (entity != null) {
             int idUsuarioTmp = entity.getId();
-            if (idUsuarioTmp > 0) {
+            if (idUsuarioTmp >= 0) {
                 Usuario usuarioTmp = findId(idUsuarioTmp);
                 if (usuarioTmp == null) {
                     // Inserta un nuevo usuario
@@ -45,7 +44,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
 
                         preparedStatement.executeUpdate();
                     } catch (SQLException e) {
-                        e.printStackTrace();
+                        System.err.println("Error al insertar un nuevo usuario: " + e.getMessage());
                     }
                 } else {
                     // Actualiza un usuario existente
@@ -57,7 +56,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
 
                         preparedStatement.executeUpdate();
                     } catch (SQLException e) {
-                        e.printStackTrace();
+                        System.err.println("Error al actualizar el usuario: " + e.getMessage());
                     }
                 }
             }
@@ -86,9 +85,28 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al buscar el usuario con ID " + entityId + ": " + e.getMessage());
         }
 
+        return usuario;
+    }
+
+    public Usuario findByEmail(String email) {
+        Usuario usuario = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    usuario = new Usuario();
+                    usuario.setId(resultSet.getInt("Id"));
+                    usuario.setNombre(resultSet.getString("Nombre"));
+                    usuario.setClave(resultSet.getString("Clave"));
+                    usuario.setEMAIL(resultSet.getString("Email"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println();
+        }
         return usuario;
     }
 
@@ -105,12 +123,11 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 preparedStatement.setInt(1, entityDelete.getId());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Error al eliminar el usuario con ID " + entityDelete.getId() + ": " + e.getMessage());
             }
         }
         return entityDelete;
     }
-
 
     @Override
     public void close() throws IOException {

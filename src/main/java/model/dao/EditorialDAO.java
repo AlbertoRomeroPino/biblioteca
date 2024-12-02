@@ -8,6 +8,8 @@ import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditorialDAO implements IDAO<Editorial, Integer> {
     private Connection connection;
@@ -19,14 +21,17 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
     private static final String INSERT = "INSERT INTO Editorial (Nombre, Pais, Fecha_Fundacion) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Editorial WHERE Id = ?";
     private static final String UPDATE = "UPDATE Editorial SET Nombre = ?, Pais = ?, Fecha_Fundacion = ? WHERE Id = ?";
-    private static final String FINDID =  "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial WHERE Id = ?";
+    //Select
+    private static final String FINDID = "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial WHERE Id = ?";
+    private static final String FINDALL = "SELECT Id, Nombre, Pais, Fecha_Fundacion FROM Editorial";
 
     /**
      * Almacena una editorial en la base de datos.
-     * Si la editorial ya existe (por su ID), la actualiza; si no, la inserta como nueva.
+     * Si la editorial no existe (por su ID), la inserta como un nuevo registro.
+     * Si ya existe, se actualizan sus datos.
      *
      * @param entity La editorial que se desea almacenar.
-     * @return La editorial almacenada en la base de datos.
+     * @return La editorial almacenada o actualizada en la base de datos.
      */
     @Override
     public Editorial store(Editorial entity) {
@@ -67,7 +72,7 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
      * Busca una editorial en la base de datos utilizando su identificador (ID).
      *
      * @param entityId El ID de la editorial que se desea buscar.
-     * @return La editorial encontrada con todos sus datos; devuelve null si no existe.
+     * @return La editorial encontrada con todos sus datos, o null si no existe.
      */
     @Override
     public Editorial findId(Integer entityId) {
@@ -89,6 +94,27 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
         return editorial;
     }
 
+    public List<Editorial> findAll() {
+        List<Editorial> editoriales = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Editorial editorial = new Editorial();
+                    editorial.setId(resultSet.getInt("Id"));
+                    editorial.setNombre(resultSet.getString("Nombre"));
+                    editorial.setPais(resultSet.getString("Pais"));
+                    editorial.setFecha_fundacion(resultSet.getDate("Fecha_Fundacion").toLocalDate());
+
+                    editoriales.add(editorial);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return editoriales;
+    }
+
     /**
      * Elimina una editorial específica de la base de datos.
      *
@@ -107,6 +133,7 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
         }
         return entityDelete;
     }
+
 
     @Override
     public void close() throws IOException {

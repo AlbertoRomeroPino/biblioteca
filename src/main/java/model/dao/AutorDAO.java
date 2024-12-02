@@ -2,15 +2,15 @@ package model.dao;
 
 import model.connection.ConnectionMariaDB;
 import model.entity.Autor;
-import model.entity.Usuario;
 import interfaces.IDAO;
+import model.entity.Editorial;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Clase DAO para manejar las operaciones de la tabla "Autor" en la base de datos.
- */
+
 public class AutorDAO implements IDAO<Autor, Integer> {
     private Connection connection;
 
@@ -21,11 +21,14 @@ public class AutorDAO implements IDAO<Autor, Integer> {
     private static final String INSERT = "INSERT INTO Autor(Nombre, Nacionalidad, Fecha_Nacimiento) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Autor WHERE Id = ?";
     private static final String UPDATE = "UPDATE Autor SET Nombre = ?, Nacionalidad= ?, Fecha_Nacimiento= ? WHERE Id = ?";
+    // Select
     private static final String FINDID = "SELECT Id, Nombre, Nacionalidad, Fecha_Nacimiento FROM Autor WHERE Id = ?";
+    private static final String FINDALL = "SELECT Id, Nombre, Nacionalidad, Fecha_Nacimiento FROM Autor";
 
     /**
      * Almacena un autor en la base de datos.
-     * Si el autor ya existe (por su ID), lo actualiza; si no, lo inserta como nuevo.
+     * Si el autor no existe (por su ID), lo inserta como un nuevo registro.
+     * Si ya existe, se actualizan sus datos.
      *
      * @param entity El autor que se desea almacenar.
      * @return El autor almacenado en la base de datos.
@@ -78,18 +81,37 @@ public class AutorDAO implements IDAO<Autor, Integer> {
             preparedStatement.setInt(1, entityId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    Autor autorTmp = new Autor();
-                    autorTmp.setId(resultSet.getInt("Id"));
-                    autorTmp.setNombre(resultSet.getString("Nombre"));
-                    autorTmp.setNacionalidad(resultSet.getString("Nacionalidad"));
-                    autorTmp.setFechaNacimiento(resultSet.getDate("Fecha_Nacimiento").toLocalDate());
-                    autor = autorTmp;
+                    autor = new Autor();
+                    autor.setId(resultSet.getInt("Id"));
+                    autor.setNombre(resultSet.getString("Nombre"));
+                    autor.setNacionalidad(resultSet.getString("Nacionalidad"));
+                    autor.setFechaNacimiento(resultSet.getDate("Fecha_Nacimiento").toLocalDate());
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return autor;
+    }
+
+    public List<Autor> findAll() {
+        List<Autor> autores = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Autor autorTmp = new Autor();
+                    autorTmp.setId(resultSet.getInt("Id"));
+                    autorTmp.setNombre(resultSet.getString("Nombre"));
+                    autorTmp.setNacionalidad(resultSet.getString("Nacionalidad"));
+                    autorTmp.setFechaNacimiento(resultSet.getDate("Fecha_Nacimiento").toLocalDate());
+
+                    autores.add(autorTmp);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return autores;
     }
 
     /**
