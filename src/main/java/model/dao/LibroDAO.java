@@ -2,6 +2,7 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
+import model.entity.Autor;
 import model.entity.Libro;
 import model.entity.Publicacion;
 
@@ -21,11 +22,13 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         connection = ConnectionMariaDB.getConnection();
     }
 
+
     private static final String INSERT = "INSERT INTO Libro(Publicacion_ID, ISBN, Autor_ID) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Libro WHERE Publicacion_ID = ?";
     private static final String UPDATE = "UPDATE Libro SET ISBN = ?, Autor_ID = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
     private static final String FINDALL = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro";
+
 
 
     /**
@@ -38,6 +41,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
      */
     @Override
     public Libro store(Libro entity) {
+
         if (entity != null) {
             int idLibroTmp = entity.getId();
             if (idLibroTmp > 0) {
@@ -62,6 +66,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                         preparedStatement.setInt(3, entity.getAutor().getId());
 
                         preparedStatement.executeUpdate();
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -98,6 +103,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                 if (resultSet.next()) {
                     libro = new Libro();
 
+
                     // Atributos heredados de Publicación
                     Publicacion publicacion = PublicacionDAO.build().findId(resultSet.getInt("Publicacion_Id"));
                     libro.setId(publicacion.getId());
@@ -106,6 +112,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                     libro.setTipo(publicacion.getTipo());
                     libro.setCategoria(publicacion.getCategoria());
                     libro.setEditorial(publicacion.getEditorial());
+
 
                     // Atributos específicos de Libro
                     libro.setISBN(resultSet.getString("ISBN"));
@@ -160,6 +167,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     @Override
     public Libro deleteEntity(Libro entityDelete) {
         if (entityDelete != null) {
+
             try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
                 preparedStatement.setInt(1, entityDelete.getId());
                 preparedStatement.executeUpdate();
