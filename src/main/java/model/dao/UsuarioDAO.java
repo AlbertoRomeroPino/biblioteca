@@ -24,7 +24,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     private static final String UPDATE = "UPDATE Usuario SET Nombre = ?, Clave = ?, Email = ? WHERE Id = ?";
     //Select
     private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
-    private static final String FINDBYEMAIL = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Email = ?";
+    private static final String FINDBYIDENTIFICATOR = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Email = ? and Clave = ?";
 
     /**
      * Clase DAO para gestionar las operaciones CRUD de la entidad Usuario en la base de datos.
@@ -91,10 +91,11 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         return usuario;
     }
 
-    public Usuario findByEmail(String email) {
+    public Usuario findByIdentificator(String email, String clave) {
         Usuario usuario = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYEMAIL)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYIDENTIFICATOR)) {
             preparedStatement.setString(1, email);
+            preparedStatement.setString(2, clave);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     usuario = new Usuario();

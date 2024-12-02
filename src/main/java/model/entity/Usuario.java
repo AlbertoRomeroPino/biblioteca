@@ -93,7 +93,7 @@ public class Usuario {
         return "Usuario{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", hashedClave='" + Clave + '\'' +
+                ", Clave='" + Clave + '\'' +
                 ", EMAIL='" + EMAIL + '\'' +
                 ", prestamos=" + prestamos +
                 '}';
