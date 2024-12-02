@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,10 @@ public class Usuario {
         this.Clave = clave;
         this.EMAIL = EMAIL;
         this.prestamos = prestamos;
+    }
+
+    public Usuario(String nombre, String email, String password, LocalDate fechaNacimiento) {
+
     }
 
 

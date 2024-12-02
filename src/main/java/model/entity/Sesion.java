@@ -14,7 +14,12 @@ public class Sesion {
         }
         return _sesion;
     }
-
+public static Sesion salirIstacia(){
+        if (_sesion != null){
+            _sesion = null;
+        }
+        return _sesion;
+}
     public Usuario getUsuario() {
         return usuario;
     }
