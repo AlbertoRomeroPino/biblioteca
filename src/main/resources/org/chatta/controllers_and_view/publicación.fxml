@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosPublicaciones">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosPublicaciones">
    <children>
       <MenuBar layoutY="2.0">
         <menus>
@@ -22,44 +22,44 @@
                 <items>
                     <Menu mnemonicParsing="false" text="usuario">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create usuario" onAction="#CreateNewUsuario"/>
-                            <MenuItem mnemonicParsing="false" text="update usuario" onAction="#ModifyUsuario"/>
-                            <MenuItem mnemonicParsing="false" text="Delete usuario" onAction="#DeleteUsuario"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewUsuario" text="create usuario" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyUsuario" text="update usuario" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeleteUsuario" text="Delete usuario" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="prestamo">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create prestamo" onAction="#CreateNewPrestamo" />
-                            <MenuItem mnemonicParsing="false" text="update prestamo" onAction="#ModifyPrestamo"/>
-                            <MenuItem mnemonicParsing="false" text="delete prestamo" onAction="#DeletePrestamo"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewPrestamo" text="create prestamo" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyPrestamo" text="update prestamo" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeletePrestamo" text="delete prestamo" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="libro">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create libro"  onAction="#CreateNewLibro"/>
-                            <MenuItem mnemonicParsing="false" text="update libro" onAction="#ModifyLibro"/>
-                            <MenuItem mnemonicParsing="false" text="Delete libro" onAction="#DeleteLibro"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewLibro" text="create libro" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyLibro" text="update libro" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeleteLibro" text="Delete libro" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="revista">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create revista" onAction="#CreateNewRevista"/>
-                            <MenuItem mnemonicParsing="false" text="update revista" onAction="#ModifyRevista"/>
-                            <MenuItem mnemonicParsing="false" text="Delete revista" onAction="#DeleteRevista"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewRevista" text="create revista" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyRevista" text="update revista" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeleteRevista" text="Delete revista" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="autores">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create autor" onAction="#CreateNewAutor"/>
-                            <MenuItem mnemonicParsing="false" text="update autor" onAction="#ModifyAutor"/>
-                            <MenuItem mnemonicParsing="false" text="Delete autor" onAction="#DeleteAutor"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewAutor" text="create autor" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyAutor" text="update autor" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeleteAutor" text="Delete autor" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="editorial">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="create editorial" onAction="#CreateNewEditorial"/>
-                            <MenuItem mnemonicParsing="false" text="update editorial" onAction="#ModifyEditorial"/>
-                            <MenuItem mnemonicParsing="false" text="Delete editorial" onAction="#DeleteEditorial"/>
+                            <MenuItem mnemonicParsing="false" onAction="#CreateNewEditorial" text="create editorial" />
+                            <MenuItem mnemonicParsing="false" onAction="#ModifyEditorial" text="update editorial" />
+                            <MenuItem mnemonicParsing="false" onAction="#DeleteEditorial" text="Delete editorial" />
                         </items>
                     </Menu>
                 </items>
@@ -73,13 +73,12 @@
       </MenuBar>
       <TableView layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
         <columns>
-          <TableColumn prefWidth="90.0" text="C1" />
-          <TableColumn prefWidth="73.0" text="C2" />
-            <TableColumn prefWidth="83.0" text="C3" />
-            <TableColumn prefWidth="82.0" text="C4" />
-            <TableColumn text="C5" />
-            <TableColumn text="C6" />
-            <TableColumn prefWidth="76.0" text="C7" />
+          <TableColumn prefWidth="90.0" text="ID" />
+          <TableColumn prefWidth="73.0" text="Titulo" />
+            <TableColumn prefWidth="126.20001220703125" text="FechaPublicacion" />
+            <TableColumn prefWidth="89.0" text="Tipo" />
+            <TableColumn prefWidth="86.19998168945312" text="Categoria_ID" />
+            <TableColumn prefWidth="98.5999755859375" text="Editorial_ID" />
         </columns>
       </TableView>
       <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publicacion" />
