@@ -47,7 +47,9 @@ public class PantalladeRegistro {
 
             Usuario usuarioDao = UsuarioDAO.build().findByIdentificator(email, hasPassword);
 
-            if (usuarioDao == null || usuario.getNombre().equals(usuarioDao.getNombre())){
+
+
+            if (usuarioDao == null){
                 UsuarioDAO.build().store(usuario);
 
                 // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
