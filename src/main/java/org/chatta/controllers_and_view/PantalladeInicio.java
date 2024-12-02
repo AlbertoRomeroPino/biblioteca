@@ -72,113 +72,92 @@ public class PantalladeInicio {
     @FXML
     private void SwitchToPantalladeRegistro() throws IOException {
         // Detener el video y la música antes de cambiar de pantalla
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.dispose();  // Liberar recursos
-        }
+        stopMediaPlayers();
 
-        if (mediaPlayerAudio != null) {
-            mediaPlayerAudio.stop();
-            mediaPlayerAudio.dispose();  // Liberar recursos
-        }
-        try {
-            // Cargar el FXML de PantalladeIdentificacion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/registro.fxml"));
-            Parent root = loader.load();
+        // Cargar el FXML de PantalladeRegistro
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/registro.fxml"));
+        Parent root = loader.load();
 
-            // Crear un nuevo Stage (ventana emergente)
-            Stage popupStage = new Stage();
-            popupStage.setTitle("Pantalla de Identificación");
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
-            popupStage.setScene(new Scene(root));
+        // Crear un nuevo Stage (ventana emergente)
+        Stage popupStage = new Stage();
+        popupStage.setTitle("Pantalla de Registro");
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+        popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(600);  // Ancho de la ventana
-            popupStage.setHeight(400); // Alto de la ventana
+        // Configurar dimensiones predeterminadas
+        popupStage.setWidth(600);  // Ancho de la ventana
+        popupStage.setHeight(400); // Alto de la ventana
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(200);
-            popupStage.setMaxWidth(800);
-            popupStage.setMaxHeight(600);
+        // Opcional: Configurar tamaño mínimo y máximo
+        popupStage.setMinWidth(300);
+        popupStage.setMinHeight(200);
+        popupStage.setMaxWidth(800);
+        popupStage.setMaxHeight(600);
 
-            // Mostrar el popup
-            popupStage.show();
+        // Mostrar el popup
+        popupStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void SwitchToPantalladeIdentificacion() throws IOException {
         // Detener el video y la música antes de cambiar de pantalla
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.dispose();  // Liberar recursos
-        }
+        stopMediaPlayers();
 
-        if (mediaPlayerAudio != null) {
-            mediaPlayerAudio.stop();
-            mediaPlayerAudio.dispose();  // Liberar recursos
-        }
-        try {
-            // Cargar el FXML de PantalladeIdentificacion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/identificacion.fxml"));
-            Parent root = loader.load();
+        // Cargar el FXML de PantalladeIdentificacion
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/identificacion.fxml"));
+        Parent root = loader.load();
 
-            // Crear un nuevo Stage (ventana emergente)
-            Stage popupStage = new Stage();
-            popupStage.setTitle("Pantalla de Identificación");
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
-            popupStage.setScene(new Scene(root));
+        // Crear un nuevo Stage (ventana emergente)
+        Stage popupStage = new Stage();
+        popupStage.setTitle("Pantalla de Identificación");
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+        popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(600);  // Ancho de la ventana
-            popupStage.setHeight(400); // Alto de la ventana
+        // Configurar dimensiones predeterminadas
+        popupStage.setWidth(600);  // Ancho de la ventana
+        popupStage.setHeight(400); // Alto de la ventana
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(200);
-            popupStage.setMaxWidth(800);
-            popupStage.setMaxHeight(600);
+        // Opcional: Configurar tamaño mínimo y máximo
+        popupStage.setMinWidth(300);
+        popupStage.setMinHeight(200);
+        popupStage.setMaxWidth(800);
+        popupStage.setMaxHeight(600);
 
-            // Mostrar el popup
-            popupStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Mostrar el popup
+        popupStage.show();
+
     }
 
     @FXML
     private void SwitchToPantalladeCreditos() throws IOException {
 
-        try {
-            // Cargar el FXML de PantalladeIdentificacion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/creditos.fxml"));
-            Parent root = loader.load();
+        // Detener el video y la música antes de cambiar de pantalla
+        stopMediaPlayers();
 
-            // Crear un nuevo Stage (ventana emergente)
-            Stage popupStage = new Stage();
-            popupStage.setTitle("Pantalla de creditos");
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
-            popupStage.setScene(new Scene(root));
+        // Cargar el FXML de PantalladeCreditos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/creditos.fxml"));
+        Parent root = loader.load();
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(600);  // Ancho de la ventana
-            popupStage.setHeight(400); // Alto de la ventana
+        // Crear un nuevo Stage (ventana emergente)
+        Stage popupStage = new Stage();
+        popupStage.setTitle("Pantalla de Créditos");
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+        popupStage.setScene(new Scene(root));
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(200);
-            popupStage.setMaxWidth(800);
-            popupStage.setMaxHeight(600);
+        // Configurar dimensiones predeterminadas
+        popupStage.setWidth(600);  // Ancho de la ventana
+        popupStage.setHeight(400); // Alto de la ventana
 
-            // Mostrar el popup
-            popupStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Opcional: Configurar tamaño mínimo y máximo
+        popupStage.setMinWidth(300);
+        popupStage.setMinHeight(200);
+        popupStage.setMaxWidth(800);
+        popupStage.setMaxHeight(600);
+
+        // Mostrar el popup
+        popupStage.show();
+
     }
 
     @FXML
@@ -194,6 +173,17 @@ public class PantalladeInicio {
         }
     }
 
+    private void stopMediaPlayers() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();  // Liberar recursos
+        }
+
+        if (mediaPlayerAudio != null) {
+            mediaPlayerAudio.stop();
+            mediaPlayerAudio.dispose();  // Liberar recursos
+        }
+    }
 }
 
 

@@ -1,7 +1,6 @@
 package model.connection;
 
 import utils.ManagerXML;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,7 +8,7 @@ import java.sql.SQLException;
 public class ConnectionMariaDB {
     private final static String FILE = "connection.xml";
     private static ConnectionMariaDB _instance;
-    private static Connection connection;
+    private Connection connection;
 
     private ConnectionMariaDB() {
         ConnectionProperties properties = (ConnectionProperties) ManagerXML.readXML(new ConnectionProperties(), FILE);
@@ -20,23 +19,32 @@ public class ConnectionMariaDB {
             e.printStackTrace();
             connection = null;
         }
-
     }
 
     public static Connection getConnection() {
-        if (_instance == null) {
+        if (_instance == null || _instance.connection == null || isConnectionClosed()) {
             _instance = new ConnectionMariaDB();
         }
-        return connection;
+        return _instance.connection;
     }
 
     public static void closeConnection() {
-        if (connection != null) {
+        if (_instance != null && _instance.connection != null) {
             try {
-                connection.close();
+                _instance.connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    private static boolean isConnectionClosed() {
+        try {
+            return _instance.connection == null || _instance.connection.isClosed();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
 }
+
