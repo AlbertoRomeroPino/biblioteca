@@ -71,14 +71,14 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
-        <columns>
-          <TableColumn prefWidth="90.0" text="ID" />
-          <TableColumn prefWidth="115.59999084472656" text="Nombre" />
-            <TableColumn minWidth="0.0" prefWidth="145.5999755859375" text="Pais" />
-            <TableColumn prefWidth="204.0" text="Fecha de Fundacion" />
-        </columns>
-      </TableView>
+       <TableView fx:id="tableView" layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
+           <columns>
+               <TableColumn fx:id="idColumn" prefWidth="90.0" text="ID" />
+               <TableColumn fx:id="nombreColumn" prefWidth="115.6" text="Nombre" />
+               <TableColumn fx:id="paisColumn" prefWidth="145.6" text="País" />
+               <TableColumn fx:id="fechaFundacionColumn" prefWidth="204.0" text="Fecha de Fundación" />
+           </columns>
+       </TableView>
       <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editorial" />
    </children>
 </AnchorPane>

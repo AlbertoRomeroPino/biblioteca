@@ -30,6 +30,23 @@ public class CreateEditorial {
 
         App.setRoot(scenes.PANTALLADEBASADEDATOSEDITORIAL);
 
+        if (nombre.getText().isEmpty()){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("inserción correcta");
+            alert.setHeaderText("la insertción no a sido completada con exito");
+            alert.setContentText("La inserción del nombre de la editorial  no a sido realizada con exito,\n el campo nombre se encuentra vacio");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        } else if (pais.getText().isEmpty()) {
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("inserción correcta");
+            alert.setHeaderText("la insertción no a sido completada con exito");
+            alert.setContentText("La inserción del pais de la editorial  no a sido realizada con exito,\n el campo pais se encuentra vacio");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        }
         Editorial editorial =new Editorial();
         editorial.setNombre(nombre.getText());
         editorial.setPais(pais.getText());
