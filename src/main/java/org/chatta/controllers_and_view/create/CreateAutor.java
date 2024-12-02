@@ -25,64 +25,51 @@ public class CreateAutor {
     @FXML
     private Button closeButton;
 
-
+    private void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
     @FXML
     private void Close() throws IOException {
-
-
-
-        App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
-
-        Autor autor= new Autor();
         if (nombre.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción no a sido completada con exito");
-            alert.setContentText("La inserción del nombre del autor no a sido realizada con exito,\n el campo nobre se encuentra vacio");
-            alert.showAndWait();
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else if (nacionalidad.getText().isEmpty()) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción no a sido completada con exito");
-            alert.setContentText("La inserción de la nacionalidad del autor no a sido realizada con exito,\n el campo nacionalidad se encuentra vacio");
-            alert.showAndWait();
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else if (fecha_nacimiento.getValue().equals(null)) {
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción no a sido completada con exito");
-            alert.setContentText("La inserción de la fecha de nacimiento del autor no a sido realizada con exito,\n el campo fecha de nacimiento se encuentra vacio");
-            alert.showAndWait();
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else {
-
-
-            autor.setNombre(nombre.getText());
-            autor.setNacionalidad(nacionalidad.getText());
-            autor.setFechaNacimiento(fecha_nacimiento.getValue());
-
-            AutorDAO.build().store(autor);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("inserción correcta");
-            alert.setHeaderText("la insertción a sido completada con exito");
-            alert.setContentText("La inserción de autor a sido realizada con exito");
-            alert.showAndWait();
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
+            showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
+                    "El campo 'Nombre' está vacío. Por favor, ingréselo.");
+            return;
         }
 
+        if (nacionalidad.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
+                    "El campo 'Nacionalidad' está vacío. Por favor, ingréselo.");
+            return;
+        }
+
+        if (fecha_nacimiento.getValue() == null) {
+            showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
+                    "El campo 'Fecha de Nacimiento' está vacío. Por favor, ingréselo.");
+            return;
+        }
+
+        // Si todos los campos están correctamente completados
+        Autor autor = new Autor();
+        autor.setNombre(nombre.getText());
+        autor.setNacionalidad(nacionalidad.getText());
+        autor.setFechaNacimiento(fecha_nacimiento.getValue());
+
+        AutorDAO.build().store(autor);
+
+        showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
+                "El autor ha sido registrado correctamente.");
+
+        // Cambiar a la pantalla de autores después de insertar el autor
+        App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
+
+        // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 }
+

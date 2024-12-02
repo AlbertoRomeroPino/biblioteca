@@ -3,13 +3,10 @@ package model.dao;
 import model.connection.ConnectionMariaDB;
 import model.entity.Autor;
 import interfaces.IDAO;
-import model.entity.Editorial;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class AutorDAO implements IDAO<Autor, Integer> {
     private Connection connection;
@@ -21,59 +18,36 @@ public class AutorDAO implements IDAO<Autor, Integer> {
     private static final String INSERT = "INSERT INTO Autor(Nombre, Nacionalidad, Fecha_Nacimiento) VALUES (?,?,?)";
     private static final String DELETE = "DELETE FROM Autor WHERE Id = ?";
     private static final String UPDATE = "UPDATE Autor SET Nombre = ?, Nacionalidad= ?, Fecha_Nacimiento= ? WHERE Id = ?";
-    // Select
     private static final String FINDID = "SELECT Id, Nombre, Nacionalidad, Fecha_Nacimiento FROM Autor WHERE Id = ?";
     private static final String FINDALL = "SELECT Id, Nombre, Nacionalidad, Fecha_Nacimiento FROM Autor";
 
-    /**
-     * Almacena un autor en la base de datos.
-     * Si el autor no existe (por su ID), lo inserta como un nuevo registro.
-     * Si ya existe, se actualizan sus datos.
-     *
-     * @param entity El autor que se desea almacenar.
-     * @return El autor almacenado en la base de datos.
-     */
     @Override
     public Autor store(Autor entity) {
         if (entity != null) {
-            int idAutorTmp = entity.getId();
-            if (idAutorTmp > 0) {
-                Autor autorTmp = findId(idAutorTmp);
-                if (autorTmp == null) {
+            try {
+                if (entity.getId() <= 0) { // Se considera que un ID <= 0 es un autor nuevo
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
-                        // Inserta un nuevo autor
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getNacionalidad());
                         preparedStatement.setDate(3, Date.valueOf(entity.getFechaNacimiento()));
-
                         preparedStatement.executeUpdate();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
                     }
                 } else {
                     try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-                        // Actualiza un autor existente
                         preparedStatement.setInt(4, entity.getId());
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getNacionalidad());
                         preparedStatement.setDate(3, Date.valueOf(entity.getFechaNacimiento()));
-
                         preparedStatement.executeUpdate();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
                     }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return entity;
     }
 
-    /**
-     * Busca un autor en la base de datos utilizando su identificador (ID).
-     *
-     * @param entityId El ID del autor que se desea buscar.
-     * @return El autor encontrado con todos sus datos; devuelve null si no existe.
-     */
     @Override
     public Autor findId(Integer entityId) {
         Autor autor = null;
@@ -104,7 +78,6 @@ public class AutorDAO implements IDAO<Autor, Integer> {
                     autorTmp.setNombre(resultSet.getString("Nombre"));
                     autorTmp.setNacionalidad(resultSet.getString("Nacionalidad"));
                     autorTmp.setFechaNacimiento(resultSet.getDate("Fecha_Nacimiento").toLocalDate());
-
                     autores.add(autorTmp);
                 }
             }
@@ -114,12 +87,6 @@ public class AutorDAO implements IDAO<Autor, Integer> {
         return autores;
     }
 
-    /**
-     * Elimina un autor de la base de datos.
-     *
-     * @param entityDelete El autor que se desea eliminar.
-     * @return El autor eliminado.
-     */
     @Override
     public Autor deleteEntity(Autor entityDelete) {
         if (entityDelete != null) {
@@ -135,7 +102,13 @@ public class AutorDAO implements IDAO<Autor, Integer> {
 
     @Override
     public void close() throws IOException {
-
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static AutorDAO build() {
