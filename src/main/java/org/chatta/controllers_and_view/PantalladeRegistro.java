@@ -44,17 +44,23 @@ public class PantalladeRegistro {
             usuario.setNombre(nombre);
             usuario.setEMAIL(email);
             usuario.setClave(hasPassword);
-            if (usuario ==)
 
+            Usuario usuarioDao = UsuarioDAO.build().findByIdentificator(email, hasPassword);
 
-            UsuarioDAO.build().store(usuario);
+            if (usuarioDao == null || usuario.getNombre().equals(usuarioDao.getNombre())){
+                UsuarioDAO.build().store(usuario);
 
-            // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
-            System.out.println("Usuario registrado: " + usuario);
+                // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
+                System.out.println("Usuario registrado: " + usuario);
 
-            App.setRoot(scenes.PANTALLADEBASADEDATOS);
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
+                App.setRoot(scenes.PANTALLADEBASADEDATOS);
+                Stage stage = (Stage) closeButton.getScene().getWindow();
+                stage.close();
+            } else {
+                System.out.println("Usuario ya existente");
+            }
+        } else {
+            System.out.println("Correo electronico fallido");
         }
     }
 
