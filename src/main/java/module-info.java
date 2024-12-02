@@ -7,7 +7,7 @@ module org.chatta {
     requires java.sql;
     requires java.xml.bind;  // Si estás usando JAXB
     opens model.connection to java.xml.bind; // Permite acceso a JAXB
-
+    opens model.entity to javafx.base;
     exports org.chatta;  // Ajusta esto según el paquete principal
 
     opens org.chatta.controllers_and_view to javafx.fxml;
