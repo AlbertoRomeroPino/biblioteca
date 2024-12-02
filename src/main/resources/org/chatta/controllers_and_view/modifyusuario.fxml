@@ -5,11 +5,16 @@
 <?import javafx.scene.layout.Pane?>
 
 
+<?import javafx.scene.text.Text?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyUsuario">
 
-      <Button fx:id="closeButton" onAction="#Close" layoutX="105.0" layoutY="274.0" mnemonicParsing="false" text="modify Prestamo" />
-      <TextField layoutX="75.0" layoutY="81.0" />
-      <TextField layoutX="75.0" layoutY="133.0" />
-      <TextField layoutX="75.0" layoutY="187.0" />
+      <Button fx:id="closeButton" layoutX="110.0" layoutY="277.0" mnemonicParsing="false" onAction="#Close" text="modify usuario" />
+      <TextField fx:id="nombre" layoutX="75.0" layoutY="81.0" />
+      <TextField fx:id="clave" layoutX="74.0" layoutY="150.0" />
+      <TextField fx:id="email" layoutX="75.0" layoutY="215.0" />
+      <Text layoutX="129.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombre" />
+      <Text layoutX="137.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="clave" />
+      <Text layoutX="136.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" />
+
 
 </Pane>

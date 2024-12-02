@@ -36,26 +36,45 @@ public class CreateUsuario {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("inserción incorrecta");
             alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de nombre de usuario a fallado, es probable que sea un nombre repetido o este el campo vacio");
+            alert.setContentText("La inserción de nombre de usuario a fallado," +
+                    "\n es probable que sea un nombre repetido o este el campo vacio");
             alert.showAndWait();
+
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+
         } else if (clave.getText().isEmpty() ) {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("inserción incorrecta");
             alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de clave de usuario a fallado, es probable que este  campo este vacio");
+            alert.setContentText("La inserción de clave de usuario a fallado," +
+                    "\n es probable que este  campo este vacio");
             alert.showAndWait();
+
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+
         } else if (email.getText().isEmpty()) {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("inserción incorrecta");
             alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de email de usuario a fallado, es probable que este  campo este vacio");
+            alert.setContentText("La inserción de email de usuario a fallado," +
+                    "\n es probable que este  campo este vacio");
             alert.showAndWait();
+
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+
         } else if (!Validacion.validacionEmail(email.getText())) {
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("inserción incorrecta");
             alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de email de usuario a fallado, no cumple con los requisitos de validación");
+            alert.setContentText("La inserción de email de usuario a fallado, " +
+                    "\n no cumple con los requisitos de validación");
             alert.showAndWait();
+
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
 
         }else {
 
@@ -63,15 +82,19 @@ public class CreateUsuario {
             String hasPassword = Validacion.encryptClave(clave.getText());
             usuario.setClave(hasPassword);
             usuario.setEMAIL(email.getText());
+
+            UsuarioDAO.build().store(usuario);
+
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("inserción correcta");
+            alert.setHeaderText("la insertción a sido completada con exito");
+            alert.setContentText("La inserción de usuario a sido realizada con exito");
+            alert.showAndWait();
+
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
         }
 
-        UsuarioDAO.build().store(usuario);
-
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("inserción correcta");
-        alert.setHeaderText("la insertción a sido completada con exito");
-        alert.setContentText("La inserción de usuario a sido realizada con exito");
-        alert.showAndWait();
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

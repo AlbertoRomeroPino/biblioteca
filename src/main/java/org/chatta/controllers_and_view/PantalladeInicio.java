@@ -12,6 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.chatta.App;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -183,6 +184,12 @@ public class PantalladeInicio {
             mediaPlayerAudio.stop();
             mediaPlayerAudio.dispose();  // Liberar recursos
         }
+    }
+
+    @FXML
+    private void SwitchToPantalladelabasededatos() throws IOException {
+        stopMediaPlayers();
+        App.setRoot(scenes.PANTALLADEBASADEDATOS);
     }
 }
 

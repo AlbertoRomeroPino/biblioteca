@@ -33,18 +33,55 @@ public class CreateAutor {
 
 
         App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
+
         Autor autor= new Autor();
-        autor.setNombre(nombre.getText());
-        autor.setNacionalidad(nacionalidad.getText());
-        autor.setFechaNacimiento(fecha_nacimiento.getValue());
+        if (nombre.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("inserción incorrecta");
+            alert.setHeaderText("la insertción no a sido completada con exito");
+            alert.setContentText("La inserción del nombre del autor no a sido realizada con exito,\n el campo nobre se encuentra vacio");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
 
-        AutorDAO.build().store(autor);
+        } else if (nacionalidad.getText().isEmpty()) {
 
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("inserción correcta");
-        alert.setHeaderText("la insertción a sido completada con exito");
-        alert.setContentText("La inserción de autor a sido realizada con exito");
-        alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("inserción incorrecta");
+            alert.setHeaderText("la insertción no a sido completada con exito");
+            alert.setContentText("La inserción de la nacionalidad del autor no a sido realizada con exito,\n el campo nacionalidad se encuentra vacio");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+
+        } else if (fecha_nacimiento.getValue().equals(null)) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("inserción incorrecta");
+            alert.setHeaderText("la insertción no a sido completada con exito");
+            alert.setContentText("La inserción de la fecha de nacimiento del autor no a sido realizada con exito,\n el campo fecha de nacimiento se encuentra vacio");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+
+        } else {
+
+
+            autor.setNombre(nombre.getText());
+            autor.setNacionalidad(nacionalidad.getText());
+            autor.setFechaNacimiento(fecha_nacimiento.getValue());
+
+            AutorDAO.build().store(autor);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("inserción correcta");
+            alert.setHeaderText("la insertción a sido completada con exito");
+            alert.setContentText("La inserción de autor a sido realizada con exito");
+            alert.showAndWait();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        }
+
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
