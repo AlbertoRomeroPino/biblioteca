@@ -1,0 +1,76 @@
+@startuml
+class Usuario {
+  +int id
+  +String nombre
+  +String email
+  +String clase
+  +void registrar()
+  +void prestarPublicacion()
+  +void devolverPublicacion()
+}
+
+class Editorial {
+  +int id
+  +String nombre
+  +String pais
+  +LocalDate fechaFundacion
+  +void obtenerInformacion()
+}
+
+class Categoria {
+  +int id
+  +String nombre
+  +void obtenerInformacion()
+}
+
+class Publicacion {
+  +int id
+  +String titulo
+  +LocalDate fecha
+  +String tipo
+  -Editorial editorial
+  -Categoria categoria
+  +void obtenerInformacion()
+}
+
+class Prestamo {
+  +LocalDate fechaPrestamo
+  +LocalDate fechaDevolucion
+  +String estado
+  -Usuario usuario
+  -Publicacion publicacion
+  +void registrarPrestamo()
+  +void registrarDevolucion()
+}
+
+class Libro {
+  +String ISBN
+  -Publicacion publicacion
+  +void obtenerInformacion()
+}
+
+class Revista {
+  +String ISSN
+  +String periodicidad
+  -Publicacion publicacion
+  +void obtenerInformacion()
+}
+
+class Autor {
+  +int id
+  +String nombre
+  +String nacionalidad
+  +LocalDate fechaNacimiento
+  +void escribirLibro()
+  +void obtenerInformacion()
+}
+
+Usuario --> Prestamo : tiene
+Prestamo --> Usuario : pertenece a
+Prestamo --> Publicacion : incluye
+Publicacion --> Editorial : pertenece a
+Publicacion --> Categoria : clasificada como
+Libro --> Publicacion : hereda de
+Revista --> Publicacion : hereda de
+Autor --> Libro : escribe
+@enduml
