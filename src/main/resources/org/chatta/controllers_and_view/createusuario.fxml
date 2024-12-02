@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.create.CreatePrestamo">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.create.CreateUsuario">
 
       <Button fx:id="closeButton" onAction="#Close" layoutX="105.0" layoutY="274.0" mnemonicParsing="false" text="add Prestamo" />
       <TextField layoutX="75.0" layoutY="81.0" />

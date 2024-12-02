@@ -18,52 +18,52 @@
                 <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeEditorial" text="editorial" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-                  <Menu mnemonicParsing="false" text="usuario">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create usuario" />
-                        <MenuItem mnemonicParsing="false" text="update usuario" />
-                        <MenuItem mnemonicParsing="false" text="Delete usuario" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="prestamo">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create prestamo" />
-                        <MenuItem mnemonicParsing="false" text="update prestamo" />
-                        <MenuItem mnemonicParsing="false" text="delete prestamo" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="libro">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create libro" />
-                        <MenuItem mnemonicParsing="false" text="update libro" />
-                        <MenuItem mnemonicParsing="false" text="Delete libro" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="revista">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create revista" />
-                        <MenuItem mnemonicParsing="false" text="update revista" />
-                        <MenuItem mnemonicParsing="false" text="Delete revista" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="autores">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create autor" />
-                        <MenuItem mnemonicParsing="false" text="update autor" />
-                        <MenuItem mnemonicParsing="false" text="Delete autor" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="editorial">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="create editorial" />
-                        <MenuItem mnemonicParsing="false" text="update editorial" />
-                        <MenuItem mnemonicParsing="false" text="Delete editorial" />
-                     </items>
-                  </Menu>
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+                <items>
+                    <Menu mnemonicParsing="false" text="usuario">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create usuario" onAction="#CreateNewUsuario"/>
+                            <MenuItem mnemonicParsing="false" text="update usuario" onAction="#ModifyUsuario"/>
+                            <MenuItem mnemonicParsing="false" text="Delete usuario" onAction="#DeleteUsuario"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="prestamo">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create prestamo" onAction="#CreateNewPrestamo" />
+                            <MenuItem mnemonicParsing="false" text="update prestamo" onAction="#ModifyPrestamo"/>
+                            <MenuItem mnemonicParsing="false" text="delete prestamo" onAction="#DeletePrestamo"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="libro">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create libro"  onAction="#CreateNewLibro"/>
+                            <MenuItem mnemonicParsing="false" text="update libro" onAction="#ModifyLibro"/>
+                            <MenuItem mnemonicParsing="false" text="Delete libro" onAction="#DeleteLibro"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="revista">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create revista" onAction="#CreateNewRevista"/>
+                            <MenuItem mnemonicParsing="false" text="update revista" onAction="#ModifyRevista"/>
+                            <MenuItem mnemonicParsing="false" text="Delete revista" onAction="#DeleteRevista"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="autores">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create autor" onAction="#CreateNewAutor"/>
+                            <MenuItem mnemonicParsing="false" text="update autor" onAction="#ModifyAutor"/>
+                            <MenuItem mnemonicParsing="false" text="Delete autor" onAction="#DeleteAutor"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="editorial">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="create editorial" onAction="#CreateNewEditorial"/>
+                            <MenuItem mnemonicParsing="false" text="update editorial" onAction="#ModifyEditorial"/>
+                            <MenuItem mnemonicParsing="false" text="Delete editorial" onAction="#DeleteEditorial"/>
+                        </items>
+                    </Menu>
+                </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="ohters">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
