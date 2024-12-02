@@ -55,9 +55,16 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
                     );
                     PublicacionDAO.build().store(publicacionTmp);
 
+                    List<Publicacion> publicaciones = PublicacionDAO.build().findAll();
+                    for (Publicacion publicacion : publicaciones){
+                        if (publicacionTmp.equals(publicacion)){
+                            publicacionTmp=publicacion;
+                        }
+                    }
+
                     // Insertar la revista
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
-                        preparedStatement.setInt(1, entity.getId());
+                        preparedStatement.setInt(1, publicacionTmp.getId());
                         preparedStatement.setString(2, entity.getISSN());
                         preparedStatement.setString(3, entity.getPeriodicidad().toString());
                         preparedStatement.executeUpdate();
