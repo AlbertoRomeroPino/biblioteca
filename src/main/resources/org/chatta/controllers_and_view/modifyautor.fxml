@@ -7,14 +7,20 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyAutor">
 
-      <Button fx:id="closeButton" layoutX="115.0" layoutY="275.0" mnemonicParsing="false" onAction="#Close" text="modify autor" />
-      <TextField fx:id="nombre" layoutX="75.0" layoutY="81.0" />
-      <TextField fx:id="nacionalidad" layoutX="75.0" layoutY="143.0" />
-      <Text layoutX="129.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombre" />
-      <DatePicker fx:id="fecha_nacimiento" layoutX="62.0" layoutY="202.0" />
-      <Text layoutX="115.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nacionalidad" />
-      <Text layoutX="96.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fecha de nacimiento" />
+      <!-- ComboBox para seleccionar el autor -->
+      <ComboBox fx:id="comboBoxAutores" prefWidth="300" />
+
+      <!-- Campos de texto para modificar el autor -->
+      <TextField fx:id="nombre" promptText="Nombre del autor" prefWidth="300"/>
+      <TextField fx:id="nacionalidad" promptText="Nacionalidad" prefWidth="300"/>
+
+      <!-- DatePicker para modificar la fecha de nacimiento -->
+      <DatePicker fx:id="fecha_nacimiento" prefWidth="300" />
+
+      <!-- Botón para cerrar y guardar la modificación -->
+      <Button fx:id="closeButton" text="Guardar Cambios" onAction="#close" prefWidth="150" />
 
 </Pane>
