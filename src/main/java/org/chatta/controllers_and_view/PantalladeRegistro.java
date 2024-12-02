@@ -13,6 +13,7 @@ import org.chatta.App;
 import utils.Validacion;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public class PantalladeRegistro {
@@ -45,18 +46,38 @@ public class PantalladeRegistro {
             usuario.setEMAIL(email);
             usuario.setClave(hasPassword);
             Usuario usuarioDao = UsuarioDAO.build().findByIdentificator(email, hasPassword);
+            boolean estaAlmacenado = false;
 
             if (usuarioDao == null){
-                UsuarioDAO.build().store(usuario);
 
-                // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
-                System.out.println("Usuario registrado: " + usuario);
+                List<Usuario> usuarios = UsuarioDAO.build().findAll();
+                for (Usuario usuarioTmp : usuarios){
+                    if (usuarioTmp.getNombre() == usuario.getNombre()){
+                        estaAlmacenado = true;
+                        break;
+                    }
+                }
+                if (estaAlmacenado) {
+                    UsuarioDAO.build().store(usuario);
 
-                App.setRoot(scenes.PANTALLADEBASADEDATOS);
+                    // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
+                    System.out.println("Usuario registrado: " + usuario);
+
+                    App.setRoot(scenes.PANTALLADEBASADEDATOS);
+                    Stage stage = (Stage) closeButton.getScene().getWindow();
+                    stage.close();
+                }else {
+                    System.out.println("Usuario ya existente");
+                    App.setRoot(scenes.PANTALLADEINICIO);
+                    Stage stage = (Stage) closeButton.getScene().getWindow();
+                    stage.close();
+                }
+            } else {
+
+                System.out.println("Correo ya existente");
+                App.setRoot(scenes.PANTALLADEINICIO);
                 Stage stage = (Stage) closeButton.getScene().getWindow();
                 stage.close();
-            } else {
-                System.out.println("Usuario ya existente");
             }
         } else {
             System.out.println("Correo electronico fallido");
