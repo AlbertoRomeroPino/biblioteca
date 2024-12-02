@@ -1,16 +1,73 @@
 package org.chatta.controllers_and_view;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dao.PrestamoDAO;
+import model.entity.Prestamo;
 import org.chatta.App;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 
 public class PantalladelaBasededatosPrestamos {
+
+    @FXML
+    private TableView<Prestamo> tablaPrestamos;
+
+    @FXML
+    private TableColumn<Prestamo, String> colUsuarioId;
+
+    @FXML
+    private TableColumn<Prestamo, String> colPublicacionId;
+
+    @FXML
+    private TableColumn<Prestamo, String> colFechaPrestamo;
+
+    @FXML
+    private TableColumn<Prestamo, String> colFechaDevolucion;
+
+    @FXML
+    private TableColumn<Prestamo, String> colEstado;
+
+    public void initialize() {
+        // Configurar las columnas para mostrar datos derivados
+        colUsuarioId.setCellValueFactory(cellData -> {
+            // Extraer el nombre del usuario
+            return new SimpleStringProperty(
+                    cellData.getValue().getUsuario().getNombre()
+            );
+        });
+
+        colPublicacionId.setCellValueFactory(cellData -> {
+            // Extraer el título de la publicación
+            return new SimpleStringProperty(
+                    cellData.getValue().getPublicacion().getTitulo()
+            );
+        });
+
+        colFechaPrestamo.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
+        colFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+        // Cargar los datos en la tabla
+        cargarPrestamos();
+    }
+
+    private void cargarPrestamos() {
+        ObservableList<Prestamo> prestamos = FXCollections.observableArrayList(
+                PrestamoDAO.build().findAll()
+        );
+        tablaPrestamos.setItems(prestamos);
+    }
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {

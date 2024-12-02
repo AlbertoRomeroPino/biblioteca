@@ -1,16 +1,65 @@
 package org.chatta.controllers_and_view;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dao.LibroDAO;
+import model.entity.Libro;
 import org.chatta.App;
+import javafx.collections.FXCollections;
+
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 import java.io.IOException;
 
 public class PantalladelaBasededatosLibros {
+
+    @FXML
+    private TableView<Libro> tablaLibros;
+    @FXML
+    private TableColumn<Libro, Integer> colId;
+    @FXML
+    private TableColumn<Libro, String> colTitulo;
+    @FXML
+    private TableColumn<Libro, String> colPublicacion;
+    @FXML
+    private TableColumn<Libro, String> colCategoria;
+    @FXML
+    private TableColumn<Libro, String> colEditorial;
+    @FXML
+    private TableColumn<Libro, String> colIsbn;
+    @FXML
+    private TableColumn<Libro, String> colAutor;
+
+    public void initialize() {
+        // Configurar las columnas de la tabla
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colPublicacion.setCellValueFactory(new PropertyValueFactory<>("publicacion"));
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
+        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
+
+        // Cargar los libros
+        cargarLibros();
+    }
+
+    private void cargarLibros() {
+        // Obtén la lista de libros desde la base de datos o el DAO
+        ObservableList<Libro> libros = FXCollections.observableArrayList(LibroDAO.build().findAll());
+
+        // Asignar la lista de libros a la tabla
+        tablaLibros.setItems(libros);
+    }
+
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {

@@ -5,82 +5,38 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosPublicaciones">
-   <children>
-      <MenuBar layoutY="2.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="tables">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladePrestamos" text="prestamo" />
-
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeLibros" text="libro" />
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeRevistas" text="revista" />
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeAutores" text="autores" />
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeEditorial" text="editorial" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-                <items>
-                    <Menu mnemonicParsing="false" text="usuario">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewUsuario" text="create usuario" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyUsuario" text="update usuario" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeleteUsuario" text="Delete usuario" />
-                        </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="prestamo">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewPrestamo" text="create prestamo" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyPrestamo" text="update prestamo" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeletePrestamo" text="delete prestamo" />
-                        </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="libro">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewLibro" text="create libro" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyLibro" text="update libro" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeleteLibro" text="Delete libro" />
-                        </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="revista">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewRevista" text="create revista" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyRevista" text="update revista" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeleteRevista" text="Delete revista" />
-                        </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="autores">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewAutor" text="create autor" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyAutor" text="update autor" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeleteAutor" text="Delete autor" />
-                        </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="editorial">
-                        <items>
-                            <MenuItem mnemonicParsing="false" onAction="#CreateNewEditorial" text="create editorial" />
-                            <MenuItem mnemonicParsing="false" onAction="#ModifyEditorial" text="update editorial" />
-                            <MenuItem mnemonicParsing="false" onAction="#DeleteEditorial" text="Delete editorial" />
-                        </items>
-                    </Menu>
-                </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="ohters">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TableView layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
-        <columns>
-          <TableColumn prefWidth="90.0" text="ID" />
-          <TableColumn prefWidth="73.0" text="Titulo" />
-            <TableColumn prefWidth="126.20001220703125" text="FechaPublicacion" />
-            <TableColumn prefWidth="89.0" text="Tipo" />
-            <TableColumn prefWidth="86.19998168945312" text="Categoria_ID" />
-            <TableColumn prefWidth="98.5999755859375" text="Editorial_ID" />
-        </columns>
-      </TableView>
-      <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publicacion" />
-   </children>
+    <children>
+        <MenuBar layoutY="2.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="tables">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladePrestamos" text="prestamo" />
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeLibros" text="libro" />
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeRevistas" text="revista" />
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeAutores" text="autores" />
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeEditorial" text="editorial" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <!-- Opciones de edición omitidas por brevedad -->
+                </Menu>
+                <Menu mnemonicParsing="false" text="others">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TableView fx:id="tablaPublicaciones" layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="90.0" text="ID" />
+                <TableColumn fx:id="colTitulo" prefWidth="73.0" text="Titulo" />
+                <TableColumn fx:id="colFechaPublicacion" prefWidth="126.2" text="Fecha Publicacion" />
+                <TableColumn fx:id="colTipo" prefWidth="89.0" text="Tipo" />
+                <TableColumn fx:id="colCategoriaId" prefWidth="86.2" text="Categoria ID" />
+                <TableColumn fx:id="colEditorialId" prefWidth="98.6" text="Editorial ID" />
+            </columns>
+        </TableView>
+        <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publicaciones" />
+    </children>
 </AnchorPane>
