@@ -1,6 +1,5 @@
 package org.chatta.controllers_and_view;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,17 +8,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.chatta.App;
 
-
 import java.io.IOException;
 
-public class PantalladelaBasededatos {
+public class PantalladelaBasededatosPrestamos {
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
         App.setRoot(scenes.PANTALLADEINICIO);
     }
-
     @FXML
     private void SwitchToPantalladePrestamos() throws IOException {
         // Cambiar la vista a la pantalla de Inicio
@@ -593,6 +590,5 @@ public class PantalladelaBasededatos {
             e.printStackTrace();
         }
     }
-
 
 }

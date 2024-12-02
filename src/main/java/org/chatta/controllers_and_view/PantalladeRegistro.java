@@ -1,16 +1,20 @@
 package org.chatta.controllers_and_view;
 
+
 import model.entity.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
 import javafx.stage.Stage;
 import org.chatta.App;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 
 public class PantalladeRegistro {
 
@@ -47,10 +51,12 @@ public class PantalladeRegistro {
         usuario.setClave(password);
         // Aquí puedes guardar el usuario en la base de datos o realizar otras acciones
         System.out.println("Usuario registrado: " + usuario);
+
         App.setRoot(scenes.PANTALLADEBASADEDATOS);
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
 
 @FXML
     private void Close() throws IOException {
@@ -59,5 +65,6 @@ public class PantalladeRegistro {
         stage.close();
     }
 }
+
 
 

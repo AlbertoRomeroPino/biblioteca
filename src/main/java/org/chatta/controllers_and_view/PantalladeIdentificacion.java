@@ -26,8 +26,11 @@ public class PantalladeIdentificacion {
     @FXML
     private PasswordField passwordField;
 
+
+
     @FXML
     private Button closeButton;
+
 
     @FXML
     private void handleIdentificacion() {
@@ -83,9 +86,3 @@ public class PantalladeIdentificacion {
         stage.close();
     }
 }
-
-
-
-
-
-

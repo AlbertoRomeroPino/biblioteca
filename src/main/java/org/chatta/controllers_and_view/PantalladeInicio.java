@@ -12,6 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -95,6 +96,7 @@ public class PantalladeInicio {
 
         // Mostrar el popup
         popupStage.show();
+
     }
 
     @FXML
@@ -124,10 +126,12 @@ public class PantalladeInicio {
 
         // Mostrar el popup
         popupStage.show();
+
     }
 
     @FXML
     private void SwitchToPantalladeCreditos() throws IOException {
+
         // Detener el video y la música antes de cambiar de pantalla
         stopMediaPlayers();
 
@@ -153,6 +157,7 @@ public class PantalladeInicio {
 
         // Mostrar el popup
         popupStage.show();
+
     }
 
     @FXML
@@ -180,6 +185,7 @@ public class PantalladeInicio {
         }
     }
 }
+
 
 
 
