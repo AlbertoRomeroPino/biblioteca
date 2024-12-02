@@ -47,8 +47,6 @@ public class PantalladeRegistro {
 
             Usuario usuarioDao = UsuarioDAO.build().findByIdentificator(email, hasPassword);
 
-
-
             if (usuarioDao == null){
                 UsuarioDAO.build().store(usuario);
 

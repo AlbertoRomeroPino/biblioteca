@@ -62,6 +62,6 @@ public class Libro extends Publicacion {
         return "Libro{" +
                 "ISBN='" + ISBN + '\'' +
                 ", autor=" + autor +
-                '}';
+                '}' + super.toString();
     }
 }

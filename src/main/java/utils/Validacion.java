@@ -31,7 +31,7 @@ public class Validacion {
     }
 
     public static boolean validacionEmail(String email) {
-        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(gmail|hotmail)\\.(com|es)$";
         return email.matches(emailRegex);
     }
 
