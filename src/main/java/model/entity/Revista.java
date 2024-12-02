@@ -63,6 +63,6 @@ public class Revista extends Publicacion {
         return "Revista{" +
                 "ISSN='" + ISSN + '\'' +
                 ", periodicidad=" + periodicidad +
-                '}';
+                '}' + super.toString();
     }
 }

@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO implements IDAO<Usuario, Integer> {
 
@@ -25,6 +27,7 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
     //Select
     private static final String FINDID = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Id = ?";
     private static final String FINDBYIDENTIFICATOR = "SELECT Id, Nombre, Clave, Email FROM Usuario WHERE Email = ? and Clave = ?";
+    private static final String FINDALL = "SELECT Id, Nombre, Email FROM Usuario";
 
     /**
      * Clase DAO para gestionar las operaciones CRUD de la entidad Usuario en la base de datos.
@@ -109,6 +112,25 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
             System.out.println();
         }
         return usuario;
+    }
+
+    public List<Usuario> findAll() {
+        List<Usuario> usuarios = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setId(resultSet.getInt("Id"));
+                    usuario.setNombre(resultSet.getString("Nombre"));
+                    usuario.setEMAIL(resultSet.getString("Email"));
+
+                    usuarios.add(usuario);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println();
+        }
+        return usuarios;
     }
 
     /**
