@@ -51,6 +51,7 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
                         e.printStackTrace();
                     }
                 } else {
+
                     // Actualiza una editorial existente
                     try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
                         preparedStatement.setString(1, entity.getNombre());
