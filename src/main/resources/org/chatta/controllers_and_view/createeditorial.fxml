@@ -5,11 +5,16 @@
 <?import javafx.scene.layout.Pane?>
 
 
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.DatePicker?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.create.CreateEditorial">
 
-      <Button fx:id="closeButton" onAction="#Close" layoutX="105.0" layoutY="274.0" mnemonicParsing="false" text="add Prestamo" />
-      <TextField layoutX="75.0" layoutY="81.0" />
-      <TextField layoutX="75.0" layoutY="133.0" />
-      <TextField layoutX="75.0" layoutY="187.0" />
+      <Button fx:id="closeButton" layoutX="115.0" layoutY="275.0" mnemonicParsing="false" onAction="#Close" text="add editorial" />
+      <TextField fx:id="nombre" layoutX="75.0" layoutY="81.0" />
+      <TextField fx:id="pais" layoutX="75.0" layoutY="143.0" />
+      <Text layoutX="129.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombre" />
+      <DatePicker fx:id="fecha_fundacion" layoutX="62.0" layoutY="202.0" />
+      <Text layoutX="115.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nacionalidad" />
+      <Text layoutX="96.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fecha de nacimiento" />
 
 </Pane>
