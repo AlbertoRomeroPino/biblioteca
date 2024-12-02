@@ -48,6 +48,12 @@ public class Test2DAO {
         FindAllRevista();
 
         System.out.println("-------------------");
+        System.out.println("|   All Usuario   |");
+        System.out.println("-------------------");
+
+        FindAllUsuario();
+
+        System.out.println("-------------------");
         System.out.println("|All Identificador |");
         System.out.println("-------------------");
 
@@ -93,6 +99,13 @@ public class Test2DAO {
         List<Revista> revistas = RevistaDAO.build().findAll();
         for (Revista revista : revistas){
             System.out.println(revista);
+        }
+    }
+
+    public static void FindAllUsuario(){
+        List<Usuario> usuarios = UsuarioDAO.build().findAll();
+        for (Usuario usuario : usuarios){
+            System.out.println(usuario);
         }
     }
 
