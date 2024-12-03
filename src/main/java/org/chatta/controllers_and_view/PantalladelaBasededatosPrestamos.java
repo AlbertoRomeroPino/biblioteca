@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.sql.Date;
 
 public class PantalladelaBasededatosPrestamos {
 
@@ -38,6 +39,7 @@ public class PantalladelaBasededatosPrestamos {
     @FXML
     private TableColumn<Prestamo, String> colEstado;
 
+
     public void initialize() {
         // Configurar las columnas para mostrar datos derivados
         colUsuarioId.setCellValueFactory(cellData -> {
@@ -56,9 +58,17 @@ public class PantalladelaBasededatosPrestamos {
             );
         });
 
-        // Configuración para los otros campos
+        // Configuración para la columna de la fecha de préstamo
         colFechaPrestamo.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
-        colFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+
+        // Configuración personalizada para la columna de la fecha de devolución
+        colFechaDevolucion.setCellValueFactory(cellData -> {
+            // Comprobar si la fecha de devolución es null y asignar un valor vacío en caso afirmativo
+            java.sql.Date fechaDevolucion = Date.valueOf(cellData.getValue().getFechaDevolucion()); // Asegúrate de tener este método en tu clase Prestamo
+            String fechaDevolucionStr = (fechaDevolucion != null) ? fechaDevolucion.toLocalDate().toString() : "";
+            return new SimpleStringProperty(fechaDevolucionStr);
+        });
+
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
         // Cargar los datos en la tabla
@@ -71,6 +81,7 @@ public class PantalladelaBasededatosPrestamos {
         );
         tablaPrestamos.setItems(prestamos);
     }
+
 
 
     @FXML
