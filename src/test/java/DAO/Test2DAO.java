@@ -58,6 +58,12 @@ public class Test2DAO {
         System.out.println("-------------------");
 
         FindIdentificador();
+
+        System.out.println("-------------------");
+        System.out.println("|     All Join    |");
+        System.out.println("-------------------");
+
+        FindJoinPrestamo();
     }
 
     public static void FindALLPrestamo() {
@@ -115,5 +121,13 @@ public class Test2DAO {
         Usuario usuario = UsuarioDAO.build().findByIdentificator(email, clave);
 
         System.out.println(usuario);
+    }
+
+    public static void FindJoinPrestamo(){
+        List<Prestamo> prestamos = PrestamoDAO.build().findJoin();
+        for (Prestamo prestamo : prestamos){
+            System.out.println(prestamo.getUsuario().getNombre() + ", Titulo: " + prestamo.getPublicacion().getTitulo());
+            System.out.println(prestamo.toString());
+        }
     }
 }

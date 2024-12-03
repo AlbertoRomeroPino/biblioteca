@@ -4,6 +4,8 @@ import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
 import model.entity.Enum.Estado_Enum;
 import model.entity.Prestamo;
+import model.entity.Publicacion;
+import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
@@ -22,7 +24,9 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
     private static final String UPDATE = "UPDATE Prestamo SET FechaDevolucion = ?, Estado = ? WHERE Usuario_ID = ? AND Publicacion_ID = ? AND FechaPrestamo = ?";
 
     private static final String FINDID = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo WHERE Usuario_ID = ? and Publicacion_ID = ? and FechaPrestamo = ?";
-    private static final String FINDALL = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo";
+    private static final String FINDJOIN = "SELECT u.Nombre AS NombreUsuario, p.Titulo AS TituloPublicacion, pr.FechaPrestamo, pr.FechaDevolucion, pr.Estado " +
+            " FROM Prestamo pr " +
+            " JOIN Usuario u ON pr.Usuario_ID = u.ID JOIN Publicacion p ON pr.Publicacion_ID = p.ID;";
 
     /**
      * Almacena un objeto Prestamo en la base de datos.
@@ -102,20 +106,22 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
         return prestamo;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<Prestamo> findAll(){
+    public List<Prestamo> findJoin(){
         List<Prestamo> prestamos = new ArrayList<>();
 
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
+                    Publicacion publicacion = new Publicacion();
+                    Usuario usuario = new Usuario();
+
+                    publicacion.setTitulo(resultSet.getString("TituloPublicacion"));
+                    usuario.setNombre(resultSet.getString("NombreUsuario"));
+
+
                     Prestamo prestamo = new Prestamo();
-                    prestamo.setUsuario(UsuarioDAO.build().findId(resultSet.getInt("Usuario_ID")));
-                    prestamo.setPublicacion(PublicacionDAO.build().findId(resultSet.getInt("Publicacion_ID")));
+                    prestamo.setUsuario(usuario);
+                    prestamo.setPublicacion(publicacion);
                     prestamo.setFechaPrestamo(resultSet.getDate("FechaPrestamo").toLocalDate());
                     prestamo.setFechaDevolucion(resultSet.getDate("FechaDevolucion").toLocalDate());
                     prestamo.setEstado(Estado_Enum.valueOf(resultSet.getString("Estado")));

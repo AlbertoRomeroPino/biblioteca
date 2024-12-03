@@ -2,9 +2,7 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
-import model.entity.Autor;
-import model.entity.Libro;
-import model.entity.Publicacion;
+import model.entity.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,6 +26,15 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     private static final String UPDATE = "UPDATE Libro SET ISBN = ?, Autor_ID = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
     private static final String FINDALL = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro";
+    private static final String FINDJOIN = "SELECT p.ID AS Id, p.Titulo AS Titulo, p.FechaPublicacion AS Publicacion, " +
+                    " c.Nombre AS Categoria, e.Nombre AS Editorial, l.ISBN AS ISBN, " +
+                    " a.Nombre AS Autor " +
+                    " FROM Publicacion p " +
+                    " JOIN Categoria c ON p.Categoria_ID = c.ID " +
+                    " JOIN Editorial e ON p.Editorial_ID = e.ID " +
+                    " JOIN Libro l ON p.ID = l.Publicacion_ID " +
+                    " JOIN Autor a ON l.Autor_ID = a.ID;";
+
 
 
 
@@ -59,7 +66,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                     );
                     PublicacionDAO.build().store(publicacionTmp);
 
-                    List<Publicacion> publicaciones = PublicacionDAO.build().findAll();
+                    List<Publicacion> publicaciones = PublicacionDAO.build().findJoinPublicacion();
                     for (Publicacion publicacion : publicaciones){
                         if (publicacionTmp.equals(publicacion)){
                             publicacionTmp=publicacion;
@@ -159,6 +166,44 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return libros;
+
+    }
+
+    public List<Libro> findJoinLibro(){
+        List<Libro> libros = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Crear objetos relacionados con la publicación
+                    Categoria categoria = new Categoria();
+                    Editorial editorial = new Editorial();
+                    categoria.setNombre(resultSet.getString("Categoria"));
+                    editorial.setNombre(resultSet.getString("Editorial"));
+
+                    // Crear y llenar el objeto Libro
+                    Libro libro = new Libro();
+                    libro.setId(resultSet.getInt("Id"));
+                    libro.setTitulo(resultSet.getString("Titulo"));
+                    libro.setFecha_publicacion(resultSet.getDate("Publicacion").toLocalDate());
+                    libro.setCategoria(categoria);
+                    libro.setEditorial(editorial);
+                    libro.setISBN(resultSet.getString("ISBN"));
+
+                    // Asociar el autor al libro
+                    Autor autor = new Autor();
+                    autor.setNombre(resultSet.getString("Autor"));
+                    libro.setAutor(autor);
+
+                    // Agregar el libro a la lista
+                    libros.add(libro);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return libros;
 
     }

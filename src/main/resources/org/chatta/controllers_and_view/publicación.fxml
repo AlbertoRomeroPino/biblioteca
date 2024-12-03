@@ -33,8 +33,8 @@
                 <TableColumn fx:id="colTitulo" prefWidth="73.0" text="Titulo" />
                 <TableColumn fx:id="colFechaPublicacion" prefWidth="126.2" text="Fecha Publicacion" />
                 <TableColumn fx:id="colTipo" prefWidth="89.0" text="Tipo" />
-                <TableColumn fx:id="colCategoriaId" prefWidth="86.2" text="Categoria ID" />
-                <TableColumn fx:id="colEditorialId" prefWidth="98.6" text="Editorial ID" />
+                <TableColumn fx:id="colCategoriaId" prefWidth="86.2" text="Categoria" />
+                <TableColumn fx:id="colEditorialId" prefWidth="98.6" text="Editorial" />
             </columns>
         </TableView>
         <Text layoutX="66.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publicaciones" />
