@@ -1,11 +1,7 @@
 package org.chatta.controllers_and_view.modify;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.dao.AutorDAO;
 import model.entity.Autor;
@@ -18,35 +14,39 @@ import java.util.List;
 public class ModifyAutor {
 
     @FXML
-    public DatePicker fecha_nacimiento;
+    private DatePicker fecha_nacimiento;
     @FXML
-    public TextField nombre;
+    private TextField nombre;
     @FXML
-    public TextField nacionalidad;
+    private TextField nacionalidad;
     @FXML
     private Button closeButton;
     @FXML
-    private ComboBox<Autor> comboBoxAutores; // ComboBox para seleccionar un autor
+    private ComboBox<Autor> comboBoxAutores;
 
-    private Autor selectedAutor; // Autor seleccionado en el ComboBox
+    private Autor selectedAutor;
 
     @FXML
     private void initialize() {
-        loadAutores(); // Cargar los autores en el ComboBox al iniciar
-
-        // Acción cuando se selecciona un autor en el ComboBox
-        comboBoxAutores.setOnAction(event -> loadSelectedAutor());
+        cargarAutores();
+        comboBoxAutores.setOnAction(event -> cargarAutorSeleccionado());
     }
 
-    // Cargar los autores en el ComboBox
-    private void loadAutores() {
-        List<Autor> autores = AutorDAO.build().findAll();
-        comboBoxAutores.getItems().clear();
-        comboBoxAutores.getItems().addAll(autores);
+    private void cargarAutores() {
+        try {
+            List<Autor> autores = AutorDAO.build().findAll();
+            if (autores.isEmpty()) {
+                mostrarAlerta(Alert.AlertType.WARNING, "Lista Vacía", "No hay autores disponibles", "No se encontraron autores en la base de datos.");
+            } else {
+                comboBoxAutores.getItems().clear();
+                comboBoxAutores.getItems().addAll(autores);
+            }
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", "No se pudieron cargar los autores.", e.getMessage());
+        }
     }
 
-    // Cargar los datos del autor seleccionado
-    private void loadSelectedAutor() {
+    private void cargarAutorSeleccionado() {
         selectedAutor = comboBoxAutores.getSelectionModel().getSelectedItem();
         if (selectedAutor != null) {
             nombre.setText(selectedAutor.getNombre());
@@ -57,36 +57,53 @@ public class ModifyAutor {
 
     @FXML
     private void close() throws IOException {
-        if (selectedAutor != null) {
-            // Modificar el autor
+        if (selectedAutor == null) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se puede modificar el autor", "No se ha seleccionado ningún autor.");
+            return;
+        }
+
+        if (!validarCampos()) {
+            return;
+        }
+
+        try {
             selectedAutor.setNombre(nombre.getText());
             selectedAutor.setNacionalidad(nacionalidad.getText());
             selectedAutor.setFechaNacimiento(fecha_nacimiento.getValue());
 
-            // Llamar al DAO para almacenar la modificación
-            AutorDAO.build().store(selectedAutor);
+            AutorDAO.build().store(selectedAutor); //store funciona tambien como update
 
-            // Mostrar alerta de éxito
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Modificación Correcta");
-            alert.setHeaderText("La modificación ha sido completada con éxito");
-            alert.setContentText("La modificación del autor ha sido realizada con éxito.");
-            alert.showAndWait();
-
-            // Cambiar a la vista de la base de datos de autores
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Modificación Correcta", "Modificación realizada con éxito", "El autor se ha actualizado correctamente.");
             App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
 
-            // Cerrar la ventana actual
             Stage stage = (Stage) closeButton.getScene().getWindow();
             stage.close();
-        } else {
-            // Si no se ha seleccionado un autor, mostrar un mensaje de error
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No se puede modificar el autor");
-            alert.setContentText("No se ha seleccionado ningún autor.");
-            alert.showAndWait();
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo guardar la modificación.", e.getMessage());
         }
     }
-}
 
+    private boolean validarCampos() {
+        if (nombre.getText().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Validación", "Campo vacío", "El campo 'Nombre' no puede estar vacío.");
+            return false;
+        }
+        if (nacionalidad.getText().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Validación", "Campo vacío", "El campo 'Nacionalidad' no puede estar vacío.");
+            return false;
+        }
+        if (fecha_nacimiento.getValue() == null) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Validación", "Campo vacío", "El campo 'Fecha de Nacimiento' no puede estar vacío.");
+            return false;
+        }
+        return true;
+    }
+
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String cabecera, String contenido) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(cabecera);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+}

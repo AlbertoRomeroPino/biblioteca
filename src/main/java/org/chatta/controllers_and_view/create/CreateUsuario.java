@@ -24,78 +24,67 @@ public class CreateUsuario {
     @FXML
     private Button closeButton;
 
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String cabecera, String contenido) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(cabecera);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
 
     @FXML
     private void Close() throws IOException {
 
-        App.setRoot(scenes.PANTALLADEBASADEDATOS);
-
-        Usuario usuario = new Usuario();
-
-        if (nombre.getText().isEmpty()){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de nombre de usuario a fallado," +
-                    "\n es probable que sea un nombre repetido o este el campo vacio");
-            alert.showAndWait();
-
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else if (clave.getText().isEmpty() ) {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de clave de usuario a fallado," +
-                    "\n es probable que este  campo este vacio");
-            alert.showAndWait();
-
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else if (email.getText().isEmpty()) {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de email de usuario a fallado," +
-                    "\n es probable que este  campo este vacio");
-            alert.showAndWait();
-
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        } else if (!Validacion.validacionEmail(email.getText())) {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("inserción incorrecta");
-            alert.setHeaderText("la insertción a fallado");
-            alert.setContentText("La inserción de email de usuario a fallado, " +
-                    "\n no cumple con los requisitos de validación");
-            alert.showAndWait();
-
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-
-        }else {
-
-            usuario.setNombre(nombre.getText());
-            String hasPassword = Validacion.encryptClave(clave.getText());
-            usuario.setClave(hasPassword);
-            usuario.setEMAIL(email.getText());
-
-            UsuarioDAO.build().store(usuario);
-
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("inserción correcta");
-            alert.setHeaderText("la insertción a sido completada con exito");
-            alert.setContentText("La inserción de usuario a sido realizada con exito");
-            alert.showAndWait();
-
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
+        // Validación de campos obligatorios
+        if (nombre.getText().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Inserción incorrecta",
+                    "La inserción ha fallado",
+                    "El campo 'Nombre' está vacío o el nombre es repetido.");
+            return;
         }
 
+        if (clave.getText().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Inserción incorrecta",
+                    "La inserción ha fallado",
+                    "El campo 'Clave' está vacío.");
+            return;
+        }
+
+        if (email.getText().isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Inserción incorrecta",
+                    "La inserción ha fallado",
+                    "El campo 'Email' está vacío.");
+            return;
+        }
+
+        // Validación del formato de email
+        if (!Validacion.validacionEmail(email.getText())) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Inserción incorrecta",
+                    "La inserción ha fallado",
+                    "El email no cumple con los requisitos de validación.");
+            return;
+        }
+
+        // Creación y almacenamiento del usuario
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre.getText());
+        usuario.setClave(Validacion.encryptClave(clave.getText()));
+        usuario.setEMAIL(email.getText());
+
+        UsuarioDAO.build().store(usuario);
+
+        // Mostrar mensaje de éxito
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Inserción correcta",
+                "La inserción ha sido completada con éxito.",
+                "El usuario ha sido registrado correctamente.");
+
+        // Cambiar a la pantalla principal de base de datos
+        App.setRoot(scenes.PANTALLADEBASADEDATOS);
+
+        // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
 }
