@@ -41,19 +41,22 @@ public class PantalladelaBasededatosPrestamos {
     public void initialize() {
         // Configurar las columnas para mostrar datos derivados
         colUsuarioId.setCellValueFactory(cellData -> {
-            // Extraer el nombre del usuario
+            // Extraer el nombre del usuario, asegurándose de que no sea null
             return new SimpleStringProperty(
-                    cellData.getValue().getUsuario().getNombre()
+                    cellData.getValue().getUsuario() != null ?
+                            cellData.getValue().getUsuario().getNombre() : "Desconocido"
             );
         });
 
         colPublicacionId.setCellValueFactory(cellData -> {
-            // Extraer el título de la publicación
+            // Extraer el título de la publicación, asegurándose de que no sea null
             return new SimpleStringProperty(
-                    cellData.getValue().getPublicacion().getTitulo()
+                    cellData.getValue().getPublicacion() != null ?
+                            cellData.getValue().getPublicacion().getTitulo() : "Desconocido"
             );
         });
 
+        // Configuración para los otros campos
         colFechaPrestamo.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
         colFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
@@ -64,10 +67,11 @@ public class PantalladelaBasededatosPrestamos {
 
     private void cargarPrestamos() {
         ObservableList<Prestamo> prestamos = FXCollections.observableArrayList(
-                PrestamoDAO.build().findAll()
+                PrestamoDAO.build().findJoin()
         );
         tablaPrestamos.setItems(prestamos);
     }
+
 
     @FXML
     private void SwitchToPantalladeInicio() throws IOException {

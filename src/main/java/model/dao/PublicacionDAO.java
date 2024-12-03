@@ -2,11 +2,8 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
-import model.entity.Editorial;
+import model.entity.*;
 import model.entity.Enum.Tipo_Enum;
-import model.entity.Libro;
-import model.entity.Publicacion;
-import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
@@ -26,6 +23,9 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     //Select
     private static final String FINDID = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion WHERE Id = ?";
     private static final String FINDALL = "SELECT Id, Titulo, FechaPublicacion, Tipo, Categoria_ID, Editorial_ID FROM publicacion";
+    private static final String FINDJOIN = "SELECT p.ID, p.Titulo, p.FechaPublicacion, p.Tipo, c.Nombre AS CategoriaNombre, e.Nombre AS EditorialNombre " +
+            " FROM Publicacion p " +
+            " JOIN Categoria c ON p.Categoria_ID = c.ID JOIN Editorial e ON p.Editorial_ID = e.ID";
 
     /**
      * Almacena un objeto Publicacion en la base de datos.
@@ -116,6 +116,34 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
                     publicacion.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
                     publicacion.setCategoria(CategoriaDAO.build().findId(resultSet.getInt("Categoria_ID")));
                     publicacion.setEditorial(EditorialDAO.build().findId(resultSet.getInt("Editorial_ID")));
+
+                    publicacions.add(publicacion);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicacions;
+    }
+
+    public List<Publicacion> findJoinPublicacion() {
+        List<Publicacion> publicacions = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Categoria categoria = new Categoria();
+                    Editorial editorial = new Editorial();
+                    categoria.setNombre(resultSet.getString("CategoriaNombre"));
+                    editorial.setNombre(resultSet.getString("EditorialNombre"));
+
+                    Publicacion publicacion = new Publicacion();
+                    publicacion.setId(resultSet.getInt("Id"));
+                    publicacion.setTitulo(resultSet.getString("Titulo"));
+                    publicacion.setFecha_publicacion(resultSet.getDate("FechaPublicacion").toLocalDate());
+                    publicacion.setTipo(Tipo_Enum.valueOf(resultSet.getString("Tipo")));
+                    publicacion.setCategoria(categoria);
+                    publicacion.setEditorial(editorial);
 
                     publicacions.add(publicacion);
                 }

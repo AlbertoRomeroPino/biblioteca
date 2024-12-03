@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosRevistas">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.PantalladelaBasededatosRevistas">
     <children>
         <MenuBar layoutY="2.0">
             <menus>
@@ -53,10 +49,10 @@
                 <TableColumn fx:id="idColumn" prefWidth="42.4000244140625" text="ID" />
                 <TableColumn fx:id="tituloColumn" prefWidth="68.800048828125" text="Titulo" />
                 <TableColumn fx:id="fechaPublicacionColumn" prefWidth="104.0" text="Publicacion" />
-                <TableColumn fx:id="categoriaColumn" prefWidth="65.5999755859375" text="Categoria" />
-                <TableColumn fx:id="editorialColumn" prefWidth="71.20001220703125" text="Editorial" />
-                <TableColumn fx:id="issnColumn" prefWidth="60.800048828125" text="ISSN" />
-                <TableColumn fx:id="periodicidadColumn" prefWidth="197.59991455078125" text="Periodicidad" />
+                <TableColumn fx:id="categoriaColumn" prefWidth="76.60002136230469" text="Categoria" />
+                <TableColumn fx:id="editorialColumn" prefWidth="73.0" text="Editorial" />
+                <TableColumn fx:id="issnColumn" prefWidth="69.5999755859375" text="ISSN" />
+                <TableColumn fx:id="periodicidadColumn" prefWidth="126.5999755859375" text="Periodicidad" />
             </columns>
         </TableView>
         <Text layoutX="66.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revista" />

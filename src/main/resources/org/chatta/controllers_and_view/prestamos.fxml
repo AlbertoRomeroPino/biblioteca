@@ -72,8 +72,8 @@
         </MenuBar>
         <TableView fx:id="tablaPrestamos" layoutX="19.0" layoutY="127.0" prefHeight="239.0" prefWidth="565.0">
             <columns>
-                <TableColumn fx:id="colUsuarioId" prefWidth="90.0" text="Usuario ID" />
-                <TableColumn fx:id="colPublicacionId" prefWidth="120.6" text="Publicacion ID" />
+                <TableColumn fx:id="colUsuarioId" prefWidth="90.0" text="Usuario" />
+                <TableColumn fx:id="colPublicacionId" prefWidth="120.6" text="Publicacion" />
                 <TableColumn fx:id="colFechaPrestamo" prefWidth="116.4" text="Fecha Prestamo" />
                 <TableColumn fx:id="colFechaDevolucion" prefWidth="142.8" text="Fecha Devolucion" />
                 <TableColumn fx:id="colEstado" prefWidth="95.8" text="Estado" />

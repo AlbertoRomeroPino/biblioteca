@@ -2,10 +2,8 @@ package model.dao;
 
 import interfaces.IDAO;
 import model.connection.ConnectionMariaDB;
+import model.entity.*;
 import model.entity.Enum.Periodicidad_Enum;
-import model.entity.Libro;
-import model.entity.Publicacion;
-import model.entity.Revista;
 
 import java.io.IOException;
 import java.sql.*;
@@ -25,6 +23,13 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     private static final String UPDATE = "UPDATE Revista SET ISSN = ?, Periodicidad = ? WHERE Publicacion_ID = ?";
     private static final String FINDID = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista WHERE Publicacion_Id = ?";
     private static final String FINDALL = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista";
+    private static final String FINDJOIN_REVISTA = "SELECT p.ID AS Id, p.Titulo AS Titulo, p.FechaPublicacion AS Publicacion, c.Nombre AS Categoria, e.Nombre AS Editorial, r.ISSN AS ISSN, r.Periodicidad AS Periodicidad" +
+    " FROM Publicacion p" +
+    " JOIN Categoria c ON p.Categoria_ID = c.ID" +
+    " JOIN Editorial e ON p.Editorial_ID = e.ID" +
+    " JOIN Revista r ON p.ID = r.Publicacion_ID";
+;
+
 
 
     /**
@@ -153,6 +158,41 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
         }
         return revistas;
     }
+
+    public List<Revista> findJoinRevista() {
+        List<Revista> revistas = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN_REVISTA)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Crear instancias de Categoria y Editorial
+                    Categoria categoria = new Categoria();
+                    categoria.setNombre(resultSet.getString("Categoria"));
+
+                    Editorial editorial = new Editorial();
+                    editorial.setNombre(resultSet.getString("Editorial"));
+
+                    // Crear instancia de Revista
+                    Revista revista = new Revista();
+                    revista.setId(resultSet.getInt("Id"));
+                    revista.setTitulo(resultSet.getString("Titulo"));
+                    revista.setFecha_publicacion(resultSet.getDate("Publicacion").toLocalDate());
+                    revista.setCategoria(categoria);
+                    revista.setEditorial(editorial);
+                    revista.setISSN(resultSet.getString("ISSN"));
+                    revista.setPeriodicidad(Periodicidad_Enum.valueOf(resultSet.getString("Periodicidad")));
+
+                    // Agregar la revista a la lista
+                    revistas.add(revista);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return revistas;
+    }
+
 
     /**
      * Elimina un objeto Revista de la base de datos.
