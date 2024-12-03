@@ -2,20 +2,27 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyAutor">
 
-      <!-- ComboBox para seleccionar el autor -->
-      <ComboBox fx:id="comboBoxAutores" layoutY="48.0" prefWidth="300" />
+      <!-- ComboBox para seleccionar autor -->
+      <Text layoutX="20.0" layoutY="30.0" text="Seleccionar Autor:" />
+      <ComboBox fx:id="comboBoxAutores" layoutX="20.0" layoutY="50.0" prefWidth="260.0" />
 
-      <!-- Campos de texto para modificar el autor -->
-      <TextField fx:id="nombre" layoutY="101.0" prefWidth="300" promptText="Nombre del autor" />
-      <TextField fx:id="nacionalidad" layoutY="150.0" prefHeight="25.0" prefWidth="300" promptText="Nacionalidad" />
+      <!-- Campo de texto para nombre -->
+      <Text layoutX="20.0" layoutY="100.0" text="Nombre:" />
+      <TextField fx:id="nombre" layoutX="20.0" layoutY="120.0" prefWidth="260.0" promptText="Nombre del autor" />
 
-      <!-- DatePicker para modificar la fecha de nacimiento -->
-      <DatePicker fx:id="fecha_nacimiento" layoutY="209.0" prefWidth="300" />
+      <!-- Campo de texto para nacionalidad -->
+      <Text layoutX="20.0" layoutY="170.0" text="Nacionalidad:" />
+      <TextField fx:id="nacionalidad" layoutX="20.0" layoutY="190.0" prefWidth="260.0" promptText="Nacionalidad" />
 
-      <!-- Botón para cerrar y guardar la modificación -->
-      <Button fx:id="closeButton" layoutX="75.0" layoutY="265.0" onAction="#close" prefWidth="150" text="Guardar Cambios" />
+      <!-- DatePicker para fecha de nacimiento -->
+      <Text layoutX="20.0" layoutY="240.0" text="Fecha de Nacimiento:" />
+      <DatePicker fx:id="fecha_nacimiento" layoutX="20.0" layoutY="260.0" prefWidth="260.0" />
+
+      <!-- Botón para guardar cambios -->
+      <Button fx:id="closeButton" layoutX="100.0" layoutY="320.0" onAction="#close" prefWidth="100.0" text="Guardar " />
 
 </Pane>
