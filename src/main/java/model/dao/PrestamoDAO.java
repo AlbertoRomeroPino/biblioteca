@@ -9,6 +9,7 @@ import model.entity.Usuario;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +125,9 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
                     prestamo.setPublicacion(publicacion);
                     prestamo.setFechaPrestamo(resultSet.getDate("FechaPrestamo").toLocalDate());
                     prestamo.setFechaDevolucion(resultSet.getDate("FechaDevolucion").toLocalDate());
+                    if (prestamo.getFechaDevolucion() == null){
+                        prestamo.setFechaDevolucion(prestamo.getFechaPrestamo());
+                    }
                     prestamo.setEstado(Estado_Enum.valueOf(resultSet.getString("Estado")));
                     prestamos.add(prestamo);
                 }
