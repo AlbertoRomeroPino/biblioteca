@@ -139,6 +139,14 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         return libro;
     }
 
+    /**
+     * Obtiene una lista con todos los libros almacenados en la base de datos.
+     * Este método utiliza la relación con la tabla de publicaciones para obtener los datos comunes
+     * y luego añade la información específica de los libros, como el ISBN y el autor.
+     *
+     * @return Una lista de objetos {@link Libro}, cada uno representando un libro con su información completa.
+     *         Si no hay libros registrados, se retorna una lista vacía.
+     */
     public List<Libro> findAll() {
         List<Libro> libros = new ArrayList<>();
 
@@ -167,10 +175,16 @@ public class LibroDAO implements IDAO<Libro, Integer> {
             e.printStackTrace();
         }
         return libros;
-
     }
 
-    public List<Libro> findJoinLibro(){
+    /**
+     * Obtiene una lista de libros utilizando una consulta que incluye uniones (joins)
+     * para obtener información adicional como el nombre de la categoría, editorial y autor.
+     *
+     * @return Una lista de objetos {@link Libro}, cada uno con sus datos completos, incluyendo
+     *         relaciones con categorías, editoriales y autores. Si no hay libros registrados, se retorna una lista vacía.
+     */
+    public List<Libro> findJoinLibro() {
         List<Libro> libros = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN)) {
@@ -205,7 +219,6 @@ public class LibroDAO implements IDAO<Libro, Integer> {
         }
 
         return libros;
-
     }
 
     /**

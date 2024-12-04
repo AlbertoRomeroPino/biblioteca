@@ -95,6 +95,12 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
         return editorial;
     }
 
+    /**
+     * Obtiene una lista con todas las editoriales almacenadas en la base de datos.
+     *
+     * @return Una lista de objetos {@link Editorial}, cada uno representando una editorial con sus datos:
+     *         ID, nombre, país y fecha de fundación. Si no hay editoriales, se retorna una lista vacía.
+     */
     public List<Editorial> findAll() {
         List<Editorial> editoriales = new ArrayList<>();
 

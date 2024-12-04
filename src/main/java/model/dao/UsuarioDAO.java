@@ -94,6 +94,15 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
         return usuario;
     }
 
+    /**
+     * Busca un usuario en la base de datos utilizando su correo electrónico y clave.
+     * Si el usuario existe, retorna un objeto {@link Usuario} con la información encontrada.
+     *
+     * @param email El correo electrónico del usuario que se desea buscar.
+     * @param clave La clave asociada al usuario.
+     * @return Un objeto {@link Usuario} con los datos del usuario si se encuentra;
+     *         de lo contrario, retorna {@code null}.
+     */
     public Usuario findByIdentificator(String email, String clave) {
         Usuario usuario = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDBYIDENTIFICATOR)) {
@@ -109,11 +118,18 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 }
             }
         } catch (SQLException e) {
-            System.out.println();
+            System.out.println("Error al buscar el usuario: " + e.getMessage());
         }
         return usuario;
     }
 
+    /**
+     * Recupera una lista de todos los usuarios almacenados en la base de datos.
+     * Este método no incluye la clave del usuario en la información retornada.
+     *
+     * @return Una lista de objetos {@link Usuario}, cada uno representando un usuario.
+     *         Si no hay usuarios en la base de datos, retorna una lista vacía.
+     */
     public List<Usuario> findAll() {
         List<Usuario> usuarios = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
@@ -128,10 +144,11 @@ public class UsuarioDAO implements IDAO<Usuario, Integer> {
                 }
             }
         } catch (SQLException e) {
-            System.out.println();
+            System.out.println("Error al obtener la lista de usuarios: " + e.getMessage());
         }
         return usuarios;
     }
+
 
     /**
      * Elimina un usuario específico de la base de datos.
