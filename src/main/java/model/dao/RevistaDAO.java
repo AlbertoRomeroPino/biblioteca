@@ -129,6 +129,15 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
         return revista;
     }
 
+    /**
+     * Recupera una lista con todas las revistas almacenadas en la base de datos.
+     * Este método utiliza la relación con la entidad Publicación para obtener información básica
+     * como título, fecha de publicación, tipo, categoría y editorial.
+     * Además, incluye atributos específicos de las revistas como el ISSN y la periodicidad.
+     *
+     * @return Una lista de objetos {@link Revista}, cada uno representando una revista con todos sus atributos.
+     *         Si no hay registros, se retorna una lista vacía.
+     */
     public List<Revista> findAll() {
         List<Revista> revistas = new ArrayList<>();
 
@@ -159,6 +168,15 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
         return revistas;
     }
 
+    /**
+     * Recupera una lista de revistas mediante una consulta que utiliza uniones (joins)
+     * para incluir información detallada sobre la categoría y editorial relacionadas.
+     * Este método retorna tanto los atributos generales de las publicaciones como
+     * los específicos de las revistas, incluyendo ISSN y periodicidad.
+     *
+     * @return Una lista de objetos {@link Revista}, cada uno con información adicional sobre la categoría,
+     *         editorial y atributos propios. Si no hay registros, se retorna una lista vacía.
+     */
     public List<Revista> findJoinRevista() {
         List<Revista> revistas = new ArrayList<>();
 
@@ -192,6 +210,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
 
         return revistas;
     }
+
 
 
     /**

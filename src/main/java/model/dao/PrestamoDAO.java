@@ -25,6 +25,7 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
     private static final String UPDATE = "UPDATE Prestamo SET FechaDevolucion = ?, Estado = ? WHERE Usuario_ID = ? AND Publicacion_ID = ? AND FechaPrestamo = ?";
 
     private static final String FINDID = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo WHERE Usuario_ID = ? and Publicacion_ID = ? and FechaPrestamo = ?";
+    private static final String FINDALL = "select Usuario_ID, Publicacion_ID, FechaPrestamo, FechaDevolucion, Estado FROM prestamo";
     private static final String FINDJOIN = "SELECT u.Nombre AS NombreUsuario, p.Titulo AS TituloPublicacion, pr.FechaPrestamo, pr.FechaDevolucion, pr.Estado " +
             " FROM Prestamo pr " +
             " JOIN Usuario u ON pr.Usuario_ID = u.ID JOIN Publicacion p ON pr.Publicacion_ID = p.ID;";
@@ -107,7 +108,43 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
         return prestamo;
     }
 
-    public List<Prestamo> findJoin(){
+    /**
+     * Obtiene una lista con todos los préstamos almacenados en la base de datos.
+     * Este método recupera las asociaciones con los usuarios y publicaciones correspondientes,
+     * así como las fechas de préstamo, devolución y el estado del préstamo.
+     *
+     * @return Una lista de objetos {@link Prestamo}, cada uno representando un préstamo completo con su usuario,
+     *         publicación, fechas y estado. Si no hay préstamos registrados, se retorna una lista vacía.
+     */
+    public List<Prestamo> findAll() {
+        List<Prestamo> prestamos = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Prestamo prestamo = new Prestamo();
+                    prestamo.setUsuario(UsuarioDAO.build().findId(resultSet.getInt("Usuario_ID")));
+                    prestamo.setPublicacion(PublicacionDAO.build().findId(resultSet.getInt("Publicacion_ID")));
+                    prestamo.setFechaPrestamo(resultSet.getDate("FechaPrestamo").toLocalDate());
+                    prestamo.setFechaDevolucion(resultSet.getDate("FechaDevolucion").toLocalDate());
+                    prestamo.setEstado(Estado_Enum.valueOf(resultSet.getString("Estado")));
+                    prestamos.add(prestamo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prestamos;
+    }
+
+    /**
+     * Obtiene una lista de préstamos con información adicional utilizando una consulta que incluye uniones (joins).
+     * Este método incluye datos como el título de la publicación y el nombre del usuario asociado al préstamo.
+     *
+     * @return Una lista de objetos {@link Prestamo}, cada uno con datos relacionados del usuario,
+     *         la publicación, fechas y estado. Si no hay préstamos registrados, se retorna una lista vacía.
+     */
+    public List<Prestamo> findJoin() {
         List<Prestamo> prestamos = new ArrayList<>();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDJOIN)) {
@@ -119,13 +156,12 @@ public class PrestamoDAO implements IDAO<Prestamo, Prestamo> {
                     publicacion.setTitulo(resultSet.getString("TituloPublicacion"));
                     usuario.setNombre(resultSet.getString("NombreUsuario"));
 
-
                     Prestamo prestamo = new Prestamo();
                     prestamo.setUsuario(usuario);
                     prestamo.setPublicacion(publicacion);
                     prestamo.setFechaPrestamo(resultSet.getDate("FechaPrestamo").toLocalDate());
                     prestamo.setFechaDevolucion(resultSet.getDate("FechaDevolucion").toLocalDate());
-                    if (prestamo.getFechaDevolucion() == null){
+                    if (prestamo.getFechaDevolucion() == null) {
                         prestamo.setFechaDevolucion(prestamo.getFechaPrestamo());
                     }
                     prestamo.setEstado(Estado_Enum.valueOf(resultSet.getString("Estado")));

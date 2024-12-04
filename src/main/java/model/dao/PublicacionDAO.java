@@ -103,6 +103,15 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacion;
     }
 
+    /**
+     * Obtiene una lista con todas las publicaciones almacenadas en la base de datos.
+     * Este método recupera las asociaciones con las categorías y editoriales correspondientes,
+     * así como información sobre el tipo, título y fecha de publicación.
+     *
+     * @return Una lista de objetos {@link Publicacion}, cada uno representando una publicación completa
+     *         con su categoría, editorial, tipo, título y fecha. Si no hay publicaciones registradas,
+     *         se retorna una lista vacía.
+     */
     public List<Publicacion> findAll() {
         List<Publicacion> publicacions = new ArrayList<>();
 
@@ -126,6 +135,14 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         return publicacions;
     }
 
+    /**
+     * Obtiene una lista de publicaciones con información adicional utilizando una consulta que incluye uniones (joins).
+     * Este método incluye datos como el nombre de la categoría y de la editorial asociados a la publicación,
+     * además del título, tipo y fecha de publicación.
+     *
+     * @return Una lista de objetos {@link Publicacion}, cada uno con datos relacionados sobre la categoría,
+     *         editorial, tipo, título y fecha. Si no hay publicaciones registradas, se retorna una lista vacía.
+     */
     public List<Publicacion> findJoinPublicacion() {
         List<Publicacion> publicacions = new ArrayList<>();
 
@@ -153,6 +170,7 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
         }
         return publicacions;
     }
+
 
     /**
      * Elimina un objeto Publicacion de la base de datos.
