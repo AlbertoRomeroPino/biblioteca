@@ -64,18 +64,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,18 +83,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,18 +102,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -154,18 +121,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -184,18 +140,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -214,18 +159,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -245,18 +179,7 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
-
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
+            configuracionStage(popupStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -275,18 +198,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -305,18 +218,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -335,18 +238,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -365,18 +258,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -395,18 +278,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -426,18 +299,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -456,18 +319,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -486,18 +339,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -516,18 +359,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -546,18 +379,8 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -576,23 +399,26 @@ public class PantalladelaBasededatos {
             popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
             popupStage.setScene(new Scene(root));
 
-            // Configurar dimensiones predeterminadas
-            popupStage.setWidth(300);  // Ancho de la ventana
-            popupStage.setHeight(350); // Alto de la ventana
+            configuracionStage(popupStage);
 
-            // Opcional: Configurar tamaño mínimo y máximo
-            popupStage.setMinWidth(300);
-            popupStage.setMinHeight(350);
-            popupStage.setMaxWidth(300);
-            popupStage.setMaxHeight(350);
-
-            // Mostrar el popup
-            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void configuracionStage(Stage popupStage) {
+        // Configurar dimensiones predeterminadas
+        popupStage.setWidth(400);  // Ancho de la ventana
+        popupStage.setHeight(450); // Alto de la ventana
 
+        // Opcional: Configurar tamaño mínimo y máximo
+        popupStage.setMinWidth(400);    // Ancho de la ventana
+        popupStage.setMinHeight(450);   // Alto de la ventana
+        popupStage.setMaxWidth(500);    // Ancho de la ventana
+        popupStage.setMaxHeight(550);   // Alto de la ventana
+
+        // Mostrar el popup
+        popupStage.show();
+    }
 }
