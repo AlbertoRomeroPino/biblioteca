@@ -29,6 +29,8 @@ public class Test1DAO {
         TestCategoria.main(strings);
         TestEditorial.main(strings);
 
+//        TestLibroRevista.main(args);
+
         TestLibro.main(strings);
         TestRevista.main(strings);
 
