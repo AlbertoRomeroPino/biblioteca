@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyEditorial">
+<GridPane fx:controller="org.chatta.controllers_and_view.modify.ModifyEditorial"
+          xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+          hgap="10" vgap="10" alignment="CENTER" prefHeight="400.0" prefWidth="300.0">
 
-      <!-- ComboBox para seleccionar editorial -->
-      <Text layoutX="20.0" layoutY="30.0" text="Seleccionar Editorial:" />
-      <ComboBox fx:id="comboBoxEditoriales" layoutX="20.0" layoutY="50.0" prefWidth="260.0" />
+      <!-- Label y ComboBox para seleccionar editorial -->
+      <Text text="Seleccionar Editorial:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+      <ComboBox fx:id="comboBoxEditoriales" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="260.0" />
 
-      <!-- Campo de texto para nombre -->
-      <Text layoutX="20.0" layoutY="100.0" text="Nombre:" />
-      <TextField fx:id="nombre" layoutX="20.0" layoutY="120.0" prefWidth="260.0" promptText="Nombre de la editorial" />
+      <!-- Label y campo de texto para nombre -->
+      <Text text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+      <TextField fx:id="nombre" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="260.0" promptText="Nombre de la editorial" />
 
-      <!-- Campo de texto para país -->
-      <Text layoutX="20.0" layoutY="170.0" text="País:" />
-      <TextField fx:id="pais" layoutX="20.0" layoutY="190.0" prefWidth="260.0" promptText="País de origen" />
+      <!-- Label y campo de texto para país -->
+      <Text text="País:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+      <TextField fx:id="pais" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="260.0" promptText="País de origen" />
 
-      <!-- DatePicker para fecha de fundación -->
-      <Text layoutX="20.0" layoutY="240.0" text="Fecha de Fundación:" />
-      <DatePicker fx:id="fecha_fundacion" layoutX="20.0" layoutY="260.0" prefWidth="260.0" />
+      <!-- Label y DatePicker para fecha de fundación -->
+      <Text text="Fecha de Fundación:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+      <DatePicker fx:id="fecha_fundacion" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="260.0" />
 
       <!-- Botón para guardar cambios -->
-      <Button fx:id="closeButton" layoutX="100.0" layoutY="320.0" prefWidth="100.0" onAction="#close" text="Guardar" />
-
-</Pane>
+      <Button fx:id="closeButton" text="Guardar" onAction="#close" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2" prefWidth="100.0" />
+</GridPane>

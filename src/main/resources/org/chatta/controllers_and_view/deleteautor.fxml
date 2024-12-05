@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
-
-
 <?import javafx.scene.control.ComboBox?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.delete.DeleteAutor">
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:controller="org.chatta.controllers_and_view.delete.DeleteAutor"
+          xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+          hgap="10" vgap="10" alignment="CENTER" prefHeight="350.0" prefWidth="300.0">
 
       <!-- ComboBox para seleccionar el autor -->
-      <ComboBox fx:id="comboBoxAutores" layoutY="117.0" prefWidth="300" />
+      <ComboBox fx:id="comboBoxAutores" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="200.0" />
 
-      <Button fx:id="closeButton" layoutX="99.0" layoutY="239.0" mnemonicParsing="false" onAction="#Close" text="delete Prestamo" />
-
-
-</Pane>
+      <!-- Botón para eliminar el préstamo -->
+      <Button fx:id="closeButton" text="Eliminar Autor" onAction="#Close" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+</GridPane>
