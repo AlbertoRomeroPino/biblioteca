@@ -49,8 +49,13 @@ public class CreatePublicacion extends PantalladelaBasededatos {
     public void initialize() {
         ObservableList<Tipo_Enum> tipos = FXCollections.observableArrayList(Tipo_Enum.values());
         ComboBoxtipoEnum.setItems(tipos);
-        ObservableList<Categoria> categorias = FXCollections.observableArrayList(categoriaDAO.findAll());
-        comboBoxCategoria.setItems(categorias);
+        try {
+            ObservableList<Categoria> categorias = FXCollections.observableArrayList(categoriaDAO.findAll());
+            comboBoxCategoria.setItems(categorias);
+        }catch (NullPointerException e) {
+            System.out.println("No hay categorias");
+        }
+
         ObservableList<Editorial> editoriales = FXCollections.observableArrayList(editorialDAO.findAll());
         comboBoxEditorial.setItems(editoriales);
 
