@@ -60,8 +60,18 @@ public class ModifyPublicacion extends PantalladelaBasededatos {
             System.out.println("No hay categorias");
         } ObservableList<Editorial> editoriales = FXCollections.observableArrayList(editorialDAO.findAll());
         comboBoxEditorial.setItems(editoriales);
+        if (comboBoxEditorial.getValue() == null) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay editoriales disponibles",
+                    "No se encontraron editoriales en la base de datos.");
+            return;
+        }
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
+        if (comboboxPublicacion.getValue() == null) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
+                    "No se encontraron publicaciones en la base de datos.");
+            return;
+        }
     }
 
 

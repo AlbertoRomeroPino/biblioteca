@@ -44,6 +44,11 @@ public class ModifyRevista {
 
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
+        if (comboboxPublicacion.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
+                    "No se encontraron publicaciones en la base de datos.");
+            return;
+        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {

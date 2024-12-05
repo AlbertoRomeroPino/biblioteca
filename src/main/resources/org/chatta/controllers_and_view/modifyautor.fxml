@@ -4,25 +4,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyAutor">
+<GridPane fx:controller="org.chatta.controllers_and_view.modify.ModifyAutor"
+          xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+          hgap="10" vgap="10" alignment="CENTER" prefHeight="350.0" prefWidth="300.0">
 
-      <!-- ComboBox para seleccionar autor -->
-      <Text layoutX="20.0" layoutY="30.0" text="Seleccionar Autor:" />
-      <ComboBox fx:id="comboBoxAutores" layoutX="20.0" layoutY="50.0" prefWidth="260.0" />
+      <!-- Label y ComboBox para seleccionar autor -->
+      <Text text="Seleccionar Autor:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+      <ComboBox fx:id="comboBoxAutores" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="260.0" />
 
-      <!-- Campo de texto para nombre -->
-      <Text layoutX="20.0" layoutY="100.0" text="Nombre:" />
-      <TextField fx:id="nombre" layoutX="20.0" layoutY="120.0" prefWidth="260.0" promptText="Nombre del autor" />
+      <!-- Label y campo de texto para nombre -->
+      <Text text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+      <TextField fx:id="nombre" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="260.0" promptText="Nombre del autor" />
 
-      <!-- Campo de texto para nacionalidad -->
-      <Text layoutX="20.0" layoutY="170.0" text="Nacionalidad:" />
-      <TextField fx:id="nacionalidad" layoutX="20.0" layoutY="190.0" prefWidth="260.0" promptText="Nacionalidad" />
+      <!-- Label y campo de texto para nacionalidad -->
+      <Text text="Nacionalidad:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+      <TextField fx:id="nacionalidad" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="260.0" promptText="Nacionalidad" />
 
-      <!-- DatePicker para fecha de nacimiento -->
-      <Text layoutX="20.0" layoutY="240.0" text="Fecha de Nacimiento:" />
-      <DatePicker fx:id="fecha_nacimiento" layoutX="20.0" layoutY="260.0" prefWidth="260.0" />
+      <!-- Label y DatePicker para fecha de nacimiento -->
+      <Text text="Fecha de Nacimiento:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+      <DatePicker fx:id="fecha_nacimiento" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="260.0" />
 
       <!-- Botón para guardar cambios -->
-      <Button fx:id="closeButton" layoutX="100.0" layoutY="320.0" onAction="#close" prefWidth="100.0" text="Guardar " />
-
-</Pane>
+      <Button fx:id="closeButton" text="Guardar" onAction="#close" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2" prefWidth="100.0" />
+</GridPane>

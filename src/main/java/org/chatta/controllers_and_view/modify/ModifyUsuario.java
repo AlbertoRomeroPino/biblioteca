@@ -46,6 +46,12 @@ public class ModifyUsuario {
             List<Usuario> usuarios = UsuarioDAO.build().findAll();
             usuariosList = FXCollections.observableArrayList(usuarios);
             comboUsuarios.setItems(usuariosList);
+
+            if (usuariosList.isEmpty()) {
+                mostrarAlerta(Alert.AlertType.WARNING, "Lista Vacia", "No hay usuarios disponibles", "No se encontraron usuarios en la base de datos.");
+                return;
+            }
+
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", "No se pudo cargar la lista de usuarios", e.getMessage());
         }

@@ -48,8 +48,16 @@ public class ModifyPrestamo {
 
         ObservableList<Usuario> usuarios = FXCollections.observableArrayList(userDAO.findAll());
         comboboxUsuarios.setItems(usuarios);
+        if (comboboxUsuarios.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay usuarios disponibles",
+                    "No se encontraron usuarios en la base de datos.");
+            return;}
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
+        if (comboboxPublicacion.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
+                    "No se encontraron publicaciones en la base de datos.");
+            return;}
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
