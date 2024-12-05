@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class CategoriaDAO implements IDAO<Categoria, Integer> {
@@ -23,6 +24,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
     private static final String DELETE = "DELETE FROM Categoria WHERE Id = ?";
     private static final String UPDATE = "UPDATE Categoria SET Nombre = ? WHERE Id = ?";
     private static final String FINDID = "SELECT Id, Nombre FROM Categoria WHERE Id = ?";
+    private static final String FINDALL = "SELECT Id, Nombre FROM Categoria";
 
     /**
      * Almacena una categoría en la base de datos.
@@ -84,6 +86,23 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
             e.printStackTrace();
         }
         return categoria;
+    }
+
+    public List<Categoria> findAll() {
+        List<Categoria> categorias = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Categoria categoriaTmp = new Categoria();
+                    categoriaTmp.setId(resultSet.getInt("Id"));
+                    categoriaTmp.setNombre(resultSet.getString("Nombre"));
+                    categorias.add(categoriaTmp);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
     }
 
     /**
