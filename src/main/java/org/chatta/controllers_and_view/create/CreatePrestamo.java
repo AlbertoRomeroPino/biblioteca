@@ -13,17 +13,13 @@ public class CreatePrestamo {
     @FXML
     private Button closeButton;
 
-
-    @FXML
-    private void Close() throws IOException {
-
-        App.setRoot(scenes.PANTALLADEBASADEDATOSPRESTAMOS);
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("inserción correcta");
-        alert.setHeaderText("la insertción a sido completada con exito");
-        alert.setContentText("La inserción de prestamo a sido realizada con exito");
+    private void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
         alert.showAndWait();
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
+
+
 }
