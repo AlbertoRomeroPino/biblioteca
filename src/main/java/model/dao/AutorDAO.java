@@ -35,7 +35,7 @@ public class AutorDAO implements IDAO<Autor, Integer> {
     public Autor store(Autor entity) {
         if (entity != null) {
             try {
-                if (entity.getId() <= 0) { // Se considera que un ID <= 0 es un autor nuevo
+                if (entity.getId() >= 0) { // Se considera que un ID <= 0 es un autor nuevo
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getNacionalidad());

@@ -51,7 +51,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
 
         if (entity != null) {
             int idLibroTmp = entity.getId();
-            if (idLibroTmp > 0) {
+            if (idLibroTmp >= 0) {
                 // Buscar el libro por ID
                 Libro libroTmp = findId(idLibroTmp);
                 if (libroTmp == null) {
@@ -66,7 +66,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                     );
                     PublicacionDAO.build().store(publicacionTmp);
 
-                    List<Publicacion> publicaciones = PublicacionDAO.build().findJoinPublicacion();
+                    List<Publicacion> publicaciones = PublicacionDAO.build().findAll();
                     for (Publicacion publicacion : publicaciones){
                         if (publicacionTmp.equals(publicacion)){
                             publicacionTmp=publicacion;
