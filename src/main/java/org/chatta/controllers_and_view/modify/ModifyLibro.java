@@ -45,8 +45,20 @@ public class ModifyLibro {
         // Cargar los autores en el ComboBox al inicio
         ObservableList<Autor> autores = FXCollections.observableArrayList(autorDAO.findAll());
         comboBoxAutores.setItems(autores);
+
+        if (comboBoxAutores.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay autores disponibles",
+                    "No se encontraron autores en la base de datos.");
+            return;
+        }
+
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
+        if (comboboxPublicacion.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
+                    "No se publicaciones autores en la base de datos.");
+            return;
+        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -61,6 +73,9 @@ public class ModifyLibro {
 
         Autor autorSeleccionado = comboBoxAutores.getSelectionModel().getSelectedItem();
         Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
+
+
+
         if (ISBN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'ISBN' está vacío. Por favor, ingréselo.");
