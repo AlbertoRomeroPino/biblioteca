@@ -19,27 +19,53 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <Menu mnemonicParsing="false" text="Usuario">
+                        <Menu mnemonicParsing="false" text="usuario">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#CreateNewUsuario" text="Create Usuario" />
-                                <MenuItem mnemonicParsing="false" onAction="#ModifyUsuario" text="Update Usuario" />
-                                <MenuItem mnemonicParsing="false" onAction="#DeleteUsuario" text="Delete Usuario" />
+                                <MenuItem mnemonicParsing="false" text="create usuario" onAction="#CreateNewUsuario"/>
+                                <MenuItem mnemonicParsing="false" text="update usuario" onAction="#ModifyUsuario"/>
+                                <MenuItem mnemonicParsing="false" text="Delete usuario" onAction="#DeleteUsuario"/>
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Prestamo">
+                        <Menu mnemonicParsing="false" text="prestamo">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#CreateNewPrestamo" text="Create Prestamo" />
-                                <MenuItem mnemonicParsing="false" onAction="#ModifyPrestamo" text="Update Prestamo" />
-                                <MenuItem mnemonicParsing="false" onAction="#DeletePrestamo" text="Delete Prestamo" />
+                                <MenuItem mnemonicParsing="false" text="create prestamo" onAction="#CreateNewPrestamo" />
+                                <MenuItem mnemonicParsing="false" text="update prestamo" onAction="#ModifyPrestamo"/>
+                                <MenuItem mnemonicParsing="false" text="delete prestamo" onAction="#DeletePrestamo"/>
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Revista">
+                        <Menu mnemonicParsing="false" text="libro">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#CreateNewRevista" text="Create Revista" />
-                                <MenuItem mnemonicParsing="false" onAction="#ModifyRevista" text="Update Revista" />
-                                <MenuItem mnemonicParsing="false" onAction="#DeleteRevista" text="Delete Revista" />
+                                <MenuItem mnemonicParsing="false" text="create libro"  onAction="#CreateNewLibro"/>
+                                <MenuItem mnemonicParsing="false" text="update libro" onAction="#ModifyLibro"/>
+                                <MenuItem mnemonicParsing="false" text="Delete libro" onAction="#DeleteLibro"/>
                             </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="revista">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="create revista" onAction="#CreateNewRevista"/>
+                                <MenuItem mnemonicParsing="false" text="update revista" onAction="#ModifyRevista"/>
+                                <MenuItem mnemonicParsing="false" text="Delete revista" onAction="#DeleteRevista"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="autores">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="create autor" onAction="#CreateNewAutor"/>
+                                <MenuItem mnemonicParsing="false" text="update autor" onAction="#ModifyAutor"/>
+                                <MenuItem mnemonicParsing="false" text="Delete autor" onAction="#DeleteAutor"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="editorial">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="create editorial" onAction="#CreateNewEditorial"/>
+                                <MenuItem mnemonicParsing="false" text="update editorial" onAction="#ModifyEditorial"/>
+                                <MenuItem mnemonicParsing="false" text="Delete editorial" onAction="#DeleteEditorial"/>
+                            </items>
+                        </Menu>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="ohters">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#SwitchToPantalladeInicio" text="switch to main menu" />
                     </items>
                 </Menu>
             </menus>
