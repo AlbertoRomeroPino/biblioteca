@@ -16,11 +16,12 @@ import model.dao.PublicacionDAO;
 import model.entity.*;
 import model.entity.Enum.Tipo_Enum;
 import org.chatta.App;
+import org.chatta.controllers_and_view.PantalladelaBasededatos;
 import org.chatta.controllers_and_view.scenes;
 
 import java.io.IOException;
 
-public class CreatePublicacion {
+public class CreatePublicacion extends PantalladelaBasededatos {
 
     @FXML
     public TextField nombre;
@@ -110,61 +111,9 @@ public class CreatePublicacion {
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
 
         if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
-            try {
-                // Cargar el FXML de PantalladeIdentificacion
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createlibro.fxml"));
-                Parent root = loader.load();
-
-                // Crear un nuevo Stage (ventana emergente)
-                Stage popupStage = new Stage();
-                popupStage.setTitle("Pantalla de Creación de Libro");
-                popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
-                popupStage.setScene(new Scene(root));
-
-                // Configurar dimensiones predeterminadas
-                popupStage.setWidth(300);  // Ancho de la ventana
-                popupStage.setHeight(350); // Alto de la ventana
-
-                // Opcional: Configurar tamaño mínimo y máximo
-                popupStage.setMinWidth(300);
-                popupStage.setMinHeight(350);
-                popupStage.setMaxWidth(300);
-                popupStage.setMaxHeight(350);
-
-                // Mostrar el popup
-                popupStage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            CreateNewLibro();
         } else if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)){
-            try {
-                // Cargar el FXML de PantalladeIdentificacion
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createrevista.fxml"));
-                Parent root = loader.load();
-
-                // Crear un nuevo Stage (ventana emergente)
-                Stage popupStage = new Stage();
-                popupStage.setTitle("Pantalla de Creación de Revista");
-                popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
-                popupStage.setScene(new Scene(root));
-
-                // Configurar dimensiones predeterminadas
-                popupStage.setWidth(300);  // Ancho de la ventana
-                popupStage.setHeight(350); // Alto de la ventana
-
-                // Opcional: Configurar tamaño mínimo y máximo
-                popupStage.setMinWidth(300);
-                popupStage.setMinHeight(350);
-                popupStage.setMaxWidth(300);
-                popupStage.setMaxHeight(350);
-
-                // Mostrar el popup
-                popupStage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            CreateNewRevista();
         }
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();

@@ -90,7 +90,7 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    private void CreateNewLibro() throws IOException {
+    protected void CreateNewLibro() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createpublicacion.fxml"));
@@ -109,7 +109,7 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    private void CreateNewRevista() throws IOException {
+    protected void CreateNewRevista() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createpublicacion.fxml"));
@@ -206,7 +206,7 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    private void ModifyLibro() throws IOException {
+    protected void ModifyLibro() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifypublicacion.fxml"));
@@ -226,7 +226,7 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    private void ModifyRevista() throws IOException {
+    protected void ModifyRevista() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifypublicacion.fxml"));
