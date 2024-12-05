@@ -9,9 +9,9 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.delete.DeleteAutor">
 
       <!-- ComboBox para seleccionar el autor -->
-      <ComboBox fx:id="comboBoxAutores" prefWidth="300" />
+      <ComboBox fx:id="comboBoxAutores" layoutY="117.0" prefWidth="300" />
 
-      <Button fx:id="closeButton" onAction="#Close" layoutX="105.0" layoutY="274.0" mnemonicParsing="false" text="delete Prestamo" />
+      <Button fx:id="closeButton" layoutX="99.0" layoutY="239.0" mnemonicParsing="false" onAction="#Close" text="delete Prestamo" />
 
 
 </Pane>

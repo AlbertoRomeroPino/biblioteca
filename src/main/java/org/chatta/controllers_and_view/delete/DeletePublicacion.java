@@ -7,61 +7,63 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import model.dao.PrestamoDAO;
-import model.entity.Prestamo;
+import model.dao.AutorDAO;
+import model.dao.PublicacionDAO;
+import model.entity.Autor;
+import model.entity.Publicacion;
 import org.chatta.App;
 import org.chatta.controllers_and_view.scenes;
 
 import java.io.IOException;
 
-public class DeletePrestamo {
+public class DeletePublicacion {
     @FXML
     private Button closeButton;
 
     @FXML
-    private ComboBox<Prestamo> ComboBoxPrestamo;
+    private ComboBox<Publicacion> comboBoxPublicaciones;
 
-    private PrestamoDAO prestamoDAO;
+    private PublicacionDAO publicacionDAO;
 
-    public DeletePrestamo() {
+    public DeletePublicacion() {
         // Inicializar el DAO
-        prestamoDAO = PrestamoDAO.build();
+        publicacionDAO = PublicacionDAO.build();
     }
 
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
-        ObservableList<Prestamo> prestamos = FXCollections.observableArrayList(prestamoDAO.findAll());
-        ComboBoxPrestamo.setItems(prestamos);
+        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
+        comboBoxPublicaciones.setItems(publicaciones);
     }
 
     @FXML
     private void Close() throws IOException {
         // Eliminar el autor seleccionado
-        Prestamo prestamoSeleccionado = ComboBoxPrestamo.getSelectionModel().getSelectedItem();
-        if (prestamoSeleccionado != null) {
+        Publicacion publicacionSeleccionado = comboBoxPublicaciones.getSelectionModel().getSelectedItem();
+        if (publicacionSeleccionado != null) {
             // Eliminar el autor de la base de datos
-            prestamoDAO.deleteEntity(prestamoSeleccionado);
+            publicacionDAO.deleteEntity(publicacionSeleccionado);
             // Eliminar el autor de la lista del ComboBox
-            ComboBoxPrestamo.getItems().remove(prestamoSeleccionado);
+            comboBoxPublicaciones.getItems().remove(publicacionSeleccionado);
 
             // Mostrar el mensaje de éxito
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Eliminación correcta");
             alert.setHeaderText("La eliminación ha sido completada con éxito");
-            alert.setContentText("La eliminación del prestamo se ha realizado correctamente.");
+            alert.setContentText("La eliminación de la publicacion se ha realizado correctamente.");
             alert.showAndWait();
         } else {
             // Si no se ha seleccionado un autor, mostrar un mensaje de advertencia
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Selección no válida");
             alert.setHeaderText(null);
-            alert.setContentText("Por favor, selecciona un prestamo para eliminar.");
+            alert.setContentText("Por favor, selecciona una publicacion para eliminar.");
             alert.showAndWait();
         }
 
         // Cambiar la escena a la pantalla de autores
-        App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
+        App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
 
         // Cerrar la ventana actual
         Stage stage = (Stage) closeButton.getScene().getWindow();
