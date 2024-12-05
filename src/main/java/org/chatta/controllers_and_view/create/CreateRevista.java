@@ -41,7 +41,8 @@ public class CreateRevista {
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
-
+        ObservableList<Periodicidad_Enum> periodicidad = FXCollections.observableArrayList(Periodicidad_Enum.values());
+        comboboxperiodicidadenum.setItems(periodicidad);
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
     }

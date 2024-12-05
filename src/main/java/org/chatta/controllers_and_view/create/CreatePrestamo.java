@@ -42,7 +42,8 @@ public class CreatePrestamo {
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
-
+        ObservableList<Estado_Enum> estados = FXCollections.observableArrayList(Estado_Enum.values());
+        ComboBoxestadoEnum.setItems(estados);
         ObservableList<Usuario> usuarios = FXCollections.observableArrayList(userDAO.findAll());
         comboboxUsuarios.setItems(usuarios);
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
