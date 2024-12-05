@@ -33,15 +33,18 @@ public class ModifyPublicacion {
     private ComboBox<Categoria> comboBoxCategoria;
     @FXML
     private ComboBox<Editorial> comboBoxEditorial;
+    @FXML
+    private ComboBox<Publicacion> comboboxPublicacion;
 
     private EditorialDAO editorialDAO;
     private CategoriaDAO categoriaDAO;
-
+    private PublicacionDAO publicacionDAO;
     @FXML
     private Button closeButton;
 
     public ModifyPublicacion() {
         // Inicializar el DAO
+        publicacionDAO = PublicacionDAO.build();
         editorialDAO = EditorialDAO.build();
         categoriaDAO = CategoriaDAO.build();
     }
@@ -53,7 +56,8 @@ public class ModifyPublicacion {
         comboBoxCategoria.setItems(categorias);
         ObservableList<Editorial> editoriales = FXCollections.observableArrayList(editorialDAO.findAll());
         comboBoxEditorial.setItems(editoriales);
-
+        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
+        comboboxPublicacion.setItems(publicaciones);
     }
 
 
@@ -93,9 +97,15 @@ public class ModifyPublicacion {
                     "El campo 'Fecha de Nacimiento' está vacío. Por favor, ingréselo.");
             return;
         }
+        if (comboboxPublicacion.getValue() == null) {
+            showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
+                    "El campo 'Publicacion' está vacío. Por favor, ingréselo.");
+            return;
+        }
 
         // Si todos los campos están correctamente completados
         Publicacion publicacion = new Publicacion();
+        publicacion.setId(comboboxPublicacion.getValue().getId());
         publicacion.setTitulo(nombre.getText());
         publicacion.setFecha_publicacion(fecha_publicacion.getValue());
         publicacion.setTipo(ComboBoxtipoEnum.getValue());
@@ -113,7 +123,7 @@ public class ModifyPublicacion {
         if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
             try {
                 // Cargar el FXML de PantalladeIdentificacion
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createlibro.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifylibro.fxml"));
                 Parent root = loader.load();
 
                 // Crear un nuevo Stage (ventana emergente)
@@ -141,7 +151,7 @@ public class ModifyPublicacion {
         } else if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)){
             try {
                 // Cargar el FXML de PantalladeIdentificacion
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createrevista.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifyrevista.fxml"));
                 Parent root = loader.load();
 
                 // Crear un nuevo Stage (ventana emergente)
