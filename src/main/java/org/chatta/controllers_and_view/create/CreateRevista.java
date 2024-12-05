@@ -8,12 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.dao.AutorDAO;
-import model.dao.LibroDAO;
 import model.dao.PublicacionDAO;
-import model.entity.Autor;
-import model.entity.Libro;
+import model.dao.RevistaDAO;
+import model.entity.Enum.Periodicidad_Enum;
 import model.entity.Publicacion;
+import model.entity.Revista;
 import org.chatta.App;
 import org.chatta.controllers_and_view.scenes;
 
@@ -22,29 +21,27 @@ import java.io.IOException;
 public class CreateRevista {
 
     @FXML
-    private ComboBox<Autor> comboBoxAutores;
+    private ComboBox<Periodicidad_Enum> comboboxperiodicidadenum;
     @FXML
     private ComboBox<Publicacion> comboboxPublicacion;
     @FXML
-    public TextField ISBN;
+    public TextField ISSN;
     @FXML
     private Button closeButton;
 
-    private AutorDAO autorDAO;
 
     private PublicacionDAO publicacionDAO;
 
     public CreateRevista() {
         // Inicializar el DAO
-        autorDAO = AutorDAO.build();
+
         publicacionDAO=PublicacionDAO.build();
     }
 
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
-        ObservableList<Autor> autores = FXCollections.observableArrayList(autorDAO.findAll());
-        comboBoxAutores.setItems(autores);
+
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
     }
@@ -59,9 +56,8 @@ public class CreateRevista {
     @FXML
     private void Close() throws IOException {
 
-        Autor autorSeleccionado = comboBoxAutores.getSelectionModel().getSelectedItem();
         Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
-        if (ISBN.getText().isEmpty()) {
+        if (ISSN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'ISBN' está vacío. Por favor, ingréselo.");
             return;
@@ -69,18 +65,18 @@ public class CreateRevista {
 
         // Si todos los campos están correctamente completados
 
-        Libro libro = new Libro();
-        libro.setId(publicacionSeleccionado.getId());
-        libro.setTitulo(publicacionSeleccionado.getTitulo());
-        libro.setFecha_publicacion(publicacionSeleccionado.getFecha_publicacion());
-        libro.setTipo(publicacionSeleccionado.getTipo());
-        libro.setCategoria(publicacionSeleccionado.getCategoria());
-        libro.setEditorial(publicacionSeleccionado.getEditorial());
-        libro.setPrestamos(publicacionSeleccionado.getPrestamos());
-        libro.setISBN(ISBN.getText());
-        libro.setAutor(autorSeleccionado);
+        Revista revista = new Revista();
+        revista.setId(publicacionSeleccionado.getId());
+        revista.setTitulo(publicacionSeleccionado.getTitulo());
+        revista.setFecha_publicacion(publicacionSeleccionado.getFecha_publicacion());
+        revista.setTipo(publicacionSeleccionado.getTipo());
+        revista.setCategoria(publicacionSeleccionado.getCategoria());
+        revista.setEditorial(publicacionSeleccionado.getEditorial());
+        revista.setPrestamos(publicacionSeleccionado.getPrestamos());
+        revista.setISSN(ISSN.getText());
+        revista.setPeriodicidad(comboboxperiodicidadenum.getSelectionModel().getSelectedItem());
 
-        LibroDAO.build().store(libro);
+        RevistaDAO.build().store(revista);
 
         showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
                 "El libro ha sido registrado correctamente.");
