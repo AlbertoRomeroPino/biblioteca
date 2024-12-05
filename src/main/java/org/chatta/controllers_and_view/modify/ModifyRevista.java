@@ -82,7 +82,7 @@ public class ModifyRevista {
                 "El revista ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
-        App.setRoot(scenes.PANTALLADEBASADEDATOSLIBRO);
+        App.setRoot(scenes.PANTALLADEBASADEDATOSREVISTA);
 
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
