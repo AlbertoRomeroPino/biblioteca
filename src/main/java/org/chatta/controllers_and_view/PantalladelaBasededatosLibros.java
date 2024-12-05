@@ -293,7 +293,7 @@ public class PantalladelaBasededatosLibros {
     private void ModifyLibro() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifylibro.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifypublicacion.fxml"));
             Parent root = loader.load();
 
             // Crear un nuevo Stage (ventana emergente)
@@ -323,7 +323,7 @@ public class PantalladelaBasededatosLibros {
     private void ModifyRevista() throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifyrevista.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifypublicacion.fxml"));
             Parent root = loader.load();
 
             // Crear un nuevo Stage (ventana emergente)
