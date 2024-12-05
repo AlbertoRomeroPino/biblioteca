@@ -61,7 +61,7 @@ public class DeleteEditorial {
         }
 
         // Cambiar la escena a la pantalla de autores
-        App.setRoot(scenes.PANTALLADEBASADEDATOSAUTORES);
+        App.setRoot(scenes.PANTALLADEBASADEDATOSEDITORIAL);
 
         // Cerrar la ventana actual
         Stage stage = (Stage) closeButton.getScene().getWindow();

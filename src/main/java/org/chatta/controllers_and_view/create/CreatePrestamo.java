@@ -88,7 +88,7 @@ public class CreatePrestamo {
                 "El libro ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
-        App.setRoot(scenes.PANTALLADEBASADEDATOSLIBRO);
+        App.setRoot(scenes.PANTALLADEBASADEDATOSPRESTAMOS);
 
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
