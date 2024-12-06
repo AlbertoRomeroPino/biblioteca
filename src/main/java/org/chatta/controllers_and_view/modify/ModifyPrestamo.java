@@ -58,6 +58,12 @@ public class ModifyPrestamo {
             showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
                     "No se encontraron publicaciones en la base de datos.");
             return;}
+        ObservableList<Estado_Enum> estados = FXCollections.observableArrayList(Estado_Enum.values());
+        ComboBoxestadoEnum.setItems(estados);
+        if (ComboBoxestadoEnum.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay estados disponibles",
+                    "No se encontraron estados en la base de datos.");
+            return;}
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
