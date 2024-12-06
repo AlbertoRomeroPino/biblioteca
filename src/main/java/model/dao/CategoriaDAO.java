@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -89,7 +90,7 @@ public class CategoriaDAO implements IDAO<Categoria, Integer> {
     }
 
     public List<Categoria> findAll() {
-        List<Categoria> categorias = null;
+        List<Categoria> categorias = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FINDALL)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
