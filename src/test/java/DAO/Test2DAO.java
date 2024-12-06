@@ -17,59 +17,59 @@ public class Test2DAO {
 
         FindALLCategoria();
 
-//        System.out.println("-------------------");
-//        System.out.println("|  All Prestamos  |");
-//        System.out.println("-------------------");
-//
-//        FindALLPrestamo();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|All Publicaciones|");
-//        System.out.println("-------------------");
-//
-//        FindAllPublicacion();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|  All Editorial  |");
-//        System.out.println("-------------------");
-//
-//        FindAllEditorial();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|    All Autor    |");
-//        System.out.println("-------------------");
-//
-//        FindAllAutor();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|    All Libro    |");
-//        System.out.println("-------------------");
-//
-//        FindAllLibro();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|   All Revista   |");
-//        System.out.println("-------------------");
-//
-//        FindAllRevista();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|   All Usuario   |");
-//        System.out.println("-------------------");
-//
-//        FindAllUsuario();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|All Identificador |");
-//        System.out.println("-------------------");
-//
-//        FindIdentificador();
-//
-//        System.out.println("-------------------");
-//        System.out.println("|     All Join    |");
-//        System.out.println("-------------------");
-//
-//        FindJoinPrestamo();
+        System.out.println("-------------------");
+        System.out.println("|  All Prestamos  |");
+        System.out.println("-------------------");
+
+        FindALLPrestamo();
+
+        System.out.println("-------------------");
+        System.out.println("|All Publicaciones|");
+        System.out.println("-------------------");
+
+        FindAllPublicacion();
+
+        System.out.println("-------------------");
+        System.out.println("|  All Editorial  |");
+        System.out.println("-------------------");
+
+        FindAllEditorial();
+
+        System.out.println("-------------------");
+        System.out.println("|    All Autor    |");
+        System.out.println("-------------------");
+
+        FindAllAutor();
+
+        System.out.println("-------------------");
+        System.out.println("|    All Libro    |");
+        System.out.println("-------------------");
+
+        FindAllLibro();
+
+        System.out.println("-------------------");
+        System.out.println("|   All Revista   |");
+        System.out.println("-------------------");
+
+        FindAllRevista();
+
+        System.out.println("-------------------");
+        System.out.println("|   All Usuario   |");
+        System.out.println("-------------------");
+
+        FindAllUsuario();
+
+        System.out.println("-------------------");
+        System.out.println("|All Identificador |");
+        System.out.println("-------------------");
+
+        FindIdentificador();
+
+        System.out.println("-------------------");
+        System.out.println("|     All Join    |");
+        System.out.println("-------------------");
+
+        FindJoinPrestamo();
     }
 
     public static void FindALLCategoria() {

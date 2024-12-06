@@ -37,7 +37,7 @@ public class EditorialDAO implements IDAO<Editorial, Integer> {
     public Editorial store(Editorial entity) {
         if (entity != null) {
             int idEditorialTmp = entity.getId();
-            if (idEditorialTmp > 0) {
+            if (idEditorialTmp >= 0) {
                 Editorial editorialTmp = findId(idEditorialTmp);
                 if (editorialTmp == null) {
                     // Inserta una nueva editorial
