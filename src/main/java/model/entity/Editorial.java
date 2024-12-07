@@ -84,12 +84,6 @@ public class Editorial {
 
     @Override
     public String toString() {
-        return "Editorial{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", pais='" + pais + '\'' +
-                ", fecha_fundacion=" + fecha_fundacion +
-                ", publicacions=" + publicacions +
-                '}';
+        return nombre;
     }
 }

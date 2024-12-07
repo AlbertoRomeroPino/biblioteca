@@ -90,12 +90,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", Clave='" + Clave + '\'' +
-                ", EMAIL='" + EMAIL + '\'' +
-                ", prestamos=" + prestamos +
-                '}';
+        return nombre;
     }
 }

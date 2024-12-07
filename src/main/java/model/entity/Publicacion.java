@@ -109,14 +109,6 @@ public class Publicacion {
 
     @Override
     public String toString() {
-        return "Publicacion{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", fecha_publicacion=" + fecha_publicacion +
-                ", tipo=" + tipo +
-                ", categoria=" + categoria +
-                ", editorial=" + editorial +
-                ", prestamos=" + prestamos +
-                '}';
+        return titulo;
     }
 }
