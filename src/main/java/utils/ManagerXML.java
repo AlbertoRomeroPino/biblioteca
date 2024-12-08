@@ -7,6 +7,16 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class ManagerXML {
+
+    /**
+     * Escribe un objeto en formato XML en un archivo.
+     *
+     * @param <T>        El tipo del objeto que se escribirá en XML.
+     * @param connection El objeto a serializar en formato XML.
+     * @param filename   El nombre del archivo donde se almacenará el XML.
+     * @return {@code true} si la escritura fue exitosa, {@code false} en caso de error.
+     * @throws JAXBException Si ocurre un error durante la creación del contexto o el proceso de serialización.
+     */
     public static <T> boolean writeXML(T connection, String filename) {
         boolean write = false;
         JAXBContext context;
@@ -26,6 +36,15 @@ public class ManagerXML {
         return write;
     }
 
+    /**
+     * Lee un archivo XML y lo convierte en un objeto de tipo específico.
+     *
+     * @param <T>        El tipo del objeto que se espera como resultado.
+     * @param connection Una instancia del objeto que define el tipo de clase esperada.
+     * @param filename   El nombre del archivo XML que se leerá.
+     * @return El objeto deserializado desde el archivo XML, o el objeto original si ocurre un error.
+     * @throws JAXBException Si ocurre un error durante la creación del contexto o el proceso de deserialización.
+     */
     public static <T> T readXML(T connection, String filename) {
         T result = connection;
         JAXBContext context;
