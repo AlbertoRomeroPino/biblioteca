@@ -41,7 +41,7 @@ public class PantalladeRegistro {
         String password = passwordField.getText();
         String hashedPassword = Validacion.encryptClave(password);
 
-// Validar formato del correo electrónico
+        // Validar formato del correo electrónico
         if (Validacion.validacionEmail(email)) {
             // Verificar si el correo ya está registrado
             Usuario usuarioExistente = UsuarioDAO.build().findByIdentificator(email, hashedPassword);
