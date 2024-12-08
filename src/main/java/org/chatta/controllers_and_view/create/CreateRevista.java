@@ -60,7 +60,7 @@ public class CreateRevista {
         Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
         if (ISSN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
-                    "El campo 'ISBN' está vacío. Por favor, ingréselo.");
+                    "El campo 'ISSN' está vacío. Por favor, ingréselo.");
             return;
         }
 
@@ -80,7 +80,7 @@ public class CreateRevista {
         RevistaDAO.build().store(revista);
 
         showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
-                "El libro ha sido registrado correctamente.");
+                "La revista ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
         App.setRoot(scenes.PANTALLADEBASADEDATOSREVISTA);
