@@ -67,6 +67,7 @@ public class ModifyAutor {
         }
 
         try {
+            selectedAutor.setId(selectedAutor.getId());
             selectedAutor.setNombre(nombre.getText());
             selectedAutor.setNacionalidad(nacionalidad.getText());
             selectedAutor.setFechaNacimiento(fecha_nacimiento.getValue());
