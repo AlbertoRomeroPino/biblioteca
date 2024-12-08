@@ -110,7 +110,7 @@ public class CreatePublicacion extends PantalladelaBasededatos {
         PublicacionDAO.build().store(publicacion);
 
         showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
-                "El autor ha sido registrado correctamente.");
+                "La publicacion ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);

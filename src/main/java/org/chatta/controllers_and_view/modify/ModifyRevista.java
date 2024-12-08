@@ -84,7 +84,7 @@ public class ModifyRevista {
         RevistaDAO.build().store(revista);
 
         showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
-                "El revista ha sido registrado correctamente.");
+                "La revista ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
         App.setRoot(scenes.PANTALLADEBASADEDATOSREVISTA);
