@@ -67,6 +67,7 @@ public class ModifyEditorial {
         }
 
         try {
+            selectedEditorial.setId(selectedEditorial.getId());
             selectedEditorial.setNombre(nombre.getText());
             selectedEditorial.setPais(pais.getText());
             selectedEditorial.setFecha_fundacion(fecha_fundacion.getValue());

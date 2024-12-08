@@ -95,6 +95,7 @@ public class ModifyUsuario {
 
         try {
             // Actualizar los datos del usuario seleccionado
+            usuarioSeleccionado.setId(usuarioSeleccionado.getId());
             usuarioSeleccionado.setNombre(nombre.getText());
             usuarioSeleccionado.setEMAIL(email.getText());
 
