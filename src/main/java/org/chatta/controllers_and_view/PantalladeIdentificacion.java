@@ -41,23 +41,25 @@ public class PantalladeIdentificacion {
         String password = passwordField.getText();
         String passwordCifrado = Validacion.encryptClave(password);
 
+        // Validar formato del correo electrónico
         if (Validacion.validacionEmail(email)) {
+            // Buscar el usuario en la base de datos
             Usuario usuario = UsuarioDAO.build().findByIdentificator(email, passwordCifrado);
-                    if (usuario != null) {
-                        // Usuario encontrado y autenticado, cambiar a la pantalla de base de datos
-                        App.setRoot(scenes.PANTALLADEBASADEDATOS);
-                        // Cerrar la ventana actual
-                        Stage stage = (Stage) emailField.getScene().getWindow();
-                        stage.close();
-                    } else {
-                        // Usuario no encontrado o credenciales incorrectas
-                        mostrarAlerta("Error de autenticación", "El correo electrónico o la contraseña son incorrectos.", AlertType.ERROR);
-                    }
 
-
+            if (usuario != null) {
+                // Usuario encontrado y autenticado
+                App.setRoot(scenes.PANTALLADEBASADEDATOS);
+                Stage stage = (Stage) emailField.getScene().getWindow();
+                stage.close();
+            } else {
+                // Usuario no encontrado
+                mostrarAlerta("Error de autenticación", "El correo electrónico o la contraseña son incorrectos.", AlertType.ERROR);
+            }
         } else {
+            // Formato de correo inválido
             mostrarAlerta("Error de formato", "El correo electrónico no tiene un formato válido.", AlertType.ERROR);
         }
+
     }
 
     private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {
