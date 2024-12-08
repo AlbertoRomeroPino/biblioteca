@@ -101,7 +101,7 @@ public class ModifyPrestamo {
         PrestamoDAO.build().store(prestamo);
 
         showAlert(Alert.AlertType.INFORMATION, "Inserción Correcta", "La inserción se ha completado con éxito",
-                "El libro ha sido registrado correctamente.");
+                "El prestamo ha sido registrado correctamente.");
 
         // Cambiar a la pantalla de autores después de insertar el autor
         App.setRoot(scenes.PANTALLADEBASADEDATOSPRESTAMOS);
