@@ -24,41 +24,29 @@ public class ModifyPrestamo {
     @FXML
     private ComboBox<Estado_Enum> ComboBoxestadoEnum;
     @FXML
-    private ComboBox<Publicacion> comboboxPublicacion;
+    public DatePicker fechaDevolucion;
     @FXML
-    private ComboBox<Usuario> comboboxUsuarios;
-    @FXML
-    public DatePicker fechaPrestamo;
+    private ComboBox<Prestamo> comboBoxPrestamo;
     @FXML
     private Button closeButton;
 
-    private PublicacionDAO publicacionDAO;
-    private UsuarioDAO userDAO;
-
+    private PrestamoDAO prestamoDAO;
     public ModifyPrestamo() {
         // Inicializar el DAO
-
-        userDAO = UsuarioDAO.build();
-        publicacionDAO=PublicacionDAO.build();
+        prestamoDAO = PrestamoDAO.build();
     }
 
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
 
-        ObservableList<Usuario> usuarios = FXCollections.observableArrayList(UsuarioDAO.build().findAll());
+        ObservableList<Prestamo> prestamos = FXCollections.observableArrayList(prestamoDAO.findAll());
 
-        comboboxUsuarios.setItems(usuarios);
+        comboBoxPrestamo.setItems(prestamos);
 
-        if (comboboxUsuarios.getItems().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay usuarios disponibles",
-                    "No se encontraron usuarios en la base de datos.");
-            return;}
-        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
-        comboboxPublicacion.setItems(publicaciones);
-        if (comboboxPublicacion.getItems().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
-                    "No se encontraron publicaciones en la base de datos.");
+        if (comboBoxPrestamo.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay Prestamos disponibles",
+                    "No se encontraron Prestamo en la base de datos.");
             return;}
         ObservableList<Estado_Enum> estados = FXCollections.observableArrayList(Estado_Enum.values());
         ComboBoxestadoEnum.setItems(estados);
@@ -78,26 +66,17 @@ public class ModifyPrestamo {
     @FXML
     private void Close() throws IOException {
 
-        Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
-        Usuario usuarioSeleccionado = comboboxUsuarios.getSelectionModel().getSelectedItem();
+        Prestamo prestamo = comboBoxPrestamo.getSelectionModel().getSelectedItem();
 
-        if (publicacionSeleccionado == null || usuarioSeleccionado == null) {
-            showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
-                    "Por favor, selecciona un autor y un libro.");
-            return;
-        }
-        if (fechaPrestamo.getValue() == null) {
+        if (fechaDevolucion.getValue() == null) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'fecha de Prestamo' está vacío. Por favor, ingréselo.");
             return;
         }
         // Si todos los campos están correctamente completados
 
-        Prestamo prestamo = new Prestamo();
-        prestamo.setPublicacion(publicacionSeleccionado);
-        prestamo.setUsuario(usuarioSeleccionado);
-        prestamo.setFechaPrestamo(fechaPrestamo.getValue());
-        prestamo.setFechaDevolucion((fechaPrestamo.getValue().plusDays(30)));
+
+        prestamo.setFechaDevolucion(fechaDevolucion.getValue());
         prestamo.setEstado(ComboBoxestadoEnum.getValue());
 
         PrestamoDAO.build().store(prestamo);
