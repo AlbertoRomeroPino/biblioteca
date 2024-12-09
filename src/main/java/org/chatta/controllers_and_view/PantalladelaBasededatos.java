@@ -89,6 +89,7 @@ public class PantalladelaBasededatos {
             e.printStackTrace();
         }
     }
+
     @FXML
     protected void CreateNewLibro() throws IOException {
         try {
@@ -113,6 +114,44 @@ public class PantalladelaBasededatos {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createpublicacion.fxml"));
+            Parent root = loader.load();
+
+            // Crear un nuevo Stage (ventana emergente)
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Pantalla de Creación de Revista");
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+            popupStage.setScene(new Scene(root));
+
+            configuracionStage(popupStage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void CreateNewLibro2() throws IOException {
+        try {
+            // Cargar el FXML de PantalladeIdentificacion
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createlibro.fxml"));
+            Parent root = loader.load();
+
+            // Crear un nuevo Stage (ventana emergente)
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Pantalla de Creación de Libro");
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+            popupStage.setScene(new Scene(root));
+
+            configuracionStage(popupStage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void CreateNewRevista2() throws IOException {
+        try {
+            // Cargar el FXML de PantalladeIdentificacion
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createrevista.fxml"));
             Parent root = loader.load();
 
             // Crear un nuevo Stage (ventana emergente)
@@ -230,6 +269,46 @@ public class PantalladelaBasededatos {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifypublicacion.fxml"));
+            Parent root = loader.load();
+
+            // Crear un nuevo Stage (ventana emergente)
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Pantalla de Modificación de Revista");
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+            popupStage.setScene(new Scene(root));
+
+            configuracionStage(popupStage);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void ModifyLibro2() throws IOException {
+        try {
+            // Cargar el FXML de PantalladeIdentificacion
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifylibro.fxml"));
+            Parent root = loader.load();
+
+            // Crear un nuevo Stage (ventana emergente)
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Pantalla de Modificación de Libro");
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Hace que el popup sea modal
+            popupStage.setScene(new Scene(root));
+
+            configuracionStage(popupStage);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void ModifyRevista2() throws IOException {
+        try {
+            // Cargar el FXML de PantalladeIdentificacion
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifyrevista.fxml"));
             Parent root = loader.load();
 
             // Crear un nuevo Stage (ventana emergente)
