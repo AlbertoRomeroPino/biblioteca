@@ -46,8 +46,10 @@ public class ModifyPrestamo {
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
 
-        ObservableList<Usuario> usuarios = FXCollections.observableArrayList(userDAO.findAll());
+        ObservableList<Usuario> usuarios = FXCollections.observableArrayList(UsuarioDAO.build().findAll());
+
         comboboxUsuarios.setItems(usuarios);
+
         if (comboboxUsuarios.getItems().isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay usuarios disponibles",
                     "No se encontraron usuarios en la base de datos.");
