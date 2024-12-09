@@ -135,9 +135,9 @@ public class ModifyPublicacion extends PantalladelaBasededatos {
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
 
         if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
-            ModifyLibro();
+            ModifyLibro2();
         } else if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)){
-           ModifyRevista();
+           ModifyRevista2();
         }
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
