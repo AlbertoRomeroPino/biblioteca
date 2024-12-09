@@ -3,6 +3,7 @@ package model.dao;
 import model.connection.ConnectionMariaDB;
 import model.entity.Autor;
 import interfaces.IDAO;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,13 +35,17 @@ public class AutorDAO implements IDAO<Autor, Integer> {
     @Override
     public Autor store(Autor entity) {
         if (entity != null) {
-            try {
-                if (entity.getId() >= 0) { // Se considera que un ID <= 0 es un autor nuevo
+            int idAutortmp = entity.getId();
+            if (idAutortmp >= 0) {
+                Autor autorTmp = findId(idAutortmp);
+                if (autorTmp == null) {
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
                         preparedStatement.setString(1, entity.getNombre());
                         preparedStatement.setString(2, entity.getNacionalidad());
                         preparedStatement.setDate(3, Date.valueOf(entity.getFechaNacimiento()));
                         preparedStatement.executeUpdate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
@@ -49,12 +54,14 @@ public class AutorDAO implements IDAO<Autor, Integer> {
                         preparedStatement.setString(2, entity.getNacionalidad());
                         preparedStatement.setDate(3, Date.valueOf(entity.getFechaNacimiento()));
                         preparedStatement.executeUpdate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+
             }
         }
+
         return entity;
     }
 
@@ -128,8 +135,7 @@ public class AutorDAO implements IDAO<Autor, Integer> {
     }
 
 
-
-@Override
+    @Override
     public void close() throws IOException {
 
     }
