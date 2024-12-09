@@ -30,12 +30,17 @@ public class CreateRevista {
     private Button closeButton;
 
 
-    private PublicacionDAO publicacionDAO;
+
 
     public CreateRevista() {
         // Inicializar el DAO
 
-        publicacionDAO=PublicacionDAO.build();
+    }
+
+    private Publicacion publicacion;
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
     }
 
     @FXML
@@ -43,8 +48,7 @@ public class CreateRevista {
         // Cargar los autores en el ComboBox al inicio
         ObservableList<Periodicidad_Enum> periodicidad = FXCollections.observableArrayList(Periodicidad_Enum.values());
         comboboxperiodicidadenum.setItems(periodicidad);
-        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
-        comboboxPublicacion.setItems(publicaciones);
+
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -57,7 +61,7 @@ public class CreateRevista {
     @FXML
     private void Close() throws IOException {
 
-        Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
+        Publicacion publicacionSeleccionado = publicacion;
         if (ISSN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'ISSN' está vacío. Por favor, ingréselo.");

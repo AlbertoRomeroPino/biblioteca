@@ -18,10 +18,10 @@ import java.io.IOException;
 
 public class CreateLibro {
 
+
+
     @FXML
     private ComboBox<Autor> comboBoxAutores;
-    @FXML
-    private ComboBox<Publicacion> comboboxPublicacion;
     @FXML
     public TextField ISBN;
     @FXML
@@ -29,12 +29,19 @@ public class CreateLibro {
 
     private AutorDAO autorDAO;
 
-    private PublicacionDAO publicacionDAO;
+
 
     public CreateLibro() {
         // Inicializar el DAO
         autorDAO = AutorDAO.build();
-        publicacionDAO=PublicacionDAO.build();
+
+    }
+
+
+    private Publicacion publicacion;
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
     }
 
     @FXML
@@ -42,8 +49,12 @@ public class CreateLibro {
         // Cargar los autores en el ComboBox al inicio
         ObservableList<Autor> autores = FXCollections.observableArrayList(autorDAO.findAll());
         comboBoxAutores.setItems(autores);
-        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
-        comboboxPublicacion.setItems(publicaciones);
+        if (comboBoxAutores.getItems().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay autores disponibles",
+                    "No se encontraron autores en la base de datos.");
+            return;
+        }
+
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -57,7 +68,7 @@ public class CreateLibro {
     private void Close() throws IOException {
 
         Autor autorSeleccionado = comboBoxAutores.getSelectionModel().getSelectedItem();
-        Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
+        Publicacion publicacionSeleccionado = publicacion;
         if (ISBN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'ISBN' está vacío. Por favor, ingréselo.");

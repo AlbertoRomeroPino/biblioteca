@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<GridPane fx:controller="org.chatta.controllers_and_view.modify.ModifyLibro"
-          xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-          hgap="10" vgap="10" alignment="CENTER">
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.chatta.controllers_and_view.modify.ModifyLibro">
 
       <!-- Selección de Autor -->
-      <Label text="Seleccionar Autor:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-      <ComboBox fx:id="comboBoxAutores" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200.0" />
-
-      <!-- Selección de Publicación -->
-      <Label text="Seleccionar Publicación:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-      <ComboBox fx:id="comboboxPublicacion" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="200.0" />
+      <Label text="Seleccionar Autor:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <ComboBox fx:id="comboBoxAutores" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
       <!-- Campo para ISBN -->
-      <Label text="ISBN:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-      <TextField fx:id="ISBN" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="200.0" />
+      <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <TextField fx:id="ISBN" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
       <!-- Botón para cerrar/modificar -->
-      <Button fx:id="closeButton" text="Guardar Cambios" onAction="#Close" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+      <Button fx:id="closeButton" onAction="#Close" text="Guardar Cambios" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
