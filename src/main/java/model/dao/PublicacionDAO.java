@@ -39,7 +39,7 @@ public class PublicacionDAO implements IDAO<Publicacion, Integer> {
     public Publicacion store(Publicacion entity) {
         if (entity != null) {
             int idPublicacionTmp = entity.getId();
-            if (idPublicacionTmp > 0) {
+            if (idPublicacionTmp >= 0) {
                 Publicacion publicacionTmp = findId(idPublicacionTmp);
                 if (publicacionTmp == null) {
                     // Insertar una nueva publicación

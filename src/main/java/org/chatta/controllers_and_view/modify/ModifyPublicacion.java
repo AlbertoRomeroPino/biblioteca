@@ -56,18 +56,19 @@ public class ModifyPublicacion extends PantalladelaBasededatos {
         try {
             ObservableList<Categoria> categorias = FXCollections.observableArrayList(categoriaDAO.findAll());
             comboBoxCategoria.setItems(categorias);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("No hay categorias");
-        } ObservableList<Editorial> editoriales = FXCollections.observableArrayList(editorialDAO.findAll());
+        }
+        ObservableList<Editorial> editoriales = FXCollections.observableArrayList(editorialDAO.findAll());
         comboBoxEditorial.setItems(editoriales);
-        if (comboBoxEditorial.getValue() == null) {
+        if (comboBoxEditorial.getValue() != null) {
             showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay editoriales disponibles",
                     "No se encontraron editoriales en la base de datos.");
             return;
         }
         ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
         comboboxPublicacion.setItems(publicaciones);
-        if (comboboxPublicacion.getValue() == null) {
+        if (comboboxPublicacion.getValue() != null) {
             showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
                     "No se encontraron publicaciones en la base de datos.");
             return;
@@ -134,10 +135,10 @@ public class ModifyPublicacion extends PantalladelaBasededatos {
         // Cambiar a la pantalla de autores después de insertar el autor
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
 
-        if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
+        if (ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
             ModifyLibro2(publicacion);
-        } else if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)){
-           ModifyRevista2(publicacion);
+        } else if (ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)) {
+            ModifyRevista2(publicacion);
         }
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();
