@@ -10,6 +10,48 @@ CREATE TABLE Categoria (
     Nombre VARCHAR(50) NOT NULL
 );
 
+INSERT INTO Categoria (Nombre) VALUES
+('Literatura'),
+('Ciencia ficción'),
+('Fantasía'),
+('Romance'),
+('Historia'),
+('Biografía'),
+('Filosofía'),
+('Psicología'),
+('Economía'),
+('Política'),
+('Sociología'),
+('Tecnología'),
+('Informática'),
+('Ciencias naturales'),
+('Astronomía'),
+('Medicina'),
+('Educación'),
+('Infantil'),
+('Juvenil'),
+('Cocina'),
+('Arte'),
+('Deportes'),
+('Viajes'),
+('Música'),
+('Cine'),
+('Fotografía'),
+('Cómics'),
+('Animales'),
+('Jardinería'),
+('Decoración'),
+('Religión'),
+('Autoayuda'),
+('Negocios'),
+('Marketing'),
+('Diseño gráfico'),
+('Arquitectura'),
+('Literatura clásica'),
+('Ensayo'),
+('Poesía'),
+('Criminología');
+
 -- Crear tabla Autor
 -- Llave es entero
 CREATE TABLE Autor (
