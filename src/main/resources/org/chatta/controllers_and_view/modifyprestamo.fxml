@@ -7,7 +7,7 @@
 
       <!-- Selección de Usuario -->
       <Label text="Seleccionar Prestamo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <ComboBox fx:id="comboboxUsuarios" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ComboBox fx:id="comboBoxPrestamo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
       <!-- Selección de Estado -->
       <Label text="Seleccionar Estado:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
