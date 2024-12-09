@@ -116,9 +116,9 @@ public class CreatePublicacion extends PantalladelaBasededatos {
         App.setRoot(scenes.PANTALLADEBASADEDATOSPUBLICACION);
 
         if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Libro)) {
-            CreateNewLibro2();
+            CreateNewLibro2(publicacion);
         } else if(ComboBoxtipoEnum.getValue().equals(Tipo_Enum.Revista)){
-            CreateNewRevista2();
+            CreateNewRevista2(publicacion);
         }
         // Cerrar la ventana
         Stage stage = (Stage) closeButton.getScene().getWindow();

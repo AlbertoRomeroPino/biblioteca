@@ -23,32 +23,32 @@ public class ModifyRevista {
     @FXML
     private ComboBox<Periodicidad_Enum> comboboxperiodicidadenum;
     @FXML
-    private ComboBox<Publicacion> comboboxPublicacion;
-    @FXML
     public TextField ISSN;
     @FXML
     private Button closeButton;
 
 
-    private PublicacionDAO publicacionDAO;
+
 
     public ModifyRevista() {
         // Inicializar el DAO
 
-        publicacionDAO=PublicacionDAO.build();
+
+    }
+
+    private Publicacion publicacion;
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
+
     }
 
     @FXML
     public void initialize() {
         // Cargar los autores en el ComboBox al inicio
+        ObservableList<Periodicidad_Enum> periodicidad = FXCollections.observableArrayList(Periodicidad_Enum.values());
+        comboboxperiodicidadenum.setItems(periodicidad);
 
-        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
-        comboboxPublicacion.setItems(publicaciones);
-        if (comboboxPublicacion.getItems().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
-                    "No se encontraron publicaciones en la base de datos.");
-            return;
-        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -61,7 +61,7 @@ public class ModifyRevista {
     @FXML
     private void Close() throws IOException {
 
-        Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
+        Publicacion publicacionSeleccionado = publicacion;
         if (ISSN.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Inserción Incorrecta", "La inserción no ha sido completada con éxito",
                     "El campo 'ISBN' está vacío. Por favor, ingréselo.");

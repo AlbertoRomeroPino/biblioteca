@@ -7,7 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.entity.Publicacion;
 import org.chatta.App;
+import org.chatta.controllers_and_view.create.CreateLibro;
+import org.chatta.controllers_and_view.create.CreateRevista;
+import org.chatta.controllers_and_view.modify.ModifyLibro;
+import org.chatta.controllers_and_view.modify.ModifyRevista;
 
 
 import java.io.IOException;
@@ -129,12 +134,15 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    protected void CreateNewLibro2() throws IOException {
+    protected void CreateNewLibro2(Publicacion publicacion) throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createlibro.fxml"));
             Parent root = loader.load();
-
+            // Obtener el controlador
+            CreateLibro controller = loader.getController();
+            // Pasar la publicación al controlador
+            controller.setPublicacion(publicacion);
             // Crear un nuevo Stage (ventana emergente)
             Stage popupStage = new Stage();
             popupStage.setTitle("Pantalla de Creación de Libro");
@@ -148,12 +156,15 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    protected void CreateNewRevista2() throws IOException {
+    protected void CreateNewRevista2(Publicacion publicacion) throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/createrevista.fxml"));
             Parent root = loader.load();
-
+            // Obtener el controlador
+            CreateRevista controller = loader.getController();
+            // Pasar la publicación al controlador
+            controller.setPublicacion(publicacion);
             // Crear un nuevo Stage (ventana emergente)
             Stage popupStage = new Stage();
             popupStage.setTitle("Pantalla de Creación de Revista");
@@ -285,12 +296,15 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    protected void ModifyLibro2() throws IOException {
+    protected void ModifyLibro2(Publicacion publicacion) throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifylibro.fxml"));
             Parent root = loader.load();
-
+            // Obtener el controlador
+            ModifyLibro controller = loader.getController();
+            // Pasar la publicación al controlador
+            controller.setPublicacion(publicacion);
             // Crear un nuevo Stage (ventana emergente)
             Stage popupStage = new Stage();
             popupStage.setTitle("Pantalla de Modificación de Libro");
@@ -305,12 +319,15 @@ public class PantalladelaBasededatos {
         }
     }
     @FXML
-    protected void ModifyRevista2() throws IOException {
+    protected void ModifyRevista2(Publicacion publicacion) throws IOException {
         try {
             // Cargar el FXML de PantalladeIdentificacion
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/chatta/controllers_and_view/modifyrevista.fxml"));
             Parent root = loader.load();
-
+            // Obtener el controlador
+            ModifyRevista controller = loader.getController();
+            // Pasar la publicación al controlador
+            controller.setPublicacion(publicacion);
             // Crear un nuevo Stage (ventana emergente)
             Stage popupStage = new Stage();
             popupStage.setTitle("Pantalla de Modificación de Revista");

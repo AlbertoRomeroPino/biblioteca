@@ -24,20 +24,23 @@ public class ModifyLibro {
     @FXML
     private ComboBox<Autor> comboBoxAutores;
     @FXML
-    private ComboBox<Publicacion> comboboxPublicacion;
-    @FXML
     public TextField ISBN;
     @FXML
     private Button closeButton;
 
     private AutorDAO autorDAO;
 
-    private PublicacionDAO publicacionDAO;
 
     public ModifyLibro() {
         // Inicializar el DAO
         autorDAO = AutorDAO.build();
-        publicacionDAO=PublicacionDAO.build();
+
+    }
+
+    private Publicacion publicacion;
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
     }
 
     @FXML
@@ -52,13 +55,6 @@ public class ModifyLibro {
             return;
         }
 
-        ObservableList<Publicacion> publicaciones = FXCollections.observableArrayList(publicacionDAO.findAll());
-        comboboxPublicacion.setItems(publicaciones);
-        if (comboboxPublicacion.getItems().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Lista Vacía", "No hay publicaciones disponibles",
-                    "No se publicaciones autores en la base de datos.");
-            return;
-        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -72,7 +68,7 @@ public class ModifyLibro {
     private void Close() throws IOException {
 
         Autor autorSeleccionado = comboBoxAutores.getSelectionModel().getSelectedItem();
-        Publicacion publicacionSeleccionado = comboboxPublicacion.getSelectionModel().getSelectedItem();
+        Publicacion publicacionSeleccionado = publicacion;
 
 
 
