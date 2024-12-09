@@ -17,11 +17,6 @@ public class Test2DAO {
 
         FindALLCategoria();
 
-        System.out.println("-------------------");
-        System.out.println("|  All Prestamos  |");
-        System.out.println("-------------------");
-
-        FindALLPrestamo();
 
         System.out.println("-------------------");
         System.out.println("|All Publicaciones|");
@@ -66,10 +61,19 @@ public class Test2DAO {
         FindIdentificador();
 
         System.out.println("-------------------");
+        System.out.println("|  All Prestamos  |");
+        System.out.println("-------------------");
+
+        FindALLPrestamo();
+
+        System.out.println("-------------------");
         System.out.println("|     All Join    |");
         System.out.println("-------------------");
 
         FindJoinPrestamo();
+
+
+
     }
 
     public static void FindALLCategoria() {

@@ -24,12 +24,11 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
     private static final String FINDID = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista WHERE Publicacion_Id = ?";
     private static final String FINDALL = "SELECT Publicacion_Id, ISSN, Periodicidad FROM revista";
     private static final String FINDJOIN_REVISTA = "SELECT p.ID AS Id, p.Titulo AS Titulo, p.FechaPublicacion AS Publicacion, c.Nombre AS Categoria, e.Nombre AS Editorial, r.ISSN AS ISSN, r.Periodicidad AS Periodicidad" +
-    " FROM Publicacion p" +
-    " JOIN Categoria c ON p.Categoria_ID = c.ID" +
-    " JOIN Editorial e ON p.Editorial_ID = e.ID" +
-    " JOIN Revista r ON p.ID = r.Publicacion_ID";
-;
-
+            " FROM Publicacion p" +
+            " JOIN Categoria c ON p.Categoria_ID = c.ID" +
+            " JOIN Editorial e ON p.Editorial_ID = e.ID" +
+            " JOIN Revista r ON p.ID = r.Publicacion_ID";
+    ;
 
 
     /**
@@ -61,9 +60,14 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
                     PublicacionDAO.build().store(publicacionTmp);
 
                     List<Publicacion> publicaciones = PublicacionDAO.build().findAll();
-                    for (Publicacion publicacion : publicaciones){
-                        if (publicacionTmp.equals(publicacion)){
-                            publicacionTmp=publicacion;
+                    for (Publicacion publicacion : publicaciones) {
+
+                        if (publicacionTmp.getTitulo().equals(publicacion.getTitulo()) &&
+                                publicacionTmp.getFecha_publicacion().equals(publicacion.getFecha_publicacion()) &&
+                                publicacionTmp.getTipo().equals(publicacion.getTipo()) &&
+                                publicacionTmp.getCategoria().equals(publicacion.getCategoria()) &&
+                                publicacionTmp.getEditorial().equals(publicacion.getEditorial())) {
+                            publicacionTmp = publicacion;
                         }
                     }
 
@@ -136,7 +140,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
      * Además, incluye atributos específicos de las revistas como el ISSN y la periodicidad.
      *
      * @return Una lista de objetos {@link Revista}, cada uno representando una revista con todos sus atributos.
-     *         Si no hay registros, se retorna una lista vacía.
+     * Si no hay registros, se retorna una lista vacía.
      */
     public List<Revista> findAll() {
         List<Revista> revistas = new ArrayList<>();
@@ -175,7 +179,7 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
      * los específicos de las revistas, incluyendo ISSN y periodicidad.
      *
      * @return Una lista de objetos {@link Revista}, cada uno con información adicional sobre la categoría,
-     *         editorial y atributos propios. Si no hay registros, se retorna una lista vacía.
+     * editorial y atributos propios. Si no hay registros, se retorna una lista vacía.
      */
     public List<Revista> findJoinRevista() {
         List<Revista> revistas = new ArrayList<>();
@@ -210,7 +214,6 @@ public class RevistaDAO implements IDAO<Revista, Integer> {
 
         return revistas;
     }
-
 
 
     /**

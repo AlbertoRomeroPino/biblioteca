@@ -27,15 +27,13 @@ public class LibroDAO implements IDAO<Libro, Integer> {
     private static final String FINDID = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro WHERE Publicacion_Id = ?";
     private static final String FINDALL = "SELECT Publicacion_Id, ISBN, Autor_Id FROM libro";
     private static final String FINDJOIN = "SELECT p.ID AS Id, p.Titulo AS Titulo, p.FechaPublicacion AS Publicacion, " +
-                    " c.Nombre AS Categoria, e.Nombre AS Editorial, l.ISBN AS ISBN, " +
-                    " a.Nombre AS Autor " +
-                    " FROM Publicacion p " +
-                    " JOIN Categoria c ON p.Categoria_ID = c.ID " +
-                    " JOIN Editorial e ON p.Editorial_ID = e.ID " +
-                    " JOIN Libro l ON p.ID = l.Publicacion_ID " +
-                    " JOIN Autor a ON l.Autor_ID = a.ID;";
-
-
+            " c.Nombre AS Categoria, e.Nombre AS Editorial, l.ISBN AS ISBN, " +
+            " a.Nombre AS Autor " +
+            " FROM Publicacion p " +
+            " JOIN Categoria c ON p.Categoria_ID = c.ID " +
+            " JOIN Editorial e ON p.Editorial_ID = e.ID " +
+            " JOIN Libro l ON p.ID = l.Publicacion_ID " +
+            " JOIN Autor a ON l.Autor_ID = a.ID;";
 
 
     /**
@@ -67,11 +65,17 @@ public class LibroDAO implements IDAO<Libro, Integer> {
                     PublicacionDAO.build().store(publicacionTmp);
 
                     List<Publicacion> publicaciones = PublicacionDAO.build().findAll();
-                    for (Publicacion publicacion : publicaciones){
-                        if (publicacionTmp.equals(publicacion)){
-                            publicacionTmp=publicacion;
+                    for (Publicacion publicacion : publicaciones) {
+
+                        if (publicacionTmp.getTitulo().equals(publicacion.getTitulo()) &&
+                                publicacionTmp.getFecha_publicacion().equals(publicacion.getFecha_publicacion()) &&
+                                publicacionTmp.getTipo().equals(publicacion.getTipo()) &&
+                                publicacionTmp.getCategoria().equals(publicacion.getCategoria()) &&
+                                publicacionTmp.getEditorial().equals(publicacion.getEditorial())){
+                            publicacionTmp = publicacion;
                         }
                     }
+
 
                     // Si no existe, insertar un nuevo libro
                     try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
@@ -145,7 +149,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
      * y luego añade la información específica de los libros, como el ISBN y el autor.
      *
      * @return Una lista de objetos {@link Libro}, cada uno representando un libro con su información completa.
-     *         Si no hay libros registrados, se retorna una lista vacía.
+     * Si no hay libros registrados, se retorna una lista vacía.
      */
     public List<Libro> findAll() {
         List<Libro> libros = new ArrayList<>();
@@ -182,7 +186,7 @@ public class LibroDAO implements IDAO<Libro, Integer> {
      * para obtener información adicional como el nombre de la categoría, editorial y autor.
      *
      * @return Una lista de objetos {@link Libro}, cada uno con sus datos completos, incluyendo
-     *         relaciones con categorías, editoriales y autores. Si no hay libros registrados, se retorna una lista vacía.
+     * relaciones con categorías, editoriales y autores. Si no hay libros registrados, se retorna una lista vacía.
      */
     public List<Libro> findJoinLibro() {
         List<Libro> libros = new ArrayList<>();
